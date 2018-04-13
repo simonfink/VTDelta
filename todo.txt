@@ -1,0 +1,123 @@
+VT Delta
+--------
+
+-Claudia: Rechte für github.com/eeduro (sfink, graf) und ems svn (Scara)
+-Überarbeitung Zeitplan -> bis Anfang August
+
+Abgabe: Anfang August
+---------------------
+-Bericht: Evaluation, Auslastung (Messungen), Theorie (Berechnungen), Aufbau Sequencer(neu), SafetySystem(Änderungen), ControlSystem(evtl neu), HAL(neu) (knapp, 8-10 Seiten)
+-Präsentation: Demo, Diagramme Control-Safety-Hal-Sequencer, ...
+-Homepage: Vorzeigebeispiel für EEROS (Beschreibung unterteilen -> Controlsysetem, Sequencer, Mechanik(extern),... -> Einzelne Punkte + Verweise auf eeros falls zu detailliert)
+-Projektdoku: Students wiki -> + link auf github repo
+-EVA: 30 Minuten Prüfungsgespräch c++
+
+Beginn Migration:
+-----------------
+-BBBlue:
+--Pinbelegung für eeros
+--Inbetriebnahme + eeros -> (Beispiel Motor laufen lassen)
+--Elektromagne (PowerOUT?)
+-Analyse:
+--ControlSystem Diagramm (á la Simulink) (siehe Scara -> ems svn) (->Claudia)
+--Diagramm SafetySystem (events -> Übergang)
+--Sequencer
+
+-Versionen im Vergleich -> wann hat was geändert
+-Visualisierung mit ARVIS
+
+noch zu fragen:
+---------------
+-c++: Klassen, Templates, Namespaces, was noch?
+
+
+-Zeitplan: recht detailliert (auch ferien eintragen) (Donnerstag neu)
+  -diverse Arbeitspakete definieren + abschätzen wieviel Zeit
+  -Zeit auf Wochenarbeitspakete verteilen
+  -Soll/Ist Vergleich
+  
+-Jede Woche Rückmeldung an Urs -> Stand, erledigt diese Woche, Meeting oder Mail
+
+-fehlt aktuell auf delta:
+  -flink  <-- nicht benötigt
+  -hal
+  -neuer sequencer
+  -extractor
+  
+-Hardwarekandidaten:
+  -BeagleBoneBlue      (<--)
+  -CB20
+
+-Besprechung mit Einar (ab etwa 5.4.)   --done
+-eeros: host + simulator zu begin, tutorials --dogne 
+-eeros: später auf targetsystem ( mit flink oder wrapper)
+
+Besprechung mit Einar 06.04.
+----------------------------
+-Kinematic, Encoder, Motoren bleiben gleich, Mechanik wird jedoch erneuert
+-gibt später ein eeduro-kit bei Faulhaber
+-Bahnplan: Spline-Beschreibung, sollte aus Sequencer und Controlteil bestehen (nicht wichtig für mich)
+-bis Anfang Juni eine stabile Grundlage schaffen (absolutes Minimum)
+-(mit Arvis (ROS-Einbindung) visualisieren)
+
+EEROS - Kurzeinführung von Urs
+------------------------------
+-wiki.eeros.org
+-linux  (alles Software)
+-control system: wie simulink (blöcke)
+-safety system: schalten von safety levels
+-sequencer
+-peripheral input & output
+-HAL -> binding control PIO zu physischen Pins
+
+EEROS - Control System
+----------------------
+-Time-Domains - periodischer Aufruf von Funktionen
+-Blöcke mit Template Parameter, in & output sind signale
+-executor: singleton, wie scheduler
+
+EEROS - Safety System
+---------------------
+-level basiert, netx level nur mit safety event
+--müssen vorab deklariert und initialiesier twerden
+
+EEROS - HAL
+-----------
+-für hardwarespezifische Parameter (eigenes config file, json) ex: set range for adc
+
+next: EEROS tutorials machen, ist stand delta ermitteln, was muss/soll gemacht werden
+
+Sourcen für delta: eeros.org -> eeduro (github eeduro)
+
+-> etwa 2-3 Wochen
+
+EVA - C++
+---------
+-eher zu begin, da grundwissen wichtig
+-mit Urs besprechen welche kapitel wichtig
+-Klassen, Templates, Namespaces
+-Konstruktoren, Destruktoren, Initializerlists
+-auch cmake, buildscripts anschauen, für host + cross
+-unterschied c++11, c++13
+
+------------------------------------------------------------------ Halbzeit
+-Analyse Software: siehe Klassendiagramm Laptop (umbrello)
+--HAL -> alt, Sequencer -> alt, mit Urs die verschiedenen Versionen durchgehen, sequentiell erneuern und testen
+--Timedomain ? (kann beagle bone blue diese Anforderungen) -> siehe auch Hardwareanalyse
+
+-Analyse Hardware:
+--Motoren:
+--Encoder:
+--Usb:
+...
+
+-Analyse Bestand Hardware: was wird benötigt? welche hardware sollen wir verwenden?
+-Analyse Software: Safetysystem, Sequenzen, was muss neue Software können?
+
+
+DONE:
+-----
+-was muss abgegeben werden? Bericht, Präsentation?, EVA-Prüfungsgespräch? und bis wann? (Homepage, Bericht, Präsentation)
+-MSE ISV: Masterarbeit über 2 Semester beantragen
+-Anschlüsse CB20?  (erst nötig, falls BBBlue nicht funktioniert)
+-Projektabgabe?  (Anfang August)
