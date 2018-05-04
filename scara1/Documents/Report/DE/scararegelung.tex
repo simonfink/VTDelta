@@ -1,0 +1,904 @@
+\title{Stabilisierung eines Pendels auf einem Scara Roboter}
+%\author{
+%        Claudia Visentin \\
+%        NTB - Interstaatliche Hochschule f\"ur Technik Buchs\\
+%        9470 Buchs SG, \underline{Switzerland}
+%}
+%\date{\today}
+
+\documentclass[12pt]{article}
+
+\usepackage[applemac]{inputenc} 
+\usepackage[german]{babel}
+\usepackage[T1]{fontenc}
+\usepackage{cite}
+\usepackage{booktabs}
+\usepackage[section]{placeins}
+\usepackage{float}
+\usepackage{listings}
+\usepackage[usenames]{color} 
+
+% *** MATH PACKAGES ***
+\usepackage[cmex10]{amsmath}
+
+% *** SPECIALIZED LIST PACKAGES ***
+\usepackage{algorithmic}
+
+
+%formattazione equazioni e tavole
+\usepackage{mdwmath}
+\usepackage{mdwtab}
+\usepackage{eqparbox}
+
+%fornisce la possibilitˆ di posizionare anche sotofigure, es. 1a, 1b, ecc...
+\usepackage[tight,footnotesize]{subfigure}
+\usepackage[font={small,it}, labelfont=bf, width=.45\textwidth]{caption}[2004/07/16]
+
+%floating point package
+\usepackage{fixltx2e}
+\usepackage{stfloats}
+\usepackage{url}
+\usepackage[pdftex]{graphicx}
+\graphicspath{{img/}}
+\DeclareGraphicsExtensions{.pdf,.jpeg,.png}
+
+% correct bad hyphenation here
+\hyphenation{op-tical net-works semi-conduc-tor}
+
+\begin{document}
+\maketitle
+
+%\begin{abstract}
+%This is the paper's abstract \ldots
+%\end{abstract}
+
+%fig. \ref{fig:setup}.
+%\section{}
+
+%\ref{FIG:mainpage}.
+\section{Das Inverse Pendel}
+
+Das inverse Pendel ist ein Pendel mit dem Schwerpunkt oberhalb der Achse. Das Pendel befindet sich in seinem h\"ochsten Punkt in einer instabilen Ruhelage. Das inverse Pendel ist eine der Standardaufgaben der Regelungstechnik f\"ur die Stabilisierung einer instabilen Regelstrecke.
+ 
+\begin{figure}[h!]
+\centering
+\includegraphics[width=0.52\textwidth]{pendel.pdf}
+\caption{Inverse Pendel}
+\label{FIG:invp}
+\end{figure}
+
+Ein Standardbeispiel f\"ur ein inverses Pendel ist ein Wagen mit einem darauf montierten inversen Pendel (Bild \ref{FIG:invp}). Die Pendelbewegung kann durch die horizontale Bewegung des Wagens beeinflusst werden.
+
+Der Dynamische vom Pendel kann durch die Gleichung \ref{EQN:pendel} beschrieben werden. Die Winkelbeschleunigung ist Abh\"angig von der x Koordinate an der Basis vom Pendel. 
+
+Das Pendel Modell wurde durch diese Gleichung implementiert. 
+
+\begin{equation}
+\ddot{\phi} = \frac{d(-\ddot{x_{base}}\cos{\phi}+g\sin{\phi})}{d^2+r^2}-f_p\dot{\phi}\\
+\label{EQN:pendel}
+\end{equation}
+
+Wenn J die Tr\"agheit vom Pendel und m seine Masse sind, ist $r = \sqrt{\frac{J}{m}}$.
+
+$f_p$ ist einen Reibungsfaktor. 
+
+Aus diesem Modell kann man die Istwerte von $x_{base}$ Koordinaten und vom Winkel $\phi$.
+
+
+Der Istwert der Position vom Pendels Endpunkt wird dann durch die folgende Gleichung berechnet:
+
+\begin{equation}
+x_{tip} = x_{base} + l\sin{\phi}\\
+\label{EQN:tip}
+\end{equation}
+
+Der Winkel kann auch durch die folgende Gleichung berechnet werden:
+
+\begin{equation}
+\phi = \arctan{\frac{\ddot{x_{tip}}}{g}}\\
+\label{EQN:tip_phi}
+\end{equation}
+
+Diese Gleichung erm\"oglicht, eine Beziehung zwischen $\phi$ und $\ddot{x_{tip}}$ zu finden.
+
+
+\subsection{Das Inverse Pendel 3-D}
+
+\begin{figure}[h!]
+\centering
+\includegraphics[width=\textwidth]{pendel_sensor.pdf}
+\caption{Inverse Pendel 3-D}
+\label{FIG:pendel3d}
+\end{figure}
+
+Zur Verf\"ugung  steht ein Sensor, der durch vier Hall Sensoren den Neigungswinkel eines Pendels in 3-D liefern kann. Das Pendel ist mit einem Magnet gestattet.
+Das Modell vom Inversen Pendel wurde daher auf den 3-D Fall generalisiert. 
+In Bild \ref{FIG:sensor} wird das Messprinzip vom Sensor gezeigt. Die vier Sensoren (S1, S2, S3, S4) messen einen Wert zwischen 0 und 1, abhängig von wo sich das Pendel befindet. 
+
+Das System bekommt dann zwei Werte $m_x$ und $m_y$. In diesem Fall haben wir die folgenden Gleichungen: 
+
+\begin{equation}
+\sqrt{m_x^2 + m_y^2} = l \sin{\phi} \\
+\label{EQN:inv3d_1}
+\end{equation}
+
+\begin{equation}
+m_x = l \sin{\phi} \cos{\alpha}\\
+\label{EQN:inv3d_1}
+\end{equation}
+
+\begin{equation}
+m_y = l \sin{\phi} \sin{\alpha}\\
+\label{EQN:inv3d_1}
+\end{equation}
+
+Bei der Regelungskonzept wurde es entschieden, die zwei Winkel $\phi_x$ und $\phi_y$ und die x und y Koordinaten des Pendelstips durch die Gleichungen \ref{EQN:tip} und \ref{EQN:tip_phi} unabh\"angig zu regeln.
+
+\begin{figure}[h!]
+\centering
+\includegraphics[width=0.6\textwidth]{pendel_sensor2.pdf}
+\caption{Inverse Pendel Sensor Beschreibung}
+\label{FIG:sensor}
+\end{figure}
+
+\section{Der SCARA Roboter}
+
+Der SCARA Roboter erledigt Montageaufgaben. Er kann dabei zwischen klassischer Bahnregelung und Kraft- Positionsregelung umschalten.
+
+Ein SCARA-Roboter besitzt in der Regel vier Achsen und vier Freiheitsgrade. SŠmtliche Achsen sind als serielle Kinematik ausgefŸhrt, d.h. der Koordinatenursprung der folgenden Achse ist abhŠngig von der Position der vorhergehenden. Bei einem SCARA-Roboter sind die erste und zweite Achse rotatorischer Natur, die dritte und die vierte Achse sind vielfach aus einem Bauelement hergestellt (der Kugelrollspindel), und erlauben eine rotatorische und eine Linearbewegung. Das Werkzeug des Roboters wird am unteren Ende der Z-Achse montiert.
+
+\begin{figure}[h!]
+\centering
+\includegraphics[width=0.6\textwidth]{scara1.pdf}
+\caption{SCARA Roboter}
+\label{FIG:scara}
+\end{figure}
+
+\subsection{Direkt Kinematik}
+
+Der SCARA Roboter besteht aus vier Achsen und wird mit verschiedenen Transformationen beschrieben. Aus diesen Matrizen ergibt sich eine Vorw\"artstransformation. Die inverse Transformation wird durch eine geometrische Beschreibung hergeleitet. Diese Transformationen werden ben\"otigt, um die Koordinaten zwischen kartesischen und Maschinenkoordinaten umzuwandeln.
+
+Durch die vier Matrizen kann der Industrieroboter zu einer kinematischer Kette zusammen gebaut werden. Die vier Matrizen resultieren aus der Anzahl von Achsen. Bei jedem Koordinatensystem wird eine neue Transformationsmatrize gebildet.\\
+
+\textbf{Achse 1:}\\
+Bei der ersten Transformation handelt es sich um eine Rotation um die $z_0$ Achse. Au§erdem verschiebt man das Koordinatensystem um die LŠnge $l_1$ in der positiven $x_0$ Achse.
+
+\begin{equation}
+	{T_1^0} = \left[
+	\begin{array}{cccc}
+	cos(\phi_1) & -sin(\phi_1) & 0 & l_1cos(\phi_1) \\
+	sin(\phi_1) & cos(\phi_1) & 0 & l_1sin(\phi_1) \\
+	0 & 0 & 1 & 0 \\
+	0 & 0 & 0 & 1 \\
+	\end{array}
+	\right]
+\label{EQN:T10}
+\end{equation}	
+\\
+
+\textbf{Achse 2:}\\
+Bei der ersten Transformation handelt es sich um eine Rotation um die $z_1$ Achse. Au§erdem verschiebt man das Koordinatensystem um die LŠnge $l_2$ in der positiven $x_1$ Achse.
+
+\begin{equation}
+	{T_2^1} = \left[
+	\begin{array}{cccc}
+	cos(\phi_2) & -sin(\phi_2) & 0 & l_2cos(\phi_2) \\
+	sin(\phi_2) & cos(\phi_2) & 0 & l_2sin(\phi_2) \\
+	0 & 0 & 1 & 0 \\
+	0 & 0 & 0 & 1 \\
+	\end{array}
+	\right]
+\label{EQN:T21}
+\end{equation}	
+\\
+
+\textbf{Achse 3:}\\
+Bei der ersten Transformation handelt es sich um eine Verschiebung der L\"ange $z$ in der positiven $z_2$ Achse. 
+
+\begin{equation}
+	{T_3^2} = \left[
+	\begin{array}{cccc}
+	1 & 0 & 0 & 0 \\
+	0 & 1 & 0 & 0 \\
+	0 & 0 & 1 & -d_3 \\
+	0 & 0 & 0 & 1 \\
+	\end{array}
+	\right]
+\label{EQN:T32}
+\end{equation}	
+\\
+
+\textbf{Achse 4:}\\
+Bei der ersten Transformation handelt es sich um eine Verdrehung des Endeffektor.
+
+\begin{equation}
+	{T_4^3} = \left[
+	\begin{array}{cccc}
+	cos(\phi_4) & -sin(\phi_4) & 0 & 0 \\
+	sin(\phi_4) & cos(\phi_4) & 0 & 0 \\
+	0 & 0 & 1 & 0 \\
+	0 & 0 & 0 & 1 \\
+	\end{array}
+	\right]
+\label{EQN:T43}
+\end{equation}	
+\\
+
+\textbf{Kinematische Kette:}\\
+Aus diesen vier Matrizen entsteht eine neue Matrize. Durch diese kšnnen die Koordinaten fŸr den Endefekktors herausgelesen werden.
+
+\begin{equation}
+T_4^0 = T_1^0T_2^1T_3^2T_4^3
+\end{equation}
+
+Diese Matrix beschreibt die $xyz$ Koordinaten und die Lage $\alpha$. Dies ist der Winkel, um welchen der Endeffektor gedreht werden kann.
+
+\begin{equation}
+	\left[
+	\begin{array}{cccc}
+	x \\
+	y \\
+	z \\
+	\alpha \\
+	\end{array}
+	\right]
+ = 
+ 	\left[
+	\begin{array}{cccc}
+	l_1cos(\phi_1) + l_2cos(\phi_1+\phi_2)  \\
+	l_1sin(\phi_1) + l_2sin(\phi_1+\phi_2) \\
+	-d_3 \\
+	\phi_1+\phi_2-\phi_4 \\
+	\end{array}
+	\right]
+\label{EQN:result_dir}
+\end{equation}	
+
+\subsection{Inverse Kinematik}
+
+Die inverse Trafomastion kann bei einem SCARA Roboter noch hŠndisch berechnet werden. Jeder Punkt kann mit dem Roboterarm links oder rechts angefahren werden.
+
+\begin{equation}
+c^2 = x^2 + y^2
+\label{EQN:c1}
+\end{equation}
+
+\begin{equation}
+c^2 = \frac{l_1^2+l_2^2-x^2-y^2}{2l_1l_2}
+\label{EQN:c2}
+\end{equation}
+
+Aus der Formel ~\ref{EQN:c1} und ~\ref{EQN:c2} berechnet sich der Winkel $\theta$:
+
+\begin{equation}
+cos(\theta) = \frac{l_1^2+l_2^2-x^2-y^2}{2l_1l_2}
+\label{EQN:theta1}
+\end{equation}
+
+\begin{equation}
+180 = \theta + \phi_2
+\label{EQN:theta2}
+\end{equation}
+
+\begin{equation}
+cos(\theta) = cos(180¡-\phi_2) = -cos(\beta)
+\label{EQN:theta_cos}
+\end{equation}
+
+Somit k\"onnen die Winkel errechnet werden:
+
+\begin{equation}
+\phi_2 = \pm arccos(\frac{-l_1^2-l_2^2+x^2+y^2}{2l_1l_2})
+\label{EQN:phi2}
+\end{equation}
+
+\begin{equation}
+\phi_1 = arctan(\frac{y}{x})\pm arccos(\frac{-l_1^2-l_2^2+x^2+y^2}{2l_1\sqrt{x^2+y^2}})
+\label{EQN:phi1}
+\end{equation}
+
+\"Uber die verfahrene H\"ohe z und den Winkel $\phi_4$ kann auf $d_3$ und $d_4$ zur\"uckgeschossen werden. 
+
+\begin{equation}
+d_3 = z
+\label{EQN:d3}
+\end{equation}
+
+\begin{equation}
+\phi_4 = \phi_1+\phi_2-d_4
+\label{EQN:phi4}
+\end{equation}
+
+
+\subsection{Jacobi Matrix}
+
+Das Jacobimatrix $J(q)$ definiert die folgende Beziehung zwischen dem Vektor der Gelenkegeschwindigkeiten $\dot{q}$ und dem Vektor der kartesischen Geschwindigkeiten $\dot{x}$:
+
+\begin{equation}
+\dot{x} = J(q)\dot{q}\\
+\end{equation}
+
+Der SCARA hat ein $6x4$ Jacobimatrix, da er nur vier Freiheitsgraden hat. Da die Gelenke $1$, $2$ und $4$ Drehgelenke und Gelenk $4$ prismatisch sind,und da $O_4-O_3$ parallel zu $z_3$ Axis ist, hat der Jacobimatrix die Form: 
+
+\begin{equation}
+	{J} = \left[
+	\begin{array}{cccc}
+	z_0x(O_4-O_0) & z_1x(O_4-O_1) & z_2 & 0 \\
+	z_0 & z_1 & 0 & z_3 \\
+	\end{array}
+	\right]
+\label{EQN:J}
+\end{equation}	
+\\
+
+Die Urspr\"unge der Referenzsysteme sind so definiert:
+
+\begin{equation}
+	{O1} = \left[
+	\begin{array}{cccc}
+	l_1cos(\phi_1) \\
+	l_1sin(\phi_1) \\
+	0 \\
+	\end{array}
+	\right]
+\label{EQN:O1}
+\end{equation}	
+\\
+
+\begin{equation}
+	{O2} = \left[
+	\begin{array}{cccc}
+	l_1cos(\phi_1)+l_2cos(\phi_1+\phi_2) \\
+	l_1sin(\phi_1)+l_2sin(\phi_1+\phi_2) \\
+	0 \\
+	\end{array}
+	\right]
+\label{EQN:O2}
+\end{equation}	
+\\
+
+\begin{equation}
+	{O4} = \left[
+	\begin{array}{cccc}
+	l_1cos(\phi_1)+l_2cos(\phi_1+\phi_2) \\
+	l_1sin(\phi_1)+l_2sin(\phi_1+\phi_2) \\
+	d_3-d_4\\
+	\end{array}
+	\right]
+\label{EQN:O4}
+\end{equation}	
+\\
+
+Die Jacobi Matrix wird dann: 
+
+
+\begin{equation}
+	{J} = \left[
+	\begin{array}{cccc}
+	-l_1sin(\phi_1)-l_2sin(\phi_1+\phi_2) & -l_2sin(\phi_1+\phi_2) & 0& 0 \\
+	l_1cos(\phi_1)+l_2cos(\phi_1+\phi_2) & l_2cos(\phi_1+\phi_2) & 0& 0\\
+	0 & 0 & -1 & 0\\
+	0 & 0 & 0 & 0\\
+	0 & 0 & 0 & 0\\
+	1 & 1 & 0 & -1\\
+	\end{array}
+	\right]
+\label{EQN:J1}
+\end{equation}	
+\\
+
+\subsection{Massenmatrix}
+
+In der analytische Mechanik wird die Massenmatrix benutzt, um Bewegungsgleichungen mit generalisierten Koordinaten zu l\"osen. 
+In diesem Fall ist die Massenmatrix eine diagonale Matrix.
+
+\begin{equation}
+	{M} = \left[
+	\begin{array}{cccc}
+	J_1i_1^2 & 0 & 0 & 0 \\
+	0 & J_2i_2^2 & 0 & 0 \\
+	0 & 0 & J_3i_3^2 & 0 \\
+	0 & 0 & 0 & J_4i_4^2 \\
+	\end{array}
+	\right]
+\label{EQN:M}
+\end{equation}	
+\\
+
+und $i_{1...4}$ sind die \"Uberetzungsfaktoren f\"ur jeden Gelenk. 
+
+
+\newpage
+\section{Regelungskonzept}
+
+Bei einer Roboterregelung gelten generell folgende Anforderungen:
+
+\begin{itemize}
+\item{Der Regler muss in jedem Fall stabil sein} 
+%\item{Der Endwert der Ist-Position soll bei einem Soll-Positions-Sprung ohne †berschleifen erreicht werden} 
+\item{St\"ošrungen und Lastmomente sollen komplett ausgeregelt werden}
+\item{Die Geschwindigkeit soll begrenzt werden kšnnen}
+%\item{Bei einer nichtlinearen Begrenzung darf es keinen Windup geben}
+\item{Der Regler sollte in jeder Position des Roboters gleich straff sein}
+\end{itemize}
+
+\begin{figure}[h!]
+\centering
+\includegraphics[width=1\textwidth]{schema_tot.pdf}
+\caption{SCARA Regler Schema}
+\label{FIG:schema}
+\end{figure}
+
+Das Ziel ist, ein in dem SCARA Roboter montierte Pendel stabilisieren zu k\"onnen. Man will die Position den Endepunkt vom Pendel regeln. Daher wird einen externen Reglerkreis gebaut, der den Wert $x_{tip}$ regeln kann. 
+Der Ausgang von diesem Block ist der Sollwinkel f\"ur den Pendel, der auf Null geregelt werden muss. Dieser Sollwert wird im Pendel Regelungskreis benutzt und die Ausgang von diesem Regler sind die kartesischen Koordinaten des End Effektors, die die Sollwerte f\"ur den Roboter sind.  
+
+Der Roboter Modell bekommt die Sollwerte der kartesischen Koordinaten und regelt die Gelenkekoordinaten $q$ durch den innersten Regelungskreis. 
+
+Die Ausg\"ange vom Pendelregelungskreis ud Roboterregelungskreis werden vom $x_{tip}$ benutzt, um den $x_{tip}$ Istwert zu rechnen. 
+
+
+\subsection{Regelungsstruktur und Regelungsparameter}
+
+F\"ur eine straffe und schnelle Regelung muss eine Kaskadenregelung eingesetzt werden. Dazu m\"ussen die inneren Zust\"ande bekannt sein. Die Position der Motoren ist durch den Encoder bekannt und die Geschwindigkeit kann durch Ableiten der Position gefunden werden.
+
+Der Positionsollwert vom gesamten System ist die Position in Kartesischen Koordinaten vom \"aussersten Punkt des Pendels. 
+
+Die Parameter der Reglern, beziehungsweise $k_p$ und $k_v$ wurden nach den folgenden Formeln erhalten:
+
+\begin{equation}
+k_{p} = \omega_0^2
+\label{EQN:kp}
+\end{equation}
+
+\begin{equation}
+k_{v} = 2D\omega_0
+\label{EQN:kv}
+\end{equation}
+
+, wo $\omega_0 = 2\pi f$ ist die unged\"ampfte Eigenfrequenz und $f$ ist die Frequenz des Systems. $D$ ist der D\"ampfungsfaktor und ist in diesem Fall an $0.7$ gesetzt.
+
+Die Parameter vom Regler sind auf 1 ms Regeltakt optimiert. Der Regeltakt muss immer gr\"osser als die m\"ogliche Totzeitensein, um eine stabile Regelung zu garantieren.
+
+\begin{table}[!htbp]
+\centering
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{| l | r | r | r | }
+\hline
+& $PD xy_{tip}$ & $PD \phi_{xy}$ & $PD q$\\
+\hline
+$\omega_0$ & 1 & 10 & 600 \\
+\hline
+$k_p$ & 1 & 100 & 36e4 \\
+\hline
+$k_v$ & 1.4 & 14 & 840 \\
+ \hline
+ \end{tabular}
+\caption{Regler Parameter Einstellungen}
+\label{TAB:reg}
+\end{table}
+
+\subsection{Das Pendel Modell}
+
+Im Bild \ref{FIG:schema_pendel1} wird der innerste Regelungskreis beschrieben. Der Winkelssollwert wird mit dem Istwert vom Pendel Modell vergliechen und dieser Fehler ist der Eingang vom PD Regler. 
+
+Die Regler Parameter wurden durch die Gleichungen \ref{EQN:kp_rob} und \ref{EQN:kv_rob} berechnet.
+Der D\"ampfungsfaktor ist in diesem Fall $D = 1$, und die unged\"ampfte Eigenfrequenz $\omega_0 = 50$. 
+
+Der Ausgang vom Regler ist eine Beschleunigung. Durch den inversen Pendelmodell kann man die kartesische Beschleunigung kriegen und diese Beschleunigung ist der Eingang vom Pendel. 
+
+\begin{figure}[h!]
+\centering
+\includegraphics[width=0.8\textwidth]{pendel_control.pdf}
+\caption{Pendel $\phi_{xy}$ Regelung Schema}
+\label{FIG:schema_pendel1}
+\end{figure}
+
+Im Bild \ref{FIG:schema_pendel2} wird einen \"ausseren Regelungskreis geschlossen. Dieser Kreis regelt die Position vom Pendels Endpunkt $xy_{tip}$. 
+Der Positionsfehler wird in einem PD REgler bearbeitet. Auch diese Regler Parameter wurden durch die Gleichungen \ref{EQN:kp_rob} und \ref{EQN:kv_rob} berechnet. Der D\"ampfungsfaktor ist in diesem Fall $D = 1$, und die unged\"ampfte Eigenfrequenz $\omega_0 = 5$. 
+
+\begin{figure}[h!]
+\centering
+\includegraphics[width=0.9\textwidth]{pendel_control_alles.pdf}
+\caption{Pendel $xy_{tip}$ Regelung Schema}
+\label{FIG:schema_pendel2}
+\end{figure}
+
+Die Gleichung \ref{EQN:tip_phi} erm\"oglicht, den Winkelsollwert f\"ur den innersten Kreis zu kriegen und die Gleichung \ref{EQN:tip} erm\"oglicht schlussendlich die Istposition vom Endpunkt durch die Istposition vom Basispunkt zu rechnen.
+
+
+\subsection{SCARA Roboter Modell und Gelenkregelung}
+
+Ein \emph{Path Planner} generiert die Sollwerte der kartesischen Koordinaten vom Roboter. Diese Koordinaten werden durch die Inverse Kinematik auf Gelenkekoordinaten \"ubersetzt. Der Fehler zwischen Gelenkekoordinaten Sollwert und Istwert bestehen die Eing\"ange vom PD Regler. 
+
+Der D\"ampfungsfaktor ist in diesem Fall $D = 1$, und die unged\"ampfte Eigenfrequenz $\omega_0 = 2\pi f = 50$. 
+Der PD Regler wurde implementiert,so dass: 
+
+\begin{equation}
+k_{p} = \omega_0^2
+\label{EQN:kp_rob}
+\end{equation}
+
+\begin{equation}
+k_{v} = 2D\omega_0
+\label{EQN:kv_rob}
+\end{equation}
+
+Die Ausg\"ange vom Regler sind die Gelenkbeschleunigungen. Die Massenmatrix erm\"oglicht, aus diesen Beschleunigungen, die generalisierte Kr\"afte vom Roboter zu rechnen.
+
+\begin{figure}[h!]
+\centering
+\includegraphics[width=1\textwidth]{robot_regelung.pdf}
+\caption{SCARA Roboter Regelung Schema}
+\label{FIG:schema_robot_reg_gen}
+\end{figure}
+
+\begin{figure}[h!]
+\centering
+\includegraphics[width=1\textwidth]{robot_schema_gen.pdf}
+\caption{SCARA Roboter Schema}
+\label{FIG:schema_robot_gen}
+\end{figure}
+
+Im Roboter Modell erm\"oglicht die \emph{Inverse Massenmatrix} die Gelenkbeschleunigungen vom Roboter zu rechnen. Durch zwei Integratoren kriegt man die Gelenkkoordinaten und durch die \emph{Direkte Kinematik} kann man schliesslich die kartesischen Koordinaten vom Roboter berechnen.
+
+
+\newpage
+\section{Simulink Implementierung}
+
+Das gesamte Simulink Schema ist in Bild \ref{FIG:simulink_all}. Man kann die drei Reglerkreise, um die Position $x_{tip}$, den Winkel vom Pendel $\phi$ und die Gelenkekoordinaten $q$ zu regeln.
+
+Ein Sample Time von 1 ms wurde eingestellt und die Parameter der Reglern wurden auf diesen Wert optimiert. 
+
+Man kann in Matlab im Fenster \textbf{Simulation/Configuration Parameters} den Sample Time einstellen. 
+
+Alle Bl\"ocke werden dann dieses Wert \"ubernehmen (Der Wert $-1$ in jedem Block Properties Fenster "heisst "inherited").
+
+\begin{figure}[!htbp]
+\centering
+\includegraphics[width=\textwidth]{simulink_alles.pdf}
+\caption{Simulink gesamte Schema}
+\label{FIG:simulink_all}
+\end{figure}
+
+\subsection{Pendel Modell und Regelung}
+
+Die Gleichung \ref{EQN:pendel} wurde in Simulink f\"ur die x und y Koordinaten wie in Bild \ref{FIG:pendel_model} implementiert. Bilder \ref{FIG:pendel_reg_phi} und \ref{FIG:pendel_reg_xt} zeigen die Implementierung von den zwei Reglerkreise, die $\phi_{xy}$ Regelung und die $xy_{tip}$ Regelung.
+
+\begin{figure}[!htbp]
+\centering
+\includegraphics[width=1\textwidth]{pendel_simulink.pdf}
+\caption{Simulink Pendel Modell}
+\label{FIG:pendel_model}
+\end{figure}
+
+\begin{figure}[!htbp]
+\centering
+\includegraphics[width=1\textwidth]{pendel1.pdf}
+\caption{Simulink Pendel $\phi_{xy}$ Regelung}
+\label{FIG:pendel_reg_phi}
+\end{figure}
+
+\begin{figure}[!htbp]
+\centering
+\includegraphics[width=1\textwidth]{pendel_simulink_genxyt_control.jpg}
+\caption{Simulink Pendel $xy_{tip}$ Regelung}
+\label{FIG:pendel_reg_xt}
+\end{figure}
+
+
+\newpage
+\subsection{SCARA Roboter Modell und Gelenkeregelung}
+
+\begin{figure}[h!]
+\centering
+\includegraphics[width=1\textwidth]{robot_controller.jpg}
+\caption{Simulink SCARA Regelung Schema}
+\label{FIG:robot_reg_schema}
+\end{figure}
+
+\begin{figure}[h!]
+\centering
+\includegraphics[width=1.1\textwidth]{robot.jpg}
+\caption{Simulink SCARA Roboter Schema}
+\label{FIG:robot_schema}
+\end{figure}
+
+Der Roboter kriegt einen Positionssollwert, der dann abgeleitet wird. Das ist nicht kritisch, da die Ableitung auf einem Sollwert und nicht auf einem gemessenen Wert gemacht wird. \\
+
+In Roboter Regler wurden auch Positions und Geschwindigkeitslimitierungen implementiert. 
+
+Wenn der Roboter in die Limitierung f\"ahrt, f\"uhrt das normalerweise im besten Fall zu einem Notaus und im schlechtesten Fall zu einem Crash. \\
+ 
+In der Regelung muss auf allen Ebenen verhindert werden, dass dieser Fall eintrifft und unzul\"assige Sollwert generiert werden. Ein einfaches \"Uberwachen der Sollposition gen\"ugt da nicht, da der Roboter ja mit sehr hohen Geschwindigkeiten diese Grenze \"uberfahren kann.\\
+
+Die sauberste Methode, unzul\"assige Sollwerte zu begrenzen ist die Limitierung der Geschwindigkeit in Richtung der Grenzen des Arbeitsraums.
+Diese Limitierung wird dirch den "velocity limits" Algorithmus implementiert. 
+
+
+\lstnewenvironment{limit}[1][]
+{\lstset{basicstyle=\small\ttfamily, columns=fullflexible,
+keywordstyle=\color{black}\bfseries, commentstyle=\color{blue},
+language=C++, basicstyle=\small,
+numbers=left, numberstyle=\tiny,
+stepnumber=2, numbersep=5pt, frame=shadowbox, float=*, #1}}{}
+
+\begin{limit}
+// Velocity limits near the end of the work area
+
+dq_max = sqrt(2*a_max*(q_max-q_ist));
+dq_min = -sqrt(2*a_max*(q_ist-q_min));
+
+if dq_in > dq_max
+    dq_out = dq_max;
+elseif dq_in < dq_min
+    dq_out = dq_min;
+else
+    dq_out = dq_in;
+end
+\end{limit}
+
+Die Inverse und direkte Kinematik wurden Embedded Matlab Function implementiert.\\
+
+\lstnewenvironment{codice_inversa}[1][]
+{\lstset{basicstyle=\small\ttfamily, columns=fullflexible,
+keywordstyle=\color{black}\bfseries, commentstyle=\color{blue},
+language=C++, basicstyle=\small,
+numbers=left, numberstyle=\tiny,
+stepnumber=2, numbersep=5pt, frame=shadowbox, float=*, #1}}{}
+
+\begin{codice_inversa}
+// Scara inverse kinematik equations
+
+q_coord(2) = acos((-l1^2-l2^2+x^2+y^2)/(2*l1*l2));      % links gefahren
+
+if(q_coord(2)>=0)
+    q_coord(1)=atan(y/x)-acos(((x^2+y^2)+l1^2-l2^2)/(2*l1*sqrt(x^2+y^2)));
+else
+    q_coord(1)=atan(y/x)+acos(((x^2+y^2)+l1^2-l2^2)/(2*l1*sqrt(x^2+y^2)));
+end
+
+q_coord(3) = -z;
+q_coord(4) = q_coord(1)+q_coord(2)-alpha;
+\end{codice_inversa}
+
+\lstnewenvironment{codice_diretta}[1][]
+{\lstset{basicstyle=\small\ttfamily, columns=fullflexible,
+keywordstyle=\color{black}\bfseries, commentstyle=\color{blue},
+language=C++, basicstyle=\small,
+numbers=left, numberstyle=\tiny,
+stepnumber=2, numbersep=5pt, frame=shadowbox, float=*, #1}}{}
+
+
+\begin{codice_diretta}
+// Scara direct kinematik equations
+
+phi1 = q(1);
+phi2 = q(2);
+d3   = q(3);
+phi4 = q(4);
+
+cart_coord(1) = cos(phi1)*l1 + cos(phi1+phi2)*l2 ;
+cart_coord(2) = sin(phi1)*l1 + sin(phi1+phi2)*l2;
+cart_coord(3) = -d3;
+
+cart_coord(4) = phi1 + phi2 - phi4;
+\end{codice_diretta}
+
+\newpage
+\subsection{Sensor und Koordinaten Transformation}
+
+Die vonm Sensor gemessene Werte beziehen sich auf den Sensor Referenz System. Um die Werte in Kartesischen Koordinaten zu kriegen, muss man die koordinaten Transformation implementieren. $phi\_cx$ und $phi\_cy$ sind die Winkeln in kartesischen Koordinaten. Sie sind abh\"angig von den ersten zwei Gelenkekoordinaten vom Roboter $q1$ und $q2$ und von den gemessenen Werte $phi\_sx$ und $phi\_sy$ in Sensor Koordinaten.
+
+\lstnewenvironment{sensor}[1][]
+{\lstset{basicstyle=\small\ttfamily, columns=fullflexible,
+keywordstyle=\color{black}\bfseries, commentstyle=\color{blue},
+language=C++, basicstyle=\small,
+numbers=left, numberstyle=\tiny,
+stepnumber=2, numbersep=5pt, frame=shadowbox, float=*, #1}}{}
+
+\begin{sensor}
+// from sensor ref system to cart coord ref system
+
+phi_cx = phi_sx*cos(q1+q2) - phi_sy*sin(q1+q2);
+phi_cy = phi_sx*sin(q1+q2) + phi_sy*cos(q1+q2);
+\end{sensor}
+
+\newpage
+\section{Simulink Simulation}
+
+Ein Beispiel wurde durchgef\"uhrt, um die Leistungen der Regelung zu evaluieren. Die Daten vom System befinden sich in den folgenden Tabellen.
+
+\subsection{Daten vom Pendel}
+
+\begin{table}[!htbp]
+\centering
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{| l | l |}
+\hline
+Mass [kg] & 0.2 \\
+\hline
+Length [m] & 0.1 \\
+\hline
+Inertia [$kgm^2$] & 0.0006 \\
+\hline
+Friction coefficient [$Nsm^{-1}rad^{-1}$] & 0.1 \\
+\hline
+\hline
+\end{tabular}
+\caption{Pendel Daten}
+\label{TAB:pend}
+\end{table}
+
+\subsection{Daten vom Scara Roboter}
+
+\begin{table}[!htbp]
+\centering
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{| l | r | r |}
+\hline
+Motor Constant & [Nm/A] & 0.5 \\
+\hline
+Gear Ratio & [-] & 100 \\
+\hline
+Ratio Output Voltage to Current & [V/A] & -4.7619 \\
+\hline
+Ratio Output Voltage to $\dot{Q}$ & [V/Nm] & -0.0265 \\
+\hline
+Encoder Ticks & [lines] & 4096 \\
+\hline
+Max Voltage of V-Signal & [V] & 10\\
+\hline
+Max Current & [A] & 2.1 \\
+\hline
+Max Speed & [rad/s] & 3.14159\\
+\hline
+Controller $f_0$ & [Hz] & 50 \\
+ \hline
+Controller Damping & [-]& 1 \\
+\hline
+Inertia & $[kgm^2]$ &  1.6964e-4\\
+\hline 
+\hline
+\end{tabular}
+\caption{Scara Motor 1 Daten}
+\label{TAB:mot1}
+\end{table}
+
+\begin{table}[!htbp]
+\centering
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{| l | r | r|}
+\hline
+Motor Constant & [Nm/A] & 0.47 \\
+\hline
+Gear Ratio & [-] & 100 \\
+\hline
+Ratio Output Voltage to Current & [V/A] & -4.7619 \\
+\hline
+Ratio Output Voltage to $\dot{Q}$ & [V/Nm] & -0.0265 \\
+\hline
+Encoder Ticks & [lines] & 4096 \\
+\hline
+Max Voltage of V-Signal & [V] & 10\\
+\hline
+Max Current & [A] & 1 \\
+\hline
+Max Speed & [rad/s] & 6.2832\\
+\hline
+Controller $f_0$ & [Hz] & 50 \\
+ \hline
+Controller Damping & [-] & 1 \\
+\hline
+Inertia & $[kgm^2]$ &  6.7475e-5\\
+\hline 
+\hline
+\end{tabular}
+\caption{Scara Motor 2 Daten}
+\label{TAB:mot2}
+\end{table}
+
+\begin{table}[!htbp]
+\centering
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{| l | r | r |}
+\hline
+Motor Constant & [Nm/A] & 0.47 \\
+\hline
+Gear Ratio & [-] & -1.5 \\
+\hline
+Ratio Output Voltage to Current & [V/A] & 4.7619 \\
+\hline
+Ratio Output Voltage to $\dot{Q}$ & [V/Nm] & -0.0265 \\
+\hline
+Encoder Ticks & [lines] & 4096 \\
+\hline
+Max Voltage of V-Signal & [V] & 10\\
+\hline
+Max Current & [A] & 2.1 \\
+\hline
+Max Speed & [rad/s] & 314.159\\
+\hline
+Controller $f_0$ & [Hz] & 50 \\
+ \hline
+Controller Damping & [-] & 1 \\
+\hline
+Inertia & $[kgm^2]$  &  7e-5\\
+\hline 
+\hline
+\end{tabular}
+\caption{Scara Motor 3 Daten}
+\label{TAB:mot3}
+\end{table}
+
+\begin{table}[!htbp]
+\centering
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{| l | r | r |}
+\hline
+Motor Constant & [Nm/A] & 0.31 \\
+\hline
+Gear Ratio & [-] & -16.2022 \\
+\hline
+Ratio Output Voltage to Current & [V/A] & 4.7619 \\
+\hline
+Ratio Output Voltage to $\dot{Q}$ & [V/Nm] & -0.0265 \\
+\hline
+Encoder Ticks & [lines] & 4096 \\
+\hline
+Max Voltage of V-Signal & [V] & 10\\
+\hline
+Max Current & [A] & 0.5 \\
+\hline
+Max Speed & [rad/s] & 31.4159\\
+\hline
+Controller $f_0$ & [Hz] & 50 \\
+ \hline
+Controller Damping & [-] & 1 \\
+\hline
+Inertia & $[kgm^2]$ &  3e-5\\
+\hline 
+\hline
+\end{tabular}
+\caption{Scara Motor 4 Daten}
+\label{TAB:mot4}
+\end{table}
+
+\subsection{Ergebnisse}
+
+In Bild \ref{FIG:xt_img} ist die Sollposition vom Pendels Endepunkt mit der Istposition vergliechen. Der Fehler zwischen den zwei Gr\"ossen ist klein und das System hat eine \"Uberschleifung von $10 \%$. 
+
+Der Winkel vom Pendel hat auch sehr kleine Werte und wird schnell auf Null stabilisiert. Die Gelenkekoordinaten und kartesischen Koordinaten vom Roboter sind stark geregelt, und der Fehler zwischen Soll- und Istwert sind fast Null.
+
+\begin{figure}[!htbp]
+\centering
+\includegraphics[width=0.75\textwidth]{img_xt_step.pdf}
+\caption{$x_t$ tracking}
+\label{FIG:xt_img}
+\end{figure}
+
+\begin{figure}[!htbp]
+\centering
+\includegraphics[width=0.75\textwidth]{img_phi_step.pdf}
+\caption{$\phi$ tracking}
+\label{FIG:phi_img}
+\end{figure}
+
+\begin{figure}[!htbp]
+\centering
+\includegraphics[width=1.1\textwidth]{img_q_step.pdf}
+\caption{Roboter $q$ Koordinaten tracking}
+\label{FIG:q_img}
+\end{figure}
+
+\begin{figure}[!htbp]
+\centering
+\includegraphics[width=1.1\textwidth]{img_x_step.pdf}
+\caption{Roboter $x$ kartesischen Koordinaten tracking}
+\label{FIG:x_img}
+\end{figure}
+
+
+
+
+
+\end{document}

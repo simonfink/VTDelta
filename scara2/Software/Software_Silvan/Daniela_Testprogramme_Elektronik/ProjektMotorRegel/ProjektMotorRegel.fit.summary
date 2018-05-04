@@ -1,0 +1,16 @@
+Fitter Status : Successful - Fri Feb 21 09:03:38 2014
+Quartus II 32-bit Version : 12.0 Build 178 05/31/2012 SJ Full Version
+Revision Name : ProjektMotorRegel
+Top-level Entity Name : MotorStromRegelung
+Family : Cyclone IV E
+Device : EP4CE10E22C7
+Timing Models : Final
+Total logic elements : 1,880 / 10,320 ( 18 % )
+    Total combinational functions : 1,688 / 10,320 ( 16 % )
+    Dedicated logic registers : 1,040 / 10,320 ( 10 % )
+Total registers : 1040
+Total pins : 32 / 92 ( 35 % )
+Total virtual pins : 0
+Total memory bits : 32,768 / 423,936 ( 8 % )
+Embedded Multiplier 9-bit elements : 0 / 46 ( 0 % )
+Total PLLs : 1 / 2 ( 50 % )

@@ -1,0 +1,10 @@
+install-ppc/lib/libeeros.so.0.0.0.0
+install-ppc/lib/libflink.so
+install-ppc/lib/libflinkeeros.so
+
+build-ppc/flinklib/utils/flinkanalogoutput
+build-ppc/flinklib/utils/flinkanaloginput
+build-ppc/eeros/examples/logger/loggerTest1
+Robot-Control/HwConfig.json
+build-ppc/Robot-Control/test-hardware
+build-ppc/Robot-Control/parallel-scara

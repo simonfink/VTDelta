@@ -1,0 +1,14 @@
+Test Protokoll: 20.12.2013
+Problem: Roboter pfeift, wenn Software läuft und Bremsen angezogen sind. 
+
+Was wurde getestet:
+- alle Resolver ausgesteck
+- alle Leitungen (Drives) ausgesteckt
+- alle Stecker (Drives) ausgesteckt
+- Es wurde überprüft, dass: FreigabeDrive = 0, SollwertDrive = 0, Stromsollwert oder Spannungssollwert = Stromsollwert 
+
+- Nadeln wurden gemessen (siehe Bilder): Nadeln verschwinden, sobald die Bremsen ausgelöst werden.
+
+
+
+

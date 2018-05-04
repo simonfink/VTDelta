@@ -1,0 +1,131 @@
+overall info:
+  version code: 0x00074c
+  driver name: ni_pcimio
+  board name: pci-6220
+  number of subdevices: 14
+subdevice 0:
+  type: 1 (analog input)
+  flags: 0x01f1b000
+  number of channels: 16
+  max data value: 65535
+  ranges:
+    all chans: [-10 V,10 V] [-5 V,5 V] [-1 V,1 V] [-0.2 V,0.2 V]
+  command:
+    start: now|ext|int
+    scan_begin: timer|ext
+    convert: timer|ext
+    scan_end: count
+    stop: none|count
+  command structure filled with probe_cmd_generic_timed for 1 channels:
+    start: now 0
+    scan_begin: timer 4000
+    convert: timer 4000
+    scan_end: count 1
+    stop: count 2
+subdevice 1:
+  type: 0 (unused)
+subdevice 2:
+  type: 5 (digital I/O)
+  flags: 0x10035000
+  number of channels: 8
+  max data value: 1
+  ranges:
+    all chans: [0 V,5 V]
+  command:
+    start: int
+    scan_begin: ext
+    convert: now
+    scan_end: count
+    stop: none
+  command structure filled with probe_cmd_generic_timed for 1 channels:
+    not supported
+subdevice 3:
+  type: 0 (unused)
+subdevice 4:
+  type: 0 (unused)
+subdevice 5:
+  type: 9 (calibration)
+  flags: 0x00040000
+  number of channels: 1
+  max data value: 0
+  ranges:
+    all chans: [0,1]
+  command:
+    not supported
+subdevice 6:
+  type: 8 (memory)
+  flags: 0x00050000
+  number of channels: 1024
+  max data value: 255
+  ranges:
+    all chans: [0,1]
+  command:
+    not supported
+subdevice 7:
+  type: 5 (digital I/O)
+  flags: 0x00070000
+  number of channels: 16
+  max data value: 1
+  ranges:
+    all chans: [0,1]
+  command:
+    not supported
+subdevice 8:
+  type: 0 (unused)
+subdevice 9:
+  type: 11 (serial digital I/O)
+  flags: 0x00070000
+  number of channels: 1
+  max data value: 255
+  ranges:
+    all chans: [0,1]
+  command:
+    not supported
+subdevice 10:
+  type: 5 (digital I/O)
+  flags: 0x00070000
+  number of channels: 8
+  max data value: 1
+  ranges:
+    all chans: [0,1]
+  command:
+    not supported
+subdevice 11:
+  type: 6 (counter)
+  flags: 0x10039000
+  number of channels: 3
+  max data value: 4294967295
+  ranges:
+    all chans: [0,1]
+  command:
+    start: now|ext|int|other
+    scan_begin: follow|ext|other
+    convert: now|ext|other
+    scan_end: count
+    stop: none
+  command structure filled with probe_cmd_generic_timed for 1 channels:
+    not supported
+subdevice 12:
+  type: 6 (counter)
+  flags: 0x10039000
+  number of channels: 3
+  max data value: 4294967295
+  ranges:
+    all chans: [0,1]
+  command:
+    start: now|ext|int|other
+    scan_begin: follow|ext|other
+    convert: now|ext|other
+    scan_end: count
+    stop: none
+  command structure filled with probe_cmd_generic_timed for 1 channels:
+    not supported
+subdevice 13:
+  type: 6 (counter)
+  flags: 0x00030000
+  number of channels: 1
+  max data value: 15
+  ranges:
+    all chans: [0,1]
+  command:
+    not supported

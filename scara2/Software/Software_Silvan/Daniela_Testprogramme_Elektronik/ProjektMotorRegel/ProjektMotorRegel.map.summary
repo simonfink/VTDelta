@@ -1,0 +1,14 @@
+Analysis & Synthesis Status : Successful - Fri Feb 21 09:03:20 2014
+Quartus II 32-bit Version : 12.0 Build 178 05/31/2012 SJ Full Version
+Revision Name : ProjektMotorRegel
+Top-level Entity Name : MotorStromRegelung
+Family : Cyclone IV E
+Total logic elements : 2,013
+    Total combinational functions : 1,685
+    Dedicated logic registers : 1,040
+Total registers : 1040
+Total pins : 32
+Total virtual pins : 0
+Total memory bits : 32,768
+Embedded Multiplier 9-bit elements : 0
+Total PLLs : 1

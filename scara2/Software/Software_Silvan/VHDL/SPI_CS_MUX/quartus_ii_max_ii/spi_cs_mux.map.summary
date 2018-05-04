@@ -1,0 +1,9 @@
+Analysis & Synthesis Status : Successful - Fri Apr 11 17:09:39 2014
+Quartus II 64-Bit Version : 11.0 Build 157 04/27/2011 SJ Full Version
+Revision Name : spi_cs_mux
+Top-level Entity Name : spi_cs_mux
+Family : MAX II
+Total logic elements : 53
+Total pins : 20
+Total virtual pins : 0
+UFM blocks : 0 / 1 ( 0 % )

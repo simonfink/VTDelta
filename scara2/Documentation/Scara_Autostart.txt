@@ -1,0 +1,54 @@
+
+S98main:
+
+#!/bin/sh
+
+
+case "$1" in
+  start)
+        echo starting main application
+        screen -S main -dm /opt/c32/bin/startup.sh
+        ;;
+  stop)
+        echo stopping main application
+        screen -S main -X  stuff $'\003'
+        sleep 1
+        screen -S main -X stuff $'\003'
+        ;;
+  restart|reload)
+        restart
+        ;;
+  *)
+        echo "Usage: $0 {start|stop|restart}"
+        exit 1
+esac
+
+exit $?
+
+
+
+
+startup.sh:
+
+#!/bin/sh
+
+/opt/c32/bin/deadtime.sh &
+
+/opt/c32/bin/parallel-scara
+
+sleep 3
+
+pid=$(pidof deadtime.sh)
+if [ -z "$pid" ]; then
+        echo "shutdown"
+        halt
+fi
+
+
+
+deadtime.sh:
+
+#!/bin/sh
+
+sleep 30
+

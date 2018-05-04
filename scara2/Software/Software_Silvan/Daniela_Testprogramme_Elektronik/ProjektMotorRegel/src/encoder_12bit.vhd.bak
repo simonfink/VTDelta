@@ -1,0 +1,136 @@
+-------------------------------------------------------------------------------
+--     ____  _____          __    __    ________    _______
+--    |    | \    \        |   \ |  |  |__    __|  |   __  \
+--    |____|  \____\       |    \|  |     |  |     |  |__>  ) 
+--     ____   ____         |  |\ \  |     |  |     |   __  <
+--    |    | |    |        |  | \   |     |  |     |  |__>  )
+--    |____| |____|        |__|  \__|     |__|     |_______/
+--
+--    INTERSTATE UNIVERSITY OF AAPLIED SCIENCES OF TECHNOLOGY
+--
+--    Campus Buchs - Werdenbergstrasse 4 - CH-9471 Buchs
+--    Campus Waldau - Schoenauweg4 - CH9013 St. Gallen
+--
+--    Tel. +41 (0)81 755 33 11   Fax +41 (0)81 756 54 34
+--
+-------------------------------------------------------------------------------
+-- Project : 	DE2-115 Board Support Package
+-- Unit    : 	SPI.vhd
+-- Author  : 	David Frommelt
+-- Created : 	October 2012
+-------------------------------------------------------------------------------
+-- Copyright(C) 2011: Interstate University of Applied Sciences NTB, Buchs
+-------------------------------------------------------------------------------
+
+LIBRARY IEEE;
+USE IEEE.std_logic_1164.ALL;
+USE IEEE.numeric_std.ALL;
+
+PACKAGE spi_16bit_pkg IS
+	TYPE t_spi_16bit_mout IS RECORD
+		sclk : 		std_logic;
+		cs_n :		std_logic;
+		mosi :		std_logic;
+	END RECORD;		
+	
+	TYPE t_spi_16bit_min IS RECORD
+		miso : 		std_logic;
+	END RECORD;
+	
+	COMPONENT spi_16bit_master
+		PORT (
+			clk:				IN std_logic;
+			spi_out: 		OUT t_spi_16bit_mout;
+			spi_in:			IN t_spi_16bit_min;
+			spi_out_value:	IN std_logic_vector(15 downto 0);
+			spi_in_value:	OUT std_logic_vector(15 downto 0);
+			spi_start:		IN std_logic;
+			spi_active:		OUT std_logic
+		);
+	END COMPONENT spi_16bit_master;
+--	
+--	COMPONENT spi_16bit_slave
+--		PORT (
+--			spi_out: 		OUT t_spi_16bit_mout;
+--			spi_in:			IN t_spi_16bit_min;
+--			spi_out_value:	IN std_logic_vector(15 downto 0);
+--			spi_in_value:	OUT std_logic_vector(15 downto 0)
+--		);
+--	END COMPONENT pwm8_12bit;
+END PACKAGE spi_16bit_pkg;	
+
+LIBRARY IEEE;
+USE IEEE.std_logic_1164.ALL;
+USE IEEE.numeric_std.ALL;
+USE work.spi_16bit_pkg.ALL;
+
+ENTITY spi_16bit_master IS
+	PORT (
+		clk:				IN std_logic;
+		spi_out: 		OUT t_spi_16bit_mout;
+		spi_in:			IN t_spi_16bit_min;
+		spi_out_value:	IN std_logic_vector(15 downto 0);
+		spi_in_value:	OUT std_logic_vector(15 downto 0);
+		spi_start:		IN std_logic;
+		spi_active:		OUT std_logic
+	);
+END ENTITY spi_16bit_master;
+
+ARCHITECTURE spi_16bit_master_ent OF spi_16bit_master IS
+	TYPE t_spi_register IS RECORD
+		spi_bit:			INTEGER RANGE 0 to 16;
+		spi_clk:			std_logic;
+		spi_active:		std_logic;	
+		spi_out:			t_spi_16bit_mout;
+		spi_in:			t_spi_16bit_min;
+	END RECORD;
+	
+	SIGNAL r, r_next : t_spi_register;
+	
+	BEGIN
+		comb_process: PROCESS(r, spi_start, spi_out_value, spi_in)
+		
+			VARIABLE v: t_spi_register;
+			BEGIN
+			v:=r;
+			
+			IF v.spi_active='1' THEN
+				v.spi_out.sclk := v.spi_clk;
+				v.spi_out.cs_n := '0';
+				if v.spi_clk = '0' THEN
+					v.spi_out.mosi := spi_out_value(v.spi_bit);
+					v.spi_clk := '1';
+				ELSE
+					spi_in_value(v.spi_bit) <= spi_in.miso;
+					v.spi_clk := '0';
+					
+					if v.spi_bit > 0 THEN
+						v.spi_bit := v.spi_bit-1;
+					ELSE
+						v.spi_active := '0';
+					END IF;
+				END IF;
+				
+			ELSE
+				v.spi_out.sclk :='1';
+				v.spi_out.cs_n :='1';
+				v.spi_out.mosi :='1';
+				v.spi_bit :=15;
+				v.spi_clk :='0';
+				
+				IF spi_start ='1' THEN
+					v.spi_active := '1';
+				END IF;
+			END IF;
+			r_next <=v;
+			spi_out <= v.spi_out;
+		END PROCESS comb_process;
+		
+		reg_process: PROCESS (clk)
+		BEGIN
+			IF rising_edge(clk) THEN
+				r<=r_next;
+				spi_active <= r_next.spi_active;
+			END IF;
+		END PROCESS reg_process;
+END ARCHITECTURE spi_16bit_master_ent;

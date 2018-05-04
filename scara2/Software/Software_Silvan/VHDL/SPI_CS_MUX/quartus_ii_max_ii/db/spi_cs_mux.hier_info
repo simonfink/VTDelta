@@ -1,0 +1,86 @@
+|spi_cs_mux
+isl_clk => sync:sync_cs.clk
+isl_clk => oldSCLK.CLK
+isl_clk => txCount[0].CLK
+isl_clk => txCount[1].CLK
+isl_clk => txCount[2].CLK
+isl_clk => txCount[3].CLK
+isl_clk => txCount[4].CLK
+isl_clk => txCount[5].CLK
+isl_clk => rxCount[0].CLK
+isl_clk => rxCount[1].CLK
+isl_clk => rxCount[2].CLK
+isl_clk => rxCount[3].CLK
+isl_clk => rxCount[4].CLK
+isl_clk => rxCount[5].CLK
+isl_clk => oslv_leds[0]~reg0.CLK
+isl_clk => oslv_leds[1]~reg0.CLK
+isl_clk => oslv_leds[2]~reg0.CLK
+isl_clk => oslv_leds[3]~reg0.CLK
+isl_clk => rxBuff[16].CLK
+isl_clk => rxBuff[17].CLK
+isl_clk => rxBuff[18].CLK
+isl_clk => rxBuff[19].CLK
+isl_clk => rxBuff[30].CLK
+isl_clk => rxBuff[31].CLK
+isl_clk => sync:sync_sck.clk
+isl_clk => sync:sync_mosi.clk
+isl_clk => sync:sync_miso_sens.clk
+isl_selector => osl_CS_0_n.OUTPUTSELECT
+isl_selector => osl_CS_1_n.OUTPUTSELECT
+isl_selector => osl_MISO.OUTPUTSELECT
+isl_selector => rxCount[5].IN1
+isl_selector => rxBuff[31].ENA
+isl_selector => rxBuff[30].ENA
+isl_selector => rxBuff[19].ENA
+isl_selector => rxBuff[18].ENA
+isl_selector => rxBuff[17].ENA
+isl_selector => rxBuff[16].ENA
+isl_selector => oslv_leds[3]~reg0.ENA
+isl_selector => oslv_leds[2]~reg0.ENA
+isl_selector => oslv_leds[1]~reg0.ENA
+isl_selector => oslv_leds[0]~reg0.ENA
+isl_selector => rxCount[5].ENA
+isl_selector => rxCount[4].ENA
+isl_selector => rxCount[3].ENA
+isl_selector => rxCount[2].ENA
+isl_selector => rxCount[1].ENA
+isl_selector => rxCount[0].ENA
+isl_selector => txCount[5].ENA
+isl_selector => txCount[4].ENA
+isl_selector => txCount[3].ENA
+isl_selector => txCount[2].ENA
+isl_selector => txCount[1].ENA
+isl_selector => txCount[0].ENA
+isl_selector => oldSCLK.ENA
+isl_CS_n => sync:sync_cs.d
+isl_SCLK => sync:sync_sck.d
+isl_MOSI => sync:sync_mosi.d
+isl_MISO_MOT => osl_MISO.DATAA
+isl_MISO_SENS => sync:sync_miso_sens.d
+islv_ios[0] => osl_MISO.DATAB
+islv_ios[1] => osl_MISO.DATAB
+islv_ios[2] => osl_MISO.DATAB
+islv_ios[3] => osl_MISO.DATAB
+
+
+|spi_cs_mux|sync:sync_cs
+clk => q~reg0.CLK
+d => q~reg0.DATAIN
+
+
+|spi_cs_mux|sync:sync_sck
+clk => q~reg0.CLK
+d => q~reg0.DATAIN
+
+
+|spi_cs_mux|sync:sync_mosi
+clk => q~reg0.CLK
+d => q~reg0.DATAIN
+
+
+|spi_cs_mux|sync:sync_miso_sens
+clk => q~reg0.CLK
+d => q~reg0.DATAIN
+
+

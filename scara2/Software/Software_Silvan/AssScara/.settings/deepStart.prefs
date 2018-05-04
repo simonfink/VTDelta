@@ -1,0 +1,5 @@
+board=phyCoreMpc5200tiny
+eclipse.preferences.version=1
+libPath=I\:\\deep\\lib
+os=ntbSTS
+programmer=bdi2000

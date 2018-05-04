@@ -1,0 +1,36 @@
+-------------------------------------------------------------------------------
+--     ____  _____          __    __    ________    _______
+--    |    | \    \        |   \ |  |  |__    __|  |   __  \
+--    |____|  \____\       |    \|  |     |  |     |  |__>  ) 
+--     ____   ____         |  |\ \  |     |  |     |   __  <
+--    |    | |    |        |  | \   |     |  |     |  |__>  )
+--    |____| |____|        |__|  \__|     |__|     |_______/
+--
+--    INTERSTATE UNIVERSITY OF AAPLIED SCIENCES OF TECHNOLOGY
+--
+--    Campus Buchs - Werdenbergstrasse 4 - CH-9471 Buchs
+--    Campus Waldau - Schoenauweg4 - CH9013 St. Gallen
+--
+--    Tel. +41 (0)81 755 33 11   Fax +41 (0)81 756 54 34
+--
+-------------------------------------------------------------------------------
+-- Project : 	DE2-115 Board Support Package
+-- Unit    : 	SPI.vhd
+-- Author  : 	David Frommelt
+-- Created : 	October 2012
+-------------------------------------------------------------------------------
+-- Copyright(C) 2011: Interstate University of Applied Sciences NTB, Buchs
+-------------------------------------------------------------------------------
+PACKAGE spi_16bit_pkg IS
+	TYPE t_spi_mout IS RECORD
+		
+	END RECORD;		
+	
+	COMPONENT pwm8_12bit
+		PORT (
+			isl_clk : IN std_logic;
+			it_values: in t_array8_12bit;
+			oslv8_pwm: OUT std_logic_vector(7 downto 0)
+		);
+	END COMPONENT pwm8_12bit;
+END PACKAGE spi_16bit_pkg;	

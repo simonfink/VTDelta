@@ -1,0 +1,159 @@
+-------------------------------------------------------------------------------
+--     ____  _____          __    __    ________    _______
+--    |    | \    \        |   \ |  |  |__    __|  |   __  \
+--    |____|  \____\       |    \|  |     |  |     |  |__>  ) 
+--     ____   ____         |  |\ \  |     |  |     |   __  <
+--    |    | |    |        |  | \   |     |  |     |  |__>  )
+--    |____| |____|        |__|  \__|     |__|     |_______/
+--
+--    INTERSTATE UNIVERSITY OF AAPLIED SCIENCES OF TECHNOLOGY
+--
+--    Campus Buchs - Werdenbergstrasse 4 - CH-9471 Buchs
+--    Campus Waldau - Schoenauweg4 - CH9013 St. Gallen
+--
+--    Tel. +41 (0)81 755 33 11   Fax +41 (0)81 756 54 34
+--
+-------------------------------------------------------------------------------
+-- Project : 	DE2-115 Board Support Package
+-- Unit    : 	de2_115_start.e.vhd
+-- Author  : 	Laszlo Arato
+-- Created : 	October 2011
+-------------------------------------------------------------------------------
+-- Copyright(C) 2011: Interstate University of Applied Sciences NTB, Buchs
+-- Licensed under BSL-1.0 (Boost Software License). See end of file for details.
+-------------------------------------------------------------------------------
+
+LIBRARY IEEE;
+USE IEEE.std_logic_1164.ALL;
+USE IEEE.numeric_std.ALL;
+
+
+ENTITY MotorStromRegelung IS
+	PORT (	
+		------------------- Clock Input ----------------------------  
+		isl_clock_50		: IN  std_logic ;						-- 50 MHz
+		isl_clock2_50		: IN  std_logic ;						-- 50 MHz
+		isl_clock3_50		: IN  std_logic ;						-- 50 MHz
+		osl_sma_clkout		: OUT std_logic ;						-- Ext.
+		isl_sma_clkin		: IN  std_logic ;						-- Ext.
+		------------------- Push Button and Swicht -----------------
+		islv4_key_n			: IN  std_logic_vector(3 DOWNTO 0);		-- Pushbutton[3:0]
+		islv18_switch		: IN  std_logic_vector(17 DOWNTO 0);	-- Slide Switch[17:0]
+		------------------- LED ------------------------------------
+		oslv18_red_led		: OUT std_logic_vector(17 DOWNTO 0); 	-- LED Red[17:0]
+		oslv9_green_led		: OUT std_logic_vector(8 DOWNTO 0);		-- LED Green[8:0]
+		------------------- 7-SEG Dispaly --------------------------
+		--or_hex_display		: OUT t_hex_display;
+		------------------- Audio Codec ------------------------------
+		--r_audio_out			: OUT t_audio_out;
+		--isl_audio_adc_data	: IN  std_logic;
+		------------------- EEPROM I2C -------------------------------
+		--osl_eeprom_sclk		: OUT std_logic;
+		--bsl_eeprom_sdat		: INOUT  std_logic;
+		------------------- Ethernet 0 -----------------------------
+		--r_enet_0_out		: OUT t_ethernet_out;
+		--r_enet_0_in			: IN  t_ethernet_in;
+		--sl_enet_0_mdio		: INOUT std_logic;
+		------------------- Ethernet 1 -----------------------------
+		--r_enet_1_out		: OUT t_ethernet_out;
+		--r_enet_1_in			: IN  t_ethernet_in;
+		--sl_enet_1_mdio		: INOUT std_logic;
+		------------------- Extended IO ----------------------------
+		--bslv7_ex_io			: INOUT std_logic_vector(6 DOWNTO 0);
+		------------------- FLASH ------------------------------------
+		--r_flash_ctrl		: OUT t_flash_ctrl;
+		--sl_flash_ry			: IN  std_logic;
+		--bslv8_flash_data	: INOUT std_logic_vector(7 DOWNTO 0);
+		------------------- GPIO -----------------------------------
+		bslv36_gpio			: INOUT std_logic_vector(35 DOWNTO 0)
+		------------------- GPIO on HSMC ---------------------------
+		--islv5_hsmc_gpio		: IN std_logic_vector(4 DOWNTO 0);
+		--bslv77_hsmc_gpio	: INOUT std_logic_vector(76 DOWNTO 0);
+		------------------- IR Receiver -----------------------------
+		--isl_ir_rxd			: IN  std_logic;
+		------------------- LCD Display	----------------------------
+		--or_lcd_display		: OUT t_lcd_display;
+		------------------- LVDS on HSMC --- conflicts with Hex Display
+		-- osl_hsmc_clk_out	    : OUT   std_logic_vector( 2 DOWNTO 0);
+		-- isl_hsmc_clk_in		: IN    std_logic_vector( 2 DOWNTO 0);
+		-- oslv17_hsmc_data_out : OUT   std_logic_vector(16 DOWNTO 0);
+		-- islv17_hsmc_data_in	: IN    std_logic_vector(16 DOWNTO 0);
+		-- bslv4_hsmc_data		: INOUT std_logic_vector( 3 DOWNTO 0);
+		------------------- PS/2 -----------------------------------
+		--ir_ps2				: IN  t_ps2_in;							-- PS/2 Receiver
+		------------------- SD Card ----------------------------------
+		--bslv4_sd_card_data	: INOUT std_logic_vector(3 DOWNTO 0);
+		--osl_sd_card_clk		: OUT   std_logic;
+		--bsl_sd_card_cmd		: INOUT std_logic;
+		--isl_sd_card_wp_n	: IN    std_logic;
+		------------------- SDRAM ------------------------------------
+		--r_sdram_ctrl		: OUT t_sdram_ctrl;
+		--bslv32_sdram_data	: INOUT std_logic_vector(31 DOWNTO 0);
+		------------------- SRAM ------------------------------------
+		--r_sram_ctrl			: OUT t_sram_ctrl;
+		--bslv16_sram_data	: INOUT std_logic_vector(15 DOWNTO 0);
+		------------------- TV Decoder ------------------------------
+		--ir_tv_decoder		: IN  t_tv_decoder;
+		--osl_td_reset_n		: OUT std_logic;
+		--osl_td_i2c_sclk		: OUT std_logic;
+		--bsl_td_i2c_sdat		: INOUT std_logic;
+		------------------- UART -----------------------------------
+		--or_uart_out			: OUT t_uart_out;						-- UART Transmitter
+		--ir_uart_in			: IN  t_uart_in						-- UART Receiver
+		------------------- USB ------------------------------------
+		--bslv16_usb_data		: INOUT std_logic_vector(15 DOWNTO 0);
+		--or_usb_out			: OUT   t_usb_out;
+		--ir_usb_in			: IN    t_usb_in;
+		------------------- VGA ------------------------------------
+		--or_vga				: OUT t_vga
+	) ;
+END ENTITY MotorStromRegelung;
+	
+ARCHITECTURE top OF MotorStromRegelung IS
+
+BEGIN
+	main_proc : PROCESS (isl_clock_50)
+	BEGIN
+		IF rising_edge(isl_clock_50) THEN
+			oslv18_red_led	<= islv18_switch;
+		END IF;
+	END PROCESS main_proc;
+	
+	oslv9_green_led(3 DOWNTO 0)	<= islv4_key_n;
+	oslv9_green_led(8 DOWNTO 6)	<= islv4_key_n(2 DOWNTO 0);
+	osl_sma_clkout					<= isl_sma_clkin;
+	oslv9_green_led(4)			<= isl_clock2_50;
+	oslv9_green_led(5)			<= isl_clock3_50;
+	
+	--or_uart_out.sl_txd			<= ir_uart_in.sl_rxd;
+	--or_uart_out.sl_cts			<= ir_uart_in.sl_rts;
+
+END ARCHITECTURE top;
+
+	
+-------------------------------------------------------------------------------
+-- Boost Software License 1.0 (BSL-1.0)
+--
+-- Permission is hereby granted, free of charge, to any person or organization 
+-- obtaining a copy of the software and accompanying documentation covered by 
+-- this license (the "Software") to use, reproduce, display, distribute, 
+-- execute, and transmit the Software, and to prepare derivative works of the
+-- Software, and to permit third-parties to whom the Software is furnished to 
+-- do so, all subject to the following:
+--
+-- The copyright notices in the Software and this entire statement, including 
+-- the above license grant, this restriction and the following disclaimer, must
+-- be included in all copies of the Software, in whole or in part, and all 
+-- derivative works of the Software, unless such copies or derivative works are
+-- solely in the form of machine-executable object code generated by a source 
+-- language processor.
+--
+-- THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR 
+-- IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, 
+-- FITNESS FOR A PARTICULAR PURPOSE, TITLE AND NON-INFRINGEMENT. IN NO EVENT
+-- SHALL THE COPYRIGHT HOLDERS OR ANYONE DISTRIBUTING THE SOFTWARE BE LIABLE 
+-- FOR ANY DAMAGES OR OTHER LIABILITY, WHETHER IN CONTRACT, TORT OR OTHERWISE, 
+-- ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER 
+-- DEALINGS IN THE SOFTWARE.
+--
+-------------------------------------------------------------------------------

@@ -1,0 +1,17 @@
+{
+  "D:\\SCARA\\MotorTest\\src": {
+    "location": "D:\\SCARA\\MotorTest\\src",
+    "status": "UNRESOLVED",
+    "error": "No class path info available for \u0027D:\\SCARA\\MotorTest\\src\u0027. Skipped."
+  },
+  "I:\\deep\\lib\\bin": {
+    "location": "I:\\deep\\lib\\bin",
+    "status": "UNRESOLVED",
+    "error": "No class path info available for \u0027I:\\deep\\lib\\bin\u0027. Skipped."
+  },
+  "C:\\Program Files\\Java\\jre6\\lib\\rt.jar": {
+    "coordinate": "jre:jre:zip:call:1.0.0",
+    "location": "C:\\Program Files\\Java\\jre6\\lib\\rt.jar",
+    "status": "RESOLVED"
+  }
+}

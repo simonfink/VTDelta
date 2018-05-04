@@ -1,0 +1,17 @@
+#deep-1
+
+meta {
+	version = "Tue Sep 10 17:27:58 CEST 2013";
+	description = "deep project file for MotorTest";
+}
+
+project MotorTest {
+	libpath = "I:\deep\lib";
+	boardtype = phyCoreMpc5200tiny;
+	ostype = ntbSTS;
+#	programmertype = ntbMpc555UsbBdi;
+	#imgfile = "F:\phycorempc5200b\ScaraMotTest.bin";
+	#imgfile = "D:\RIED\Projekte\NTB-Drives\Software\Testsoftware_OmniDir\MPC5200b\ScaraMotTest.bin";
+	imgfile = "T:\pub\huber\ScaraMotTest.bin";
+	rootclasses = "ch.ntb.inf.scara.test.MotorTest";
+}

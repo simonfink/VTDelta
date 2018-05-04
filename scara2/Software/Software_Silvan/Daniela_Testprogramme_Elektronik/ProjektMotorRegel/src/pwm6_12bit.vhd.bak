@@ -1,0 +1,202 @@
+-----------------------------------------------------------------------------
+--     ____  _____          __    __    ________    _______
+--    |    | \    \        |   \ |  |  |__    __|  |   __  \
+--    |____|  \____\       |    \|  |     |  |     |  |__>  ) 
+--     ____   ____         |  |\ \  |     |  |     |   __  <
+--    |    | |    |        |  | \   |     |  |     |  |__>  )
+--    |____| |____|        |__|  \__|     |__|     |_______/
+--
+--    INTERSTATE UNIVERSITY OF AAPLIED SCIENCES OF TECHNOLOGY
+--
+--    Campus Buchs - Werdenbergstrasse 4 - CH-9471 Buchs
+--    Campus Waldau - Schoenauweg4 - CH9013 St. Gallen
+--
+--    Tel. +41 (0)81 755 33 11   Fax +41 (0)81 756 54 34
+--
+-------------------------------------------------------------------------------
+-- Project : 	MotorStromRegelung
+-- Unit    : 	pwm8_12bit.vhd
+-- Author  : 	David Frommelt
+-- Created : 	October 2012
+-------------------------------------------------------------------------------
+-- Copyright(C) 2011: Interstate University of Applied Sciences NTB, Buchs
+-------------------------------------------------------------------------------
+
+-- Package zur Erzeugung eines Dreieck-PWM Profils mit 12 Bit Auflösung
+-- inklusive:  Start-Signal für synchronisierter ADC-Messung (10x schneller)
+--					CNT-Signal 
+
+LIBRARY IEEE;
+USE IEEE.std_logic_1164.ALL;
+USE IEEE.numeric_std.ALL;
+
+PACKAGE pwm6_pkg IS
+	TYPE t_array6_s12bit IS ARRAY (5 downto 0) OF signed(11 downto 0);   
+	TYPE t_array6_u11bit IS ARRAY (5 downto 0) OF unsigned(10 downto 0);           	
+	TYPE t_array6_s11bit IS ARRAY (5 downto 0) OF signed(10 downto 0);    	
+	
+	 COMPONENT pwm6_12bit
+		PORT (
+			isl_clk : IN std_logic;
+			it_values: in t_array6_s12bit;
+			islv6_activate: IN std_logic_vector(5 downto 0);
+			oslv6_pwmA: OUT std_logic_vector(5 downto 0):= (others => '0');
+			oslv6_pwmB: OUT std_logic_vector(5 downto 0):= (others => '0');
+			oi_adc_cnt: OUT INTEGER RANGE 9 downto 0;
+			osl_adc_start: OUT std_logic
+		);
+	END COMPONENT pwm8_12bit;
+END PACKAGE pwm8_pkg;	
+
+-----------------------------------------------------------------------------
+-- ENTITIY
+-----------------------------------------------------------------------------
+LIBRARY IEEE;
+USE IEEE.std_logic_1164.ALL;
+USE IEEE.numeric_std.ALL;
+USE work.pwm6_pkg.ALL;
+
+ENTITY pwm6_12bit IS
+	PORT (	
+		isl_clk : IN std_logic;
+		it_values: in t_array6_s12bit;
+		islv6_activate: IN std_logic_vector(5 downto 0);
+		oslv6_pwmA: OUT std_logic_vector(5 downto 0):= (others => '0');
+		oslv6_pwmB: OUT std_logic_vector(5 downto 0):= (others => '0');
+		oi_adc_cnt: OUT INTEGER RANGE 9 downto 0;
+		osl_adc_start: OUT std_logic
+	) ;
+END ENTITY pwm8_12bit;
+
+
+-----------------------------------------------------------------------------
+-- ARCHITECTURE main
+-----------------------------------------------------------------------------
+ARCHITECTURE main of pwm6_12bit IS
+	-- maximum value of counter: 
+	--            /  100MHz    \
+	-- N = round | ------------ | - 2
+	--				  \	80kHz    /
+	CONSTANT counter_value_max : 	signed(12 downto 0) := b"0100111000000";
+	CONSTANT counter_value_min : 	signed(12 downto 0) := -b"0100111000000";
+	-- maximum value of synchronised counter for adc
+	--            /   100MHz   \
+	-- N = round | ------------ |
+	--				  \   800kHz   /
+	CONSTANT cnt_adc_max : 			unsigned(11 downto 0) :=x"07D";
+	-- half value of synchronised counter for adc
+	--            /   100MHz   \
+	-- N = round | ------------ |
+	--				  \ 2 * 800kHz /
+	CONSTANT cnt_adc_high : 		unsigned(11 downto 0) :=x"037";
+	
+	TYPE r_state IS (INIT, RUN);
+	-- TYPE DEFINITION OF REGISTER
+	TYPE t_pwm_registers IS RECORD
+		state:				r_state;
+		clk_cnt: 			signed(12 downto 0);
+		clk_dir:				std_logic;
+		clk_cnt_adc: 		unsigned(11 downto 0);
+		cnt_adc:				INTEGER RANGE 9 downto 0;
+	END RECORD;
+	
+	SIGNAL r, r_next : t_pwm_registers;
+
+	BEGIN
+	-----------------------------------------------------------------------------
+	-- registry process
+	-----------------------------------------------------------------------------
+	comb_procss: PROCESS(r, it_values,islv6_activate)
+	VARIABLE v : t_pwm_registers;
+	
+
+	BEGIN
+		v:= r;
+		
+		-- set pwm output if couter is higher or lower than prefered pwm value
+		
+			
+		CASE r.state IS
+		
+		WHEN INIT =>
+			v.clk_cnt := (others => '0');
+			v.clk_dir := '0';
+			v.clk_cnt_adc := (others => '0');
+			v.cnt_adc := 0;
+			FOR i IN 5 DOWNTO 0 LOOP
+				oslv6_pwmA(i) <= '0';
+				oslv6_pwmB(i) <= '0';
+			END LOOP;
+			v.state := RUN;
+		WHEN RUN =>
+			FOR i IN 5 DOWNTO 0 LOOP
+				IF r.clk_cnt <= it_values(i) AND islv6_activate(i) = '1' THEN
+					oslv6_pwmA(i) <= '1';
+				ELSE
+					oslv6_pwmA(i) <= '0';
+				END IF;
+				IF r.clk_cnt <= signed(NOT it_values(i)) AND islv6_activate(i) = '1' THEN
+					oslv6_pwmB(i) <= '1';
+				ELSE
+					oslv6_pwmB(i) <= '0';
+				END IF;
+			END LOOP;
+			-- create start-signal for analog-digital convertion
+			-- and cnt-signal (10 times faster than pwm)
+			IF r.clk_cnt_adc >= cnt_adc_max THEN
+				v.clk_cnt_adc := (others => '0');
+			ELSE
+				v.clk_cnt_adc := r.clk_cnt_adc + 1;
+				IF r.clk_cnt_adc = cnt_adc_high THEN
+					IF r.cnt_adc < 9 THEN
+						v.cnt_adc := r.cnt_adc + 1;
+					ELSE
+						v.cnt_adc := 0;
+					END IF;
+				END IF;
+			END IF;
+			
+			-- counting the pwm value
+			IF r.clk_cnt >= counter_value_max AND r.clk_dir ='0' THEN
+				v.clk_dir := '1';
+				v.clk_cnt := r.clk_cnt - 4;
+			ELSIF r.clk_cnt <= counter_value_min AND r.clk_dir ='1' THEN
+				v.clk_dir := '0';
+				v.clk_cnt := r.clk_cnt + 4;
+			ELSIF r.clk_cnt = x"000" THEN
+				v.clk_cnt_adc := (others => '0');
+				v.cnt_adc := 0;
+				v.clk_cnt := r.clk_cnt + 8;
+			ELSIF r.clk_dir ='0' THEN
+				v.clk_cnt := r.clk_cnt + 8;
+			ELSE
+				v.clk_cnt := r.clk_cnt - 8;
+			END IF;
+		WHEN OTHERS =>
+			v.state := INIT;
+		END CASE;
+		
+		IF r.clk_cnt_adc < cnt_adc_high THEN
+				osl_adc_start <= '1';
+			ELSE
+				osl_adc_start <= '0';
+		END IF;
+		oi_adc_cnt <= v.cnt_adc;
+		
+		r_next <= v;
+	END PROCESS;
+
+	-----------------------------------------------------------------------------
+	-- registry process
+	-----------------------------------------------------------------------------
+	reg_process: PROCESS(isl_clk)
+	BEGIN
+		IF rising_edge(isl_clk) THEN
+			r<=r_next;
+			
+		END IF;
+		
+	END PROCESS;
+	
+END ARCHITECTURE main;
+	

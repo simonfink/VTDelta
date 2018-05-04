@@ -1,0 +1,207 @@
+#-------------------------------------------------------------------------------
+#--     ____  _____          __    __    ________    _______
+#--    |    | \    \        |   \ |  |  |__    __|  |   __  \
+#--    |____|  \____\       |    \|  |     |  |     |  |__>  ) 
+#--     ____   ____         |  |\ \  |     |  |     |   __  <
+#--    |    | |    |        |  | \   |     |  |     |  |__>  )
+#--    |____| |____|        |__|  \__|     |__|     |_______/
+#--
+#--    INTERSTATE UNIVERSITY OF AAPLIED SCIENCES OF TECHNOLOGY
+#--
+#--    Campus Buchs - Werdenbergstrasse 4 - CH-9471 Buchs
+#--    Campus Waldau - Schoenauweg4 - CH9013 St. Gallen
+#--
+#--    Tel. +41 (0)81 755 33 11   Fax +41 (0)81 756 54 34
+#--
+#-------------------------------------------------------------------------------
+#-- Project : 	DE2-115 Board Support Package
+#-- Unit    : 	de2_115_gpio_pins.qsf
+#-- Author  : 	Laszlo Arato
+#-- Created : 	October 2011
+#-------------------------------------------------------------------------------
+#-- Copyright(C) 2011: Interstate University of Applied Sciences NTB, Buchs
+#-- Licensed under BSL-1.0 (Boost Software License). See end of file for details.
+#-------------------------------------------------------------------------------
+
+
+##  DE2-115 GPIO Pins
+##
+########################
+
+		
+set_location_assignment PIN_AB22                       -to bslv36_gpio[0]
+set_location_assignment PIN_AC15                       -to bslv36_gpio[1]
+set_location_assignment PIN_AB21                       -to bslv36_gpio[2]
+set_location_assignment PIN_Y17                        -to bslv36_gpio[3]
+set_location_assignment PIN_AC21                       -to bslv36_gpio[4]
+set_location_assignment PIN_Y16                        -to bslv36_gpio[5]
+set_location_assignment PIN_AD21                       -to bslv36_gpio[6]
+set_location_assignment PIN_AE16                       -to bslv36_gpio[7]
+set_location_assignment PIN_AD15                       -to bslv36_gpio[8]
+set_location_assignment PIN_AE15                       -to bslv36_gpio[9]
+set_location_assignment PIN_AC19                       -to bslv36_gpio[10]
+set_location_assignment PIN_AF16                       -to bslv36_gpio[11]
+set_location_assignment PIN_AD19                       -to bslv36_gpio[12]
+set_location_assignment PIN_AF15                       -to bslv36_gpio[13]
+set_location_assignment PIN_AF24                       -to bslv36_gpio[14]
+set_location_assignment PIN_AE21                       -to bslv36_gpio[15]
+set_location_assignment PIN_AF25                       -to bslv36_gpio[16]
+set_location_assignment PIN_AC22                       -to bslv36_gpio[17]
+set_location_assignment PIN_AE22                       -to bslv36_gpio[18]
+set_location_assignment PIN_AF21                       -to bslv36_gpio[19]
+set_location_assignment PIN_AF22                       -to bslv36_gpio[20]
+set_location_assignment PIN_AD22                       -to bslv36_gpio[21]
+set_location_assignment PIN_AG25                       -to bslv36_gpio[22]
+set_location_assignment PIN_AD25                       -to bslv36_gpio[23]
+set_location_assignment PIN_AH25                       -to bslv36_gpio[24]
+set_location_assignment PIN_AE25                       -to bslv36_gpio[25]
+set_location_assignment PIN_AG22                       -to bslv36_gpio[26]
+set_location_assignment PIN_AE24                       -to bslv36_gpio[27]
+set_location_assignment PIN_AH22                       -to bslv36_gpio[28]
+set_location_assignment PIN_AF26                       -to bslv36_gpio[29]
+set_location_assignment PIN_AE20                       -to bslv36_gpio[30]
+set_location_assignment PIN_AG23                       -to bslv36_gpio[31]
+set_location_assignment PIN_AF20                       -to bslv36_gpio[32]
+set_location_assignment PIN_AH26                       -to bslv36_gpio[33]
+set_location_assignment PIN_AH23                       -to bslv36_gpio[34]
+set_location_assignment PIN_AG26                       -to bslv36_gpio[35]
+
+##  Attention:  Voltage Standard depends on position of Jumper JP6
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL"  -to bslv36_gpio[0]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL"  -to bslv36_gpio[1]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL"  -to bslv36_gpio[2]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL"  -to bslv36_gpio[3]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL"  -to bslv36_gpio[4]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL"  -to bslv36_gpio[5]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL"  -to bslv36_gpio[6]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL"  -to bslv36_gpio[7]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL"  -to bslv36_gpio[8]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL"  -to bslv36_gpio[9]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL"  -to bslv36_gpio[10]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL"  -to bslv36_gpio[11]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL"  -to bslv36_gpio[12]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL"  -to bslv36_gpio[13]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL"  -to bslv36_gpio[14]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL"  -to bslv36_gpio[15]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL"  -to bslv36_gpio[16]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL"  -to bslv36_gpio[17]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL"  -to bslv36_gpio[18]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL"  -to bslv36_gpio[19]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL"  -to bslv36_gpio[20]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL"  -to bslv36_gpio[21]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL"  -to bslv36_gpio[22]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL"  -to bslv36_gpio[23]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL"  -to bslv36_gpio[24]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL"  -to bslv36_gpio[25]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL"  -to bslv36_gpio[26]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL"  -to bslv36_gpio[27]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL"  -to bslv36_gpio[28]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL"  -to bslv36_gpio[29]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL"  -to bslv36_gpio[30]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL"  -to bslv36_gpio[31]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL"  -to bslv36_gpio[32]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL"  -to bslv36_gpio[33]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL"  -to bslv36_gpio[34]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL"  -to bslv36_gpio[35]
+
+set_instance_assignment -name SLEW_RATE 2              -to bslv36_gpio[0]
+set_instance_assignment -name SLEW_RATE 2              -to bslv36_gpio[1]
+set_instance_assignment -name SLEW_RATE 2              -to bslv36_gpio[2]
+set_instance_assignment -name SLEW_RATE 2              -to bslv36_gpio[3]
+set_instance_assignment -name SLEW_RATE 2              -to bslv36_gpio[4]
+set_instance_assignment -name SLEW_RATE 2              -to bslv36_gpio[5]
+set_instance_assignment -name SLEW_RATE 2              -to bslv36_gpio[6]
+set_instance_assignment -name SLEW_RATE 2              -to bslv36_gpio[7]
+set_instance_assignment -name SLEW_RATE 2              -to bslv36_gpio[8]
+set_instance_assignment -name SLEW_RATE 2              -to bslv36_gpio[9]
+set_instance_assignment -name SLEW_RATE 2              -to bslv36_gpio[10]
+set_instance_assignment -name SLEW_RATE 2              -to bslv36_gpio[11]
+set_instance_assignment -name SLEW_RATE 2              -to bslv36_gpio[12]
+set_instance_assignment -name SLEW_RATE 2              -to bslv36_gpio[13]
+set_instance_assignment -name SLEW_RATE 2              -to bslv36_gpio[14]
+set_instance_assignment -name SLEW_RATE 2              -to bslv36_gpio[15]
+set_instance_assignment -name SLEW_RATE 2              -to bslv36_gpio[16]
+set_instance_assignment -name SLEW_RATE 2              -to bslv36_gpio[17]
+set_instance_assignment -name SLEW_RATE 2              -to bslv36_gpio[18]
+set_instance_assignment -name SLEW_RATE 2              -to bslv36_gpio[19]
+set_instance_assignment -name SLEW_RATE 2              -to bslv36_gpio[20]
+set_instance_assignment -name SLEW_RATE 2              -to bslv36_gpio[21]
+set_instance_assignment -name SLEW_RATE 2              -to bslv36_gpio[22]
+set_instance_assignment -name SLEW_RATE 2              -to bslv36_gpio[23]
+set_instance_assignment -name SLEW_RATE 2              -to bslv36_gpio[24]
+set_instance_assignment -name SLEW_RATE 2              -to bslv36_gpio[25]
+set_instance_assignment -name SLEW_RATE 2              -to bslv36_gpio[26]
+set_instance_assignment -name SLEW_RATE 2              -to bslv36_gpio[27]
+set_instance_assignment -name SLEW_RATE 2              -to bslv36_gpio[28]
+set_instance_assignment -name SLEW_RATE 2              -to bslv36_gpio[29]
+set_instance_assignment -name SLEW_RATE 2              -to bslv36_gpio[30]
+set_instance_assignment -name SLEW_RATE 2              -to bslv36_gpio[31]
+set_instance_assignment -name SLEW_RATE 2              -to bslv36_gpio[32]
+set_instance_assignment -name SLEW_RATE 2              -to bslv36_gpio[33]
+set_instance_assignment -name SLEW_RATE 2              -to bslv36_gpio[34]
+set_instance_assignment -name SLEW_RATE 2              -to bslv36_gpio[35]
+
+set_instance_assignment -name CURRENT_STRENGTH_NEW 8MA -to bslv36_gpio[0]
+set_instance_assignment -name CURRENT_STRENGTH_NEW 8MA -to bslv36_gpio[1]
+set_instance_assignment -name CURRENT_STRENGTH_NEW 8MA -to bslv36_gpio[2]
+set_instance_assignment -name CURRENT_STRENGTH_NEW 8MA -to bslv36_gpio[3]
+set_instance_assignment -name CURRENT_STRENGTH_NEW 8MA -to bslv36_gpio[4]
+set_instance_assignment -name CURRENT_STRENGTH_NEW 8MA -to bslv36_gpio[5]
+set_instance_assignment -name CURRENT_STRENGTH_NEW 8MA -to bslv36_gpio[6]
+set_instance_assignment -name CURRENT_STRENGTH_NEW 8MA -to bslv36_gpio[7]
+set_instance_assignment -name CURRENT_STRENGTH_NEW 8MA -to bslv36_gpio[8]
+set_instance_assignment -name CURRENT_STRENGTH_NEW 8MA -to bslv36_gpio[9]
+set_instance_assignment -name CURRENT_STRENGTH_NEW 8MA -to bslv36_gpio[10]
+set_instance_assignment -name CURRENT_STRENGTH_NEW 8MA -to bslv36_gpio[11]
+set_instance_assignment -name CURRENT_STRENGTH_NEW 8MA -to bslv36_gpio[12]
+set_instance_assignment -name CURRENT_STRENGTH_NEW 8MA -to bslv36_gpio[13]
+set_instance_assignment -name CURRENT_STRENGTH_NEW 8MA -to bslv36_gpio[14]
+set_instance_assignment -name CURRENT_STRENGTH_NEW 8MA -to bslv36_gpio[15]
+set_instance_assignment -name CURRENT_STRENGTH_NEW 8MA -to bslv36_gpio[16]
+set_instance_assignment -name CURRENT_STRENGTH_NEW 8MA -to bslv36_gpio[17]
+set_instance_assignment -name CURRENT_STRENGTH_NEW 8MA -to bslv36_gpio[18]
+set_instance_assignment -name CURRENT_STRENGTH_NEW 8MA -to bslv36_gpio[19]
+set_instance_assignment -name CURRENT_STRENGTH_NEW 8MA -to bslv36_gpio[20]
+set_instance_assignment -name CURRENT_STRENGTH_NEW 8MA -to bslv36_gpio[21]
+set_instance_assignment -name CURRENT_STRENGTH_NEW 8MA -to bslv36_gpio[22]
+set_instance_assignment -name CURRENT_STRENGTH_NEW 8MA -to bslv36_gpio[23]
+set_instance_assignment -name CURRENT_STRENGTH_NEW 8MA -to bslv36_gpio[24]
+set_instance_assignment -name CURRENT_STRENGTH_NEW 8MA -to bslv36_gpio[25]
+set_instance_assignment -name CURRENT_STRENGTH_NEW 8MA -to bslv36_gpio[26]
+set_instance_assignment -name CURRENT_STRENGTH_NEW 8MA -to bslv36_gpio[27]
+set_instance_assignment -name CURRENT_STRENGTH_NEW 8MA -to bslv36_gpio[28]
+set_instance_assignment -name CURRENT_STRENGTH_NEW 8MA -to bslv36_gpio[29]
+set_instance_assignment -name CURRENT_STRENGTH_NEW 8MA -to bslv36_gpio[30]
+set_instance_assignment -name CURRENT_STRENGTH_NEW 8MA -to bslv36_gpio[31]
+set_instance_assignment -name CURRENT_STRENGTH_NEW 8MA -to bslv36_gpio[32]
+set_instance_assignment -name CURRENT_STRENGTH_NEW 8MA -to bslv36_gpio[33]
+set_instance_assignment -name CURRENT_STRENGTH_NEW 8MA -to bslv36_gpio[34]
+set_instance_assignment -name CURRENT_STRENGTH_NEW 8MA -to bslv36_gpio[35]
+
+
+#-------------------------------------------------------------------------------
+#-- Boost Software License 1.0 (BSL-1.0)
+#--
+#-- Permission is hereby granted, free of charge, to any person or organization 
+#-- obtaining a copy of the software and accompanying documentation covered by 
+#-- this license (the "Software") to use, reproduce, display, distribute, 
+#-- execute, and transmit the Software, and to prepare derivative works of the
+#-- Software, and to permit third-parties to whom the Software is furnished to 
+#-- do so, all subject to the following:
+#--
+#-- The copyright notices in the Software and this entire statement, including 
+#-- the above license grant, this restriction and the following disclaimer, must
+#-- be included in all copies of the Software, in whole or in part, and all 
+#-- derivative works of the Software, unless such copies or derivative works are
+#-- solely in the form of machine-executable object code generated by a source 
+#-- language processor.
+#--
+#-- THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR 
+#-- IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, 
+#-- FITNESS FOR A PARTICULAR PURPOSE, TITLE AND NON-INFRINGEMENT. IN NO EVENT
+#-- SHALL THE COPYRIGHT HOLDERS OR ANYONE DISTRIBUTING THE SOFTWARE BE LIABLE 
+#-- FOR ANY DAMAGES OR OTHER LIABILITY, WHETHER IN CONTRACT, TORT OR OTHERWISE, 
+#-- ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER 
+#-- DEALINGS IN THE SOFTWARE.
+#--
+#-------------------------------------------------------------------------------

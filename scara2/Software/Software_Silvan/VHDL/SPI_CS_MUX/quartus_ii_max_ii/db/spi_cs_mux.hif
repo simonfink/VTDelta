@@ -1,0 +1,90 @@
+Quartus II 64-Bit
+Version 11.0 Build 157 04/27/2011 SJ Full Version
+49
+4364
+OFF
+OFF
+OFF
+ON
+ON
+OFF
+FV_OFF
+Level2
+0
+0
+VRSM_ON
+VHSM_ON
+0
+-- Start Library Paths --
+-- End Library Paths --
+-- Start VHDL Libraries --
+-- End VHDL Libraries --
+# entity
+sync
+# storage
+db|spi_cs_mux.(1).cnf
+db|spi_cs_mux.(1).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_insensitive
+# source_file
+|ass-scara|vhdl|spi_cs_mux|src|sync.vhd
+82be8c12f58aa64cb63a3356c3b482d5
+5
+# internal_option {
+HDL_INITIAL_FANOUT_LIMIT
+OFF
+AUTO_RESOURCE_SHARING
+OFF
+AUTO_RAM_RECOGNITION
+ON
+AUTO_ROM_RECOGNITION
+ON
+}
+# hierarchies {
+sync:sync_cs
+sync:sync_sck
+sync:sync_mosi
+sync:sync_miso_sens
+}
+# macro_sequence
+
+# end
+# entity
+spi_cs_mux
+# storage
+db|spi_cs_mux.(0).cnf
+db|spi_cs_mux.(0).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_insensitive
+# source_file
+|ass-scara|vhdl|spi_cs_mux|src|spi_cs_mux.vhd
+5de361911a6e48ade7ee3a5eb08eec1
+5
+# internal_option {
+HDL_INITIAL_FANOUT_LIMIT
+OFF
+AUTO_RESOURCE_SHARING
+OFF
+AUTO_RAM_RECOGNITION
+ON
+AUTO_ROM_RECOGNITION
+ON
+}
+# include_file {
+|ass-scara|vhdl|spi_cs_mux|src|sync.vhd
+82be8c12f58aa64cb63a3356c3b482d5
+}
+# hierarchies {
+|
+}
+# macro_sequence
+
+# end
+# complete
+

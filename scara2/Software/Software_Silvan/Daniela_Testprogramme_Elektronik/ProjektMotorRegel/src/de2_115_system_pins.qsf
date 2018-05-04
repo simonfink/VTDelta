@@ -1,0 +1,253 @@
+#-------------------------------------------------------------------------------
+#--     ____  _____          __    __    ________    _______
+#--    |    | \    \        |   \ |  |  |__    __|  |   __  \
+#--    |____|  \____\       |    \|  |     |  |     |  |__>  ) 
+#--     ____   ____         |  |\ \  |     |  |     |   __  <
+#--    |    | |    |        |  | \   |     |  |     |  |__>  )
+#--    |____| |____|        |__|  \__|     |__|     |_______/
+#--
+#--    INTERSTATE UNIVERSITY OF AAPLIED SCIENCES OF TECHNOLOGY
+#--
+#--    Campus Buchs - Werdenbergstrasse 4 - CH-9471 Buchs
+#--    Campus Waldau - Schoenauweg4 - CH9013 St. Gallen
+#--
+#--    Tel. +41 (0)81 755 33 11   Fax +41 (0)81 756 54 34
+#--
+#-------------------------------------------------------------------------------
+#-- Project : 	DE2-115 Board Support Package
+#-- Unit    : 	de2_115_system_pins.qsf
+#-- Author  : 	Laszlo Arato
+#-- Created : 	October 2011
+#-------------------------------------------------------------------------------
+#-- Copyright(C) 2011: Interstate University of Applied Sciences NTB, Buchs
+#-- Licensed under BSL-1.0 (Boost Software License). See end of file for details.
+#-------------------------------------------------------------------------------
+
+
+##  DE2-115 System Pins
+##
+########################
+
+
+##	Clock Input
+##  ===============
+set_location_assignment PIN_Y2                           -to isl_clock_50
+set_location_assignment PIN_AG14                         -to isl_clock2_50
+set_location_assignment PIN_AG15                         -to isl_clock3_50
+set_location_assignment PIN_AE23                         -to osl_sma_clkout
+set_location_assignment PIN_AH14                         -to isl_sma_clkin
+
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL"  -to isl_clock_50
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL"  -to isl_clock2_50
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL"  -to isl_clock3_50
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL"  -to osl_sma_clkout
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL"  -to isl_sma_clkin
+
+set_instance_assignment -name SLEW_RATE 2                -to osl_sma_clkout
+set_instance_assignment -name CURRENT_STRENGTH_NEW 8MA   -to osl_sma_clkout
+
+
+##	Pushbutton Keys
+##  ===============
+set_location_assignment PIN_M23                          -to islv4_key_n[0]
+set_location_assignment PIN_M21                          -to islv4_key_n[1]
+set_location_assignment PIN_N21                          -to islv4_key_n[2]
+set_location_assignment PIN_R24                          -to islv4_key_n[3]
+
+##  Attention:  Voltage Standard depends on position of Jumper JP7
+set_instance_assignment -name IO_STANDARD "2.5 V"        -to islv4_key_n[0]
+set_instance_assignment -name IO_STANDARD "2.5 V"        -to islv4_key_n[1]
+set_instance_assignment -name IO_STANDARD "2.5 V"        -to islv4_key_n[2]
+set_instance_assignment -name IO_STANDARD "2.5 V"        -to islv4_key_n[3]
+
+
+##	Slide Switch
+##  ============
+set_location_assignment PIN_AB28                         -to islv18_switch[0]
+set_location_assignment PIN_AC28                         -to islv18_switch[1]
+set_location_assignment PIN_AC27                         -to islv18_switch[2]
+set_location_assignment PIN_AD27                         -to islv18_switch[3]
+set_location_assignment PIN_AB27                         -to islv18_switch[4]
+set_location_assignment PIN_AC26                         -to islv18_switch[5]
+set_location_assignment PIN_AD26                         -to islv18_switch[6]
+set_location_assignment PIN_AB26                         -to islv18_switch[7]
+set_location_assignment PIN_AC25                         -to islv18_switch[8]
+set_location_assignment PIN_AB25                         -to islv18_switch[9]
+set_location_assignment PIN_AC24                         -to islv18_switch[10]
+set_location_assignment PIN_AB24                         -to islv18_switch[11]
+set_location_assignment PIN_AB23                         -to islv18_switch[12]
+set_location_assignment PIN_AA24                         -to islv18_switch[13]
+set_location_assignment PIN_AA23                         -to islv18_switch[14]
+set_location_assignment PIN_AA22                         -to islv18_switch[15]
+set_location_assignment PIN_Y24                          -to islv18_switch[16]
+set_location_assignment PIN_Y23                          -to islv18_switch[17]
+
+##  Attention:  Voltage Standard depends on position of Jumper JP7
+set_instance_assignment -name IO_STANDARD "2.5 V"        -to islv18_switch[0]
+set_instance_assignment -name IO_STANDARD "2.5 V"        -to islv18_switch[1]
+set_instance_assignment -name IO_STANDARD "2.5 V"        -to islv18_switch[2]
+set_instance_assignment -name IO_STANDARD "2.5 V"        -to islv18_switch[3]
+set_instance_assignment -name IO_STANDARD "2.5 V"        -to islv18_switch[4]
+set_instance_assignment -name IO_STANDARD "2.5 V"        -to islv18_switch[5]
+set_instance_assignment -name IO_STANDARD "2.5 V"        -to islv18_switch[6]
+set_instance_assignment -name IO_STANDARD "2.5 V"        -to islv18_switch[7]
+set_instance_assignment -name IO_STANDARD "2.5 V"        -to islv18_switch[8]
+set_instance_assignment -name IO_STANDARD "2.5 V"        -to islv18_switch[9]
+set_instance_assignment -name IO_STANDARD "2.5 V"        -to islv18_switch[10]
+set_instance_assignment -name IO_STANDARD "2.5 V"        -to islv18_switch[11]
+set_instance_assignment -name IO_STANDARD "2.5 V"        -to islv18_switch[12]
+set_instance_assignment -name IO_STANDARD "2.5 V"        -to islv18_switch[13]
+set_instance_assignment -name IO_STANDARD "2.5 V"        -to islv18_switch[14]
+set_instance_assignment -name IO_STANDARD "2.5 V"        -to islv18_switch[15]
+set_instance_assignment -name IO_STANDARD "2.5 V"        -to islv18_switch[16]
+set_instance_assignment -name IO_STANDARD "2.5 V"        -to islv18_switch[17]
+
+
+##  Red LEDs
+##  ========
+set_location_assignment PIN_G19                          -to oslv18_red_led[0]
+set_location_assignment PIN_F19                          -to oslv18_red_led[1]
+set_location_assignment PIN_E19                          -to oslv18_red_led[2]
+set_location_assignment PIN_F21                          -to oslv18_red_led[3]
+set_location_assignment PIN_F18                          -to oslv18_red_led[4]
+set_location_assignment PIN_E18                          -to oslv18_red_led[5]
+set_location_assignment PIN_J19                          -to oslv18_red_led[6]
+set_location_assignment PIN_H19                          -to oslv18_red_led[7]
+set_location_assignment PIN_J17                          -to oslv18_red_led[8]
+set_location_assignment PIN_G17                          -to oslv18_red_led[9]
+set_location_assignment PIN_J15                          -to oslv18_red_led[10]
+set_location_assignment PIN_H16                          -to oslv18_red_led[11]
+set_location_assignment PIN_J16                          -to oslv18_red_led[12]
+set_location_assignment PIN_H17                          -to oslv18_red_led[13]
+set_location_assignment PIN_F15                          -to oslv18_red_led[14]
+set_location_assignment PIN_G15                          -to oslv18_red_led[15]
+set_location_assignment PIN_G16                          -to oslv18_red_led[16]
+set_location_assignment PIN_H15                          -to oslv18_red_led[17]
+
+
+set_instance_assignment -name IO_STANDARD "2.5 V"        -to oslv18_red_led[0]
+set_instance_assignment -name IO_STANDARD "2.5 V"        -to oslv18_red_led[1]
+set_instance_assignment -name IO_STANDARD "2.5 V"        -to oslv18_red_led[2]
+set_instance_assignment -name IO_STANDARD "2.5 V"        -to oslv18_red_led[3]
+set_instance_assignment -name IO_STANDARD "2.5 V"        -to oslv18_red_led[4]
+set_instance_assignment -name IO_STANDARD "2.5 V"        -to oslv18_red_led[5]
+set_instance_assignment -name IO_STANDARD "2.5 V"        -to oslv18_red_led[6]
+set_instance_assignment -name IO_STANDARD "2.5 V"        -to oslv18_red_led[7]
+set_instance_assignment -name IO_STANDARD "2.5 V"        -to oslv18_red_led[8]
+set_instance_assignment -name IO_STANDARD "2.5 V"        -to oslv18_red_led[9]
+set_instance_assignment -name IO_STANDARD "2.5 V"        -to oslv18_red_led[10]
+set_instance_assignment -name IO_STANDARD "2.5 V"        -to oslv18_red_led[11]
+set_instance_assignment -name IO_STANDARD "2.5 V"        -to oslv18_red_led[12]
+set_instance_assignment -name IO_STANDARD "2.5 V"        -to oslv18_red_led[13]
+set_instance_assignment -name IO_STANDARD "2.5 V"        -to oslv18_red_led[14]
+set_instance_assignment -name IO_STANDARD "2.5 V"        -to oslv18_red_led[15]
+set_instance_assignment -name IO_STANDARD "2.5 V"        -to oslv18_red_led[16]
+set_instance_assignment -name IO_STANDARD "2.5 V"        -to oslv18_red_led[17]
+
+set_instance_assignment -name SLEW_RATE 2                -to oslv18_red_led[0]
+set_instance_assignment -name SLEW_RATE 2                -to oslv18_red_led[1]
+set_instance_assignment -name SLEW_RATE 2                -to oslv18_red_led[2]
+set_instance_assignment -name SLEW_RATE 2                -to oslv18_red_led[3]
+set_instance_assignment -name SLEW_RATE 2                -to oslv18_red_led[4]
+set_instance_assignment -name SLEW_RATE 2                -to oslv18_red_led[5]
+set_instance_assignment -name SLEW_RATE 2                -to oslv18_red_led[6]
+set_instance_assignment -name SLEW_RATE 2                -to oslv18_red_led[7]
+set_instance_assignment -name SLEW_RATE 2                -to oslv18_red_led[8]
+set_instance_assignment -name SLEW_RATE 2                -to oslv18_red_led[9]
+set_instance_assignment -name SLEW_RATE 2                -to oslv18_red_led[10]
+set_instance_assignment -name SLEW_RATE 2                -to oslv18_red_led[11]
+set_instance_assignment -name SLEW_RATE 2                -to oslv18_red_led[12]
+set_instance_assignment -name SLEW_RATE 2                -to oslv18_red_led[13]
+set_instance_assignment -name SLEW_RATE 2                -to oslv18_red_led[14]
+set_instance_assignment -name SLEW_RATE 2                -to oslv18_red_led[15]
+set_instance_assignment -name SLEW_RATE 2                -to oslv18_red_led[16]
+set_instance_assignment -name SLEW_RATE 2                -to oslv18_red_led[17]
+
+set_instance_assignment -name CURRENT_STRENGTH_NEW 8MA   -to oslv18_red_led[0]
+set_instance_assignment -name CURRENT_STRENGTH_NEW 8MA   -to oslv18_red_led[1]
+set_instance_assignment -name CURRENT_STRENGTH_NEW 8MA   -to oslv18_red_led[2]
+set_instance_assignment -name CURRENT_STRENGTH_NEW 8MA   -to oslv18_red_led[3]
+set_instance_assignment -name CURRENT_STRENGTH_NEW 8MA   -to oslv18_red_led[4]
+set_instance_assignment -name CURRENT_STRENGTH_NEW 8MA   -to oslv18_red_led[5]
+set_instance_assignment -name CURRENT_STRENGTH_NEW 8MA   -to oslv18_red_led[6]
+set_instance_assignment -name CURRENT_STRENGTH_NEW 8MA   -to oslv18_red_led[7]
+set_instance_assignment -name CURRENT_STRENGTH_NEW 8MA   -to oslv18_red_led[8]
+set_instance_assignment -name CURRENT_STRENGTH_NEW 8MA   -to oslv18_red_led[9]
+set_instance_assignment -name CURRENT_STRENGTH_NEW 8MA   -to oslv18_red_led[10]
+set_instance_assignment -name CURRENT_STRENGTH_NEW 8MA   -to oslv18_red_led[11]
+set_instance_assignment -name CURRENT_STRENGTH_NEW 8MA   -to oslv18_red_led[12]
+set_instance_assignment -name CURRENT_STRENGTH_NEW 8MA   -to oslv18_red_led[13]
+set_instance_assignment -name CURRENT_STRENGTH_NEW 8MA   -to oslv18_red_led[14]
+set_instance_assignment -name CURRENT_STRENGTH_NEW 8MA   -to oslv18_red_led[15]
+set_instance_assignment -name CURRENT_STRENGTH_NEW 8MA   -to oslv18_red_led[16]
+set_instance_assignment -name CURRENT_STRENGTH_NEW 8MA   -to oslv18_red_led[17]
+
+
+##  Green LEDs
+##  ==========
+set_location_assignment PIN_E21                          -to oslv9_green_led[0]
+set_location_assignment PIN_E22                          -to oslv9_green_led[1]
+set_location_assignment PIN_E25                          -to oslv9_green_led[2]
+set_location_assignment PIN_E24                          -to oslv9_green_led[3]
+set_location_assignment PIN_H21                          -to oslv9_green_led[4]
+set_location_assignment PIN_G20                          -to oslv9_green_led[5]
+set_location_assignment PIN_G22                          -to oslv9_green_led[6]
+set_location_assignment PIN_G21                          -to oslv9_green_led[7]
+set_location_assignment PIN_F17                          -to oslv9_green_led[8]
+
+set_instance_assignment -name IO_STANDARD "2.5 V"        -to oslv9_green_led[0]
+set_instance_assignment -name IO_STANDARD "2.5 V"        -to oslv9_green_led[1]
+set_instance_assignment -name IO_STANDARD "2.5 V"        -to oslv9_green_led[2]
+set_instance_assignment -name IO_STANDARD "2.5 V"        -to oslv9_green_led[3]
+set_instance_assignment -name IO_STANDARD "2.5 V"        -to oslv9_green_led[4]
+set_instance_assignment -name IO_STANDARD "2.5 V"        -to oslv9_green_led[5]
+set_instance_assignment -name IO_STANDARD "2.5 V"        -to oslv9_green_led[6]
+set_instance_assignment -name IO_STANDARD "2.5 V"        -to oslv9_green_led[7]
+set_instance_assignment -name IO_STANDARD "2.5 V"        -to oslv9_green_led[8]
+
+set_instance_assignment -name SLEW_RATE 2                -to oslv9_green_led[0]
+set_instance_assignment -name SLEW_RATE 2                -to oslv9_green_led[1]
+set_instance_assignment -name SLEW_RATE 2                -to oslv9_green_led[2]
+set_instance_assignment -name SLEW_RATE 2                -to oslv9_green_led[3]
+set_instance_assignment -name SLEW_RATE 2                -to oslv9_green_led[4]
+set_instance_assignment -name SLEW_RATE 2                -to oslv9_green_led[5]
+set_instance_assignment -name SLEW_RATE 2                -to oslv9_green_led[6]
+set_instance_assignment -name SLEW_RATE 2                -to oslv9_green_led[7]
+set_instance_assignment -name SLEW_RATE 2                -to oslv9_green_led[8]
+
+set_instance_assignment -name CURRENT_STRENGTH_NEW 8MA   -to oslv9_green_led[0]
+set_instance_assignment -name CURRENT_STRENGTH_NEW 8MA   -to oslv9_green_led[1]
+set_instance_assignment -name CURRENT_STRENGTH_NEW 8MA   -to oslv9_green_led[2]
+set_instance_assignment -name CURRENT_STRENGTH_NEW 8MA   -to oslv9_green_led[3]
+set_instance_assignment -name CURRENT_STRENGTH_NEW 8MA   -to oslv9_green_led[4]
+set_instance_assignment -name CURRENT_STRENGTH_NEW 8MA   -to oslv9_green_led[5]
+set_instance_assignment -name CURRENT_STRENGTH_NEW 8MA   -to oslv9_green_led[6]
+set_instance_assignment -name CURRENT_STRENGTH_NEW 8MA   -to oslv9_green_led[7]
+set_instance_assignment -name CURRENT_STRENGTH_NEW 8MA   -to oslv9_green_led[8]
+
+#-------------------------------------------------------------------------------
+#-- Boost Software License 1.0 (BSL-1.0)
+#--
+#-- Permission is hereby granted, free of charge, to any person or organization 
+#-- obtaining a copy of the software and accompanying documentation covered by 
+#-- this license (the "Software") to use, reproduce, display, distribute, 
+#-- execute, and transmit the Software, and to prepare derivative works of the
+#-- Software, and to permit third-parties to whom the Software is furnished to 
+#-- do so, all subject to the following:
+#--
+#-- The copyright notices in the Software and this entire statement, including 
+#-- the above license grant, this restriction and the following disclaimer, must
+#-- be included in all copies of the Software, in whole or in part, and all 
+#-- derivative works of the Software, unless such copies or derivative works are
+#-- solely in the form of machine-executable object code generated by a source 
+#-- language processor.
+#--
+#-- THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR 
+#-- IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, 
+#-- FITNESS FOR A PARTICULAR PURPOSE, TITLE AND NON-INFRINGEMENT. IN NO EVENT
+#-- SHALL THE COPYRIGHT HOLDERS OR ANYONE DISTRIBUTING THE SOFTWARE BE LIABLE 
+#-- FOR ANY DAMAGES OR OTHER LIABILITY, WHETHER IN CONTRACT, TORT OR OTHERWISE, 
+#-- ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER 
+#-- DEALINGS IN THE SOFTWARE.
+#--
+#-------------------------------------------------------------------------------

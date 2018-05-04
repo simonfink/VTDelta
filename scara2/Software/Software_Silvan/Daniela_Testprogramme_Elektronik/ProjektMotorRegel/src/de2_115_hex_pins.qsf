@@ -1,0 +1,364 @@
+#-------------------------------------------------------------------------------
+#--     ____  _____          __    __    ________    _______
+#--    |    | \    \        |   \ |  |  |__    __|  |   __  \
+#--    |____|  \____\       |    \|  |     |  |     |  |__>  ) 
+#--     ____   ____         |  |\ \  |     |  |     |   __  <
+#--    |    | |    |        |  | \   |     |  |     |  |__>  )
+#--    |____| |____|        |__|  \__|     |__|     |_______/
+#--
+#--    INTERSTATE UNIVERSITY OF AAPLIED SCIENCES OF TECHNOLOGY
+#--
+#--    Campus Buchs - Werdenbergstrasse 4 - CH-9471 Buchs
+#--    Campus Waldau - Schoenauweg4 - CH9013 St. Gallen
+#--
+#--    Tel. +41 (0)81 755 33 11   Fax +41 (0)81 756 54 34
+#--
+#-------------------------------------------------------------------------------
+#-- Project : 	DE2-115 Board Support Package
+#-- Unit    : 	de2_115_hex_pins.qsf
+#-- Author  : 	Laszlo Arato
+#-- Created : 	October 2011
+#-------------------------------------------------------------------------------
+#-- Copyright(C) 2011: Interstate University of Applied Sciences NTB, Buchs
+#-- Licensed under BSL-1.0 (Boost Software License). See end of file for details.
+#-------------------------------------------------------------------------------
+
+
+##  DE2-115 Hex Pins
+##
+########################
+
+##  Pin Mapping to 7-Segment LED elements
+##		                              -- 0 --
+##		Pin 0:  Top Element          |       |
+##		Pin 1:  Right Upper Element  5       1
+##		Pin 2:  Right Lower Element  |       |
+##		Pin 3:  Bottom Element        -- 6 --
+##		Pin 4:  Left Lower Element   |       |
+##		Pin 5:  Left Upper Element   4       2
+##		Pin 6:  Middle Element       |       |
+##	                                  -- 3 --
+
+
+##	Hex segment 0
+##  =============
+
+set_location_assignment PIN_G18                        -to or_hex_display.slv7_segment_0[0]
+set_location_assignment PIN_F22                        -to or_hex_display.slv7_segment_0[1]
+set_location_assignment PIN_E17                        -to or_hex_display.slv7_segment_0[2]
+set_location_assignment PIN_L26                        -to or_hex_display.slv7_segment_0[3]
+set_location_assignment PIN_L25                        -to or_hex_display.slv7_segment_0[4]
+set_location_assignment PIN_J22                        -to or_hex_display.slv7_segment_0[5]
+set_location_assignment PIN_H22                        -to or_hex_display.slv7_segment_0[6]
+
+set_instance_assignment -name IO_STANDARD "2.5 V"      -to or_hex_display.slv7_segment_0[0]
+set_instance_assignment -name IO_STANDARD "2.5 V"      -to or_hex_display.slv7_segment_0[1]
+set_instance_assignment -name IO_STANDARD "2.5 V"      -to or_hex_display.slv7_segment_0[2]
+##  Attention:  For following pins, Voltage Standard depends on position of Jumper JP7
+set_instance_assignment -name IO_STANDARD "2.5 V"      -to or_hex_display.slv7_segment_0[3]
+set_instance_assignment -name IO_STANDARD "2.5 V"      -to or_hex_display.slv7_segment_0[4]
+set_instance_assignment -name IO_STANDARD "2.5 V"      -to or_hex_display.slv7_segment_0[5]
+set_instance_assignment -name IO_STANDARD "2.5 V"      -to or_hex_display.slv7_segment_0[6]
+
+set_instance_assignment -name SLEW_RATE 2              -to or_hex_display.slv7_segment_0[0]
+set_instance_assignment -name SLEW_RATE 2              -to or_hex_display.slv7_segment_0[1]
+set_instance_assignment -name SLEW_RATE 2              -to or_hex_display.slv7_segment_0[2]
+set_instance_assignment -name SLEW_RATE 2              -to or_hex_display.slv7_segment_0[3]
+set_instance_assignment -name SLEW_RATE 2              -to or_hex_display.slv7_segment_0[4]
+set_instance_assignment -name SLEW_RATE 2              -to or_hex_display.slv7_segment_0[5]
+set_instance_assignment -name SLEW_RATE 2              -to or_hex_display.slv7_segment_0[6]
+
+set_instance_assignment -name CURRENT_STRENGTH_NEW 8MA -to or_hex_display.slv7_segment_0[0]
+set_instance_assignment -name CURRENT_STRENGTH_NEW 8MA -to or_hex_display.slv7_segment_0[1]
+set_instance_assignment -name CURRENT_STRENGTH_NEW 8MA -to or_hex_display.slv7_segment_0[2]
+set_instance_assignment -name CURRENT_STRENGTH_NEW 8MA -to or_hex_display.slv7_segment_0[3]
+set_instance_assignment -name CURRENT_STRENGTH_NEW 8MA -to or_hex_display.slv7_segment_0[4]
+set_instance_assignment -name CURRENT_STRENGTH_NEW 8MA -to or_hex_display.slv7_segment_0[5]
+set_instance_assignment -name CURRENT_STRENGTH_NEW 8MA -to or_hex_display.slv7_segment_0[6]
+
+##	Hex segment 1
+##  =============
+
+set_location_assignment PIN_M24                        -to or_hex_display.slv7_segment_1[0]
+set_location_assignment PIN_Y22                        -to or_hex_display.slv7_segment_1[1]
+set_location_assignment PIN_W21                        -to or_hex_display.slv7_segment_1[2]
+set_location_assignment PIN_W22                        -to or_hex_display.slv7_segment_1[3]
+set_location_assignment PIN_W25                        -to or_hex_display.slv7_segment_1[4]
+set_location_assignment PIN_U23                        -to or_hex_display.slv7_segment_1[5]
+set_location_assignment PIN_U24                        -to or_hex_display.slv7_segment_1[6]
+
+##  Attention:  For following pins, Voltage Standard depends on position of Jumper JP7
+set_instance_assignment -name IO_STANDARD "2.5 V"      -to or_hex_display.slv7_segment_1[0]
+set_instance_assignment -name IO_STANDARD "2.5 V"      -to or_hex_display.slv7_segment_1[1]
+set_instance_assignment -name IO_STANDARD "2.5 V"      -to or_hex_display.slv7_segment_1[2]
+set_instance_assignment -name IO_STANDARD "2.5 V"      -to or_hex_display.slv7_segment_1[3]
+set_instance_assignment -name IO_STANDARD "2.5 V"      -to or_hex_display.slv7_segment_1[4]
+set_instance_assignment -name IO_STANDARD "2.5 V"      -to or_hex_display.slv7_segment_1[5]
+set_instance_assignment -name IO_STANDARD "2.5 V"      -to or_hex_display.slv7_segment_1[6]
+
+set_instance_assignment -name SLEW_RATE 2              -to or_hex_display.slv7_segment_1[0]
+set_instance_assignment -name SLEW_RATE 2              -to or_hex_display.slv7_segment_1[1]
+set_instance_assignment -name SLEW_RATE 2              -to or_hex_display.slv7_segment_1[2]
+set_instance_assignment -name SLEW_RATE 2              -to or_hex_display.slv7_segment_1[3]
+set_instance_assignment -name SLEW_RATE 2              -to or_hex_display.slv7_segment_1[4]
+set_instance_assignment -name SLEW_RATE 2              -to or_hex_display.slv7_segment_1[5]
+set_instance_assignment -name SLEW_RATE 2              -to or_hex_display.slv7_segment_1[6]
+
+set_instance_assignment -name CURRENT_STRENGTH_NEW 8MA -to or_hex_display.slv7_segment_1[0]
+set_instance_assignment -name CURRENT_STRENGTH_NEW 8MA -to or_hex_display.slv7_segment_1[1]
+set_instance_assignment -name CURRENT_STRENGTH_NEW 8MA -to or_hex_display.slv7_segment_1[2]
+set_instance_assignment -name CURRENT_STRENGTH_NEW 8MA -to or_hex_display.slv7_segment_1[3]
+set_instance_assignment -name CURRENT_STRENGTH_NEW 8MA -to or_hex_display.slv7_segment_1[4]
+set_instance_assignment -name CURRENT_STRENGTH_NEW 8MA -to or_hex_display.slv7_segment_1[5]
+set_instance_assignment -name CURRENT_STRENGTH_NEW 8MA -to or_hex_display.slv7_segment_1[6]
+
+
+##	Hex segment 2
+##  =============
+
+set_location_assignment PIN_AA25                       -to or_hex_display.slv7_segment_2[0]
+set_location_assignment PIN_AA26                       -to or_hex_display.slv7_segment_2[1]
+set_location_assignment PIN_Y25                        -to or_hex_display.slv7_segment_2[2]
+set_location_assignment PIN_W26                        -to or_hex_display.slv7_segment_2[3]
+set_location_assignment PIN_Y26                        -to or_hex_display.slv7_segment_2[4]
+set_location_assignment PIN_W27                        -to or_hex_display.slv7_segment_2[5]
+set_location_assignment PIN_W28                        -to or_hex_display.slv7_segment_2[6]
+
+##  Attention:  For following pins, Voltage Standard depends on position of Jumper JP7
+set_instance_assignment -name IO_STANDARD "2.5 V"      -to or_hex_display.slv7_segment_2[0]
+set_instance_assignment -name IO_STANDARD "2.5 V"      -to or_hex_display.slv7_segment_2[1]
+set_instance_assignment -name IO_STANDARD "2.5 V"      -to or_hex_display.slv7_segment_2[2]
+set_instance_assignment -name IO_STANDARD "2.5 V"      -to or_hex_display.slv7_segment_2[3]
+set_instance_assignment -name IO_STANDARD "2.5 V"      -to or_hex_display.slv7_segment_2[4]
+set_instance_assignment -name IO_STANDARD "2.5 V"      -to or_hex_display.slv7_segment_2[5]
+set_instance_assignment -name IO_STANDARD "2.5 V"      -to or_hex_display.slv7_segment_2[6]
+
+set_instance_assignment -name SLEW_RATE 2              -to or_hex_display.slv7_segment_2[0]
+set_instance_assignment -name SLEW_RATE 2              -to or_hex_display.slv7_segment_2[1]
+set_instance_assignment -name SLEW_RATE 2              -to or_hex_display.slv7_segment_2[2]
+set_instance_assignment -name SLEW_RATE 2              -to or_hex_display.slv7_segment_2[3]
+set_instance_assignment -name SLEW_RATE 2              -to or_hex_display.slv7_segment_2[4]
+set_instance_assignment -name SLEW_RATE 2              -to or_hex_display.slv7_segment_2[5]
+set_instance_assignment -name SLEW_RATE 2              -to or_hex_display.slv7_segment_2[6]
+
+set_instance_assignment -name CURRENT_STRENGTH_NEW 8MA -to or_hex_display.slv7_segment_2[0]
+set_instance_assignment -name CURRENT_STRENGTH_NEW 8MA -to or_hex_display.slv7_segment_2[1]
+set_instance_assignment -name CURRENT_STRENGTH_NEW 8MA -to or_hex_display.slv7_segment_2[2]
+set_instance_assignment -name CURRENT_STRENGTH_NEW 8MA -to or_hex_display.slv7_segment_2[3]
+set_instance_assignment -name CURRENT_STRENGTH_NEW 8MA -to or_hex_display.slv7_segment_2[4]
+set_instance_assignment -name CURRENT_STRENGTH_NEW 8MA -to or_hex_display.slv7_segment_2[5]
+set_instance_assignment -name CURRENT_STRENGTH_NEW 8MA -to or_hex_display.slv7_segment_2[6]
+
+
+##	Hex segment 3
+##  =============
+
+set_location_assignment PIN_V21                        -to or_hex_display.slv7_segment_3[0]
+set_location_assignment PIN_U21                        -to or_hex_display.slv7_segment_3[1]
+set_location_assignment PIN_AB20                       -to or_hex_display.slv7_segment_3[2]
+set_location_assignment PIN_AA21                       -to or_hex_display.slv7_segment_3[3]
+set_location_assignment PIN_AD24                       -to or_hex_display.slv7_segment_3[4]
+set_location_assignment PIN_AF23                       -to or_hex_display.slv7_segment_3[5]
+set_location_assignment PIN_Y19                        -to or_hex_display.slv7_segment_3[6]
+
+set_instance_assignment -name IO_STANDARD "2.5 V"      -to or_hex_display.slv7_segment_3[0]
+set_instance_assignment -name IO_STANDARD "2.5 V"      -to or_hex_display.slv7_segment_3[1]
+##  Attention:  For following pins, Voltage Standard depends on position of Jumper JP6
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL"  -to or_hex_display.slv7_segment_3[2]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL"  -to or_hex_display.slv7_segment_3[3]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL"  -to or_hex_display.slv7_segment_3[4]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL"  -to or_hex_display.slv7_segment_3[5]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL"  -to or_hex_display.slv7_segment_3[6]
+
+set_instance_assignment -name SLEW_RATE 2              -to or_hex_display.slv7_segment_3[0]
+set_instance_assignment -name SLEW_RATE 2              -to or_hex_display.slv7_segment_3[1]
+set_instance_assignment -name SLEW_RATE 2              -to or_hex_display.slv7_segment_3[2]
+set_instance_assignment -name SLEW_RATE 2              -to or_hex_display.slv7_segment_3[3]
+set_instance_assignment -name SLEW_RATE 2              -to or_hex_display.slv7_segment_3[4]
+set_instance_assignment -name SLEW_RATE 2              -to or_hex_display.slv7_segment_3[5]
+set_instance_assignment -name SLEW_RATE 2              -to or_hex_display.slv7_segment_3[6]
+
+set_instance_assignment -name CURRENT_STRENGTH_NEW 8MA -to or_hex_display.slv7_segment_3[0]
+set_instance_assignment -name CURRENT_STRENGTH_NEW 8MA -to or_hex_display.slv7_segment_3[1]
+set_instance_assignment -name CURRENT_STRENGTH_NEW 8MA -to or_hex_display.slv7_segment_3[2]
+set_instance_assignment -name CURRENT_STRENGTH_NEW 8MA -to or_hex_display.slv7_segment_3[3]
+set_instance_assignment -name CURRENT_STRENGTH_NEW 8MA -to or_hex_display.slv7_segment_3[4]
+set_instance_assignment -name CURRENT_STRENGTH_NEW 8MA -to or_hex_display.slv7_segment_3[5]
+set_instance_assignment -name CURRENT_STRENGTH_NEW 8MA -to or_hex_display.slv7_segment_3[6]
+
+
+##	Hex segment 4
+##  =============
+
+set_location_assignment PIN_AB19                       -to or_hex_display.slv7_segment_4[0]
+set_location_assignment PIN_AA19                       -to or_hex_display.slv7_segment_4[1]
+set_location_assignment PIN_AG21                       -to or_hex_display.slv7_segment_4[2]
+set_location_assignment PIN_AH21                       -to or_hex_display.slv7_segment_4[3]
+set_location_assignment PIN_AE19                       -to or_hex_display.slv7_segment_4[4]
+set_location_assignment PIN_AF19                       -to or_hex_display.slv7_segment_4[5]
+set_location_assignment PIN_AE18                       -to or_hex_display.slv7_segment_4[6]
+
+##  Attention:  For following pins, Voltage Standard depends on position of Jumper JP6
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL"  -to or_hex_display.slv7_segment_4[0]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL"  -to or_hex_display.slv7_segment_4[1]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL"  -to or_hex_display.slv7_segment_4[2]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL"  -to or_hex_display.slv7_segment_4[3]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL"  -to or_hex_display.slv7_segment_4[4]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL"  -to or_hex_display.slv7_segment_4[5]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL"  -to or_hex_display.slv7_segment_4[6]
+
+set_instance_assignment -name SLEW_RATE 2              -to or_hex_display.slv7_segment_4[0]
+set_instance_assignment -name SLEW_RATE 2              -to or_hex_display.slv7_segment_4[1]
+set_instance_assignment -name SLEW_RATE 2              -to or_hex_display.slv7_segment_4[2]
+set_instance_assignment -name SLEW_RATE 2              -to or_hex_display.slv7_segment_4[3]
+set_instance_assignment -name SLEW_RATE 2              -to or_hex_display.slv7_segment_4[4]
+set_instance_assignment -name SLEW_RATE 2              -to or_hex_display.slv7_segment_4[5]
+set_instance_assignment -name SLEW_RATE 2              -to or_hex_display.slv7_segment_4[6]
+
+set_instance_assignment -name CURRENT_STRENGTH_NEW 8MA -to or_hex_display.slv7_segment_4[0]
+set_instance_assignment -name CURRENT_STRENGTH_NEW 8MA -to or_hex_display.slv7_segment_4[1]
+set_instance_assignment -name CURRENT_STRENGTH_NEW 8MA -to or_hex_display.slv7_segment_4[2]
+set_instance_assignment -name CURRENT_STRENGTH_NEW 8MA -to or_hex_display.slv7_segment_4[3]
+set_instance_assignment -name CURRENT_STRENGTH_NEW 8MA -to or_hex_display.slv7_segment_4[4]
+set_instance_assignment -name CURRENT_STRENGTH_NEW 8MA -to or_hex_display.slv7_segment_4[5]
+set_instance_assignment -name CURRENT_STRENGTH_NEW 8MA -to or_hex_display.slv7_segment_4[6]
+
+
+##	Hex segment 5
+##  =============
+
+set_location_assignment PIN_AD18                       -to or_hex_display.slv7_segment_5[0]
+set_location_assignment PIN_AC18                       -to or_hex_display.slv7_segment_5[1]
+set_location_assignment PIN_AB18                       -to or_hex_display.slv7_segment_5[2]
+set_location_assignment PIN_AH19                       -to or_hex_display.slv7_segment_5[3]
+set_location_assignment PIN_AG19                       -to or_hex_display.slv7_segment_5[4]
+set_location_assignment PIN_AF18                       -to or_hex_display.slv7_segment_5[5]
+set_location_assignment PIN_AH18                       -to or_hex_display.slv7_segment_5[6]
+
+##  Attention:  For following pins, Voltage Standard depends on position of Jumper JP6
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL"  -to or_hex_display.slv7_segment_5[0]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL"  -to or_hex_display.slv7_segment_5[1]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL"  -to or_hex_display.slv7_segment_5[2]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL"  -to or_hex_display.slv7_segment_5[3]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL"  -to or_hex_display.slv7_segment_5[4]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL"  -to or_hex_display.slv7_segment_5[5]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL"  -to or_hex_display.slv7_segment_5[6]
+
+set_instance_assignment -name SLEW_RATE 2              -to or_hex_display.slv7_segment_5[0]
+set_instance_assignment -name SLEW_RATE 2              -to or_hex_display.slv7_segment_5[1]
+set_instance_assignment -name SLEW_RATE 2              -to or_hex_display.slv7_segment_5[2]
+set_instance_assignment -name SLEW_RATE 2              -to or_hex_display.slv7_segment_5[3]
+set_instance_assignment -name SLEW_RATE 2              -to or_hex_display.slv7_segment_5[4]
+set_instance_assignment -name SLEW_RATE 2              -to or_hex_display.slv7_segment_5[5]
+set_instance_assignment -name SLEW_RATE 2              -to or_hex_display.slv7_segment_5[6]
+
+set_instance_assignment -name CURRENT_STRENGTH_NEW 8MA -to or_hex_display.slv7_segment_5[0]
+set_instance_assignment -name CURRENT_STRENGTH_NEW 8MA -to or_hex_display.slv7_segment_5[1]
+set_instance_assignment -name CURRENT_STRENGTH_NEW 8MA -to or_hex_display.slv7_segment_5[2]
+set_instance_assignment -name CURRENT_STRENGTH_NEW 8MA -to or_hex_display.slv7_segment_5[3]
+set_instance_assignment -name CURRENT_STRENGTH_NEW 8MA -to or_hex_display.slv7_segment_5[4]
+set_instance_assignment -name CURRENT_STRENGTH_NEW 8MA -to or_hex_display.slv7_segment_5[5]
+set_instance_assignment -name CURRENT_STRENGTH_NEW 8MA -to or_hex_display.slv7_segment_5[6]
+
+
+##	Hex segment 6
+##  =============
+
+set_location_assignment PIN_AA17                       -to or_hex_display.slv7_segment_6[0]
+set_location_assignment PIN_AB16                       -to or_hex_display.slv7_segment_6[1]
+set_location_assignment PIN_AA16                       -to or_hex_display.slv7_segment_6[2]
+set_location_assignment PIN_AB17                       -to or_hex_display.slv7_segment_6[3]
+set_location_assignment PIN_AB15                       -to or_hex_display.slv7_segment_6[4]
+set_location_assignment PIN_AA15                       -to or_hex_display.slv7_segment_6[5]
+set_location_assignment PIN_AC17                       -to or_hex_display.slv7_segment_6[6]
+
+##  Attention:  For following pins, Voltage Standard depends on position of Jumper JP6
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL"  -to or_hex_display.slv7_segment_6[0]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL"  -to or_hex_display.slv7_segment_6[1]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL"  -to or_hex_display.slv7_segment_6[2]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL"  -to or_hex_display.slv7_segment_6[3]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL"  -to or_hex_display.slv7_segment_6[4]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL"  -to or_hex_display.slv7_segment_6[5]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL"  -to or_hex_display.slv7_segment_6[6]
+
+set_instance_assignment -name SLEW_RATE 2              -to or_hex_display.slv7_segment_6[0]
+set_instance_assignment -name SLEW_RATE 2              -to or_hex_display.slv7_segment_6[1]
+set_instance_assignment -name SLEW_RATE 2              -to or_hex_display.slv7_segment_6[2]
+set_instance_assignment -name SLEW_RATE 2              -to or_hex_display.slv7_segment_6[3]
+set_instance_assignment -name SLEW_RATE 2              -to or_hex_display.slv7_segment_6[4]
+set_instance_assignment -name SLEW_RATE 2              -to or_hex_display.slv7_segment_6[5]
+set_instance_assignment -name SLEW_RATE 2              -to or_hex_display.slv7_segment_6[6]
+
+set_instance_assignment -name CURRENT_STRENGTH_NEW 8MA -to or_hex_display.slv7_segment_6[0]
+set_instance_assignment -name CURRENT_STRENGTH_NEW 8MA -to or_hex_display.slv7_segment_6[1]
+set_instance_assignment -name CURRENT_STRENGTH_NEW 8MA -to or_hex_display.slv7_segment_6[2]
+set_instance_assignment -name CURRENT_STRENGTH_NEW 8MA -to or_hex_display.slv7_segment_6[3]
+set_instance_assignment -name CURRENT_STRENGTH_NEW 8MA -to or_hex_display.slv7_segment_6[4]
+set_instance_assignment -name CURRENT_STRENGTH_NEW 8MA -to or_hex_display.slv7_segment_6[5]
+set_instance_assignment -name CURRENT_STRENGTH_NEW 8MA -to or_hex_display.slv7_segment_6[6]
+
+
+##	Hex segment 7
+##  =============
+
+set_location_assignment PIN_AD17                       -to or_hex_display.slv7_segment_7[0]
+set_location_assignment PIN_AE17                       -to or_hex_display.slv7_segment_7[1]
+set_location_assignment PIN_AG17                       -to or_hex_display.slv7_segment_7[2]
+set_location_assignment PIN_AH17                       -to or_hex_display.slv7_segment_7[3]
+set_location_assignment PIN_AF17                       -to or_hex_display.slv7_segment_7[4]
+set_location_assignment PIN_AG18                       -to or_hex_display.slv7_segment_7[5]
+set_location_assignment PIN_AA14                       -to or_hex_display.slv7_segment_7[6]
+
+##  Attention:  For following pins, Voltage Standard depends on position of Jumper JP6
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL"  -to or_hex_display.slv7_segment_7[0]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL"  -to or_hex_display.slv7_segment_7[1]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL"  -to or_hex_display.slv7_segment_7[2]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL"  -to or_hex_display.slv7_segment_7[3]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL"  -to or_hex_display.slv7_segment_7[4]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL"  -to or_hex_display.slv7_segment_7[5]
+##  Attention:  For following pin, Voltage Standard is always 3.3V
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL"  -to or_hex_display.slv7_segment_7[6]
+
+set_instance_assignment -name SLEW_RATE 2              -to or_hex_display.slv7_segment_7[0]
+set_instance_assignment -name SLEW_RATE 2              -to or_hex_display.slv7_segment_7[1]
+set_instance_assignment -name SLEW_RATE 2              -to or_hex_display.slv7_segment_7[2]
+set_instance_assignment -name SLEW_RATE 2              -to or_hex_display.slv7_segment_7[3]
+set_instance_assignment -name SLEW_RATE 2              -to or_hex_display.slv7_segment_7[4]
+set_instance_assignment -name SLEW_RATE 2              -to or_hex_display.slv7_segment_7[5]
+set_instance_assignment -name SLEW_RATE 2              -to or_hex_display.slv7_segment_7[6]
+
+set_instance_assignment -name CURRENT_STRENGTH_NEW 8MA -to or_hex_display.slv7_segment_7[0]
+set_instance_assignment -name CURRENT_STRENGTH_NEW 8MA -to or_hex_display.slv7_segment_7[1]
+set_instance_assignment -name CURRENT_STRENGTH_NEW 8MA -to or_hex_display.slv7_segment_7[2]
+set_instance_assignment -name CURRENT_STRENGTH_NEW 8MA -to or_hex_display.slv7_segment_7[3]
+set_instance_assignment -name CURRENT_STRENGTH_NEW 8MA -to or_hex_display.slv7_segment_7[4]
+set_instance_assignment -name CURRENT_STRENGTH_NEW 8MA -to or_hex_display.slv7_segment_7[5]
+set_instance_assignment -name CURRENT_STRENGTH_NEW 8MA -to or_hex_display.slv7_segment_7[6]
+
+
+#-------------------------------------------------------------------------------
+#-- Boost Software License 1.0 (BSL-1.0)
+#--
+#-- Permission is hereby granted, free of charge, to any person or organization 
+#-- obtaining a copy of the software and accompanying documentation covered by 
+#-- this license (the "Software") to use, reproduce, display, distribute, 
+#-- execute, and transmit the Software, and to prepare derivative works of the
+#-- Software, and to permit third-parties to whom the Software is furnished to 
+#-- do so, all subject to the following:
+#--
+#-- The copyright notices in the Software and this entire statement, including 
+#-- the above license grant, this restriction and the following disclaimer, must
+#-- be included in all copies of the Software, in whole or in part, and all 
+#-- derivative works of the Software, unless such copies or derivative works are
+#-- solely in the form of machine-executable object code generated by a source 
+#-- language processor.
+#--
+#-- THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR 
+#-- IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, 
+#-- FITNESS FOR A PARTICULAR PURPOSE, TITLE AND NON-INFRINGEMENT. IN NO EVENT
+#-- SHALL THE COPYRIGHT HOLDERS OR ANYONE DISTRIBUTING THE SOFTWARE BE LIABLE 
+#-- FOR ANY DAMAGES OR OTHER LIABILITY, WHETHER IN CONTRACT, TORT OR OTHERWISE, 
+#-- ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER 
+#-- DEALINGS IN THE SOFTWARE.
+#--
+#-------------------------------------------------------------------------------

@@ -1,0 +1,40 @@
+-------------------------------------------------------------------------------
+--     ____  _____          __    __    ________    _______
+--    |    | \    \        |   \ |  |  |__    __|  |   __  \
+--    |____|  \____\       |    \|  |     |  |     |  |__>  ) 
+--     ____   ____         |  |\ \  |     |  |     |   __  <
+--    |    | |    |        |  | \   |     |  |     |  |__>  )
+--    |____| |____|        |__|  \__|     |__|     |_______/
+--
+--    INTERSTATE UNIVERSITY OF AAPLIED SCIENCES OF TECHNOLOGY
+--
+--    Campus Buchs - Werdenbergstrasse 4 - CH-9471 Buchs
+--    Campus Waldau - Schoenauweg4 - CH9013 St. Gallen
+--
+--    Tel. +41 (0)81 755 33 11   Fax +41 (0)81 756 54 34
+--
+-------------------------------------------------------------------------------
+-- Project : 	DE2-115 Board Support Package
+-- Unit    : 	MotorStromRegelung.vhd
+-- Author  : 	David Frommelt
+-- Created : 	October 2012
+-------------------------------------------------------------------------------
+-- Copyright(C) 2011: Interstate University of Applied Sciences NTB, Buchs
+-------------------------------------------------------------------------------
+
+LIBRARY IEEE;
+USE IEEE.std_logic_1164.ALL;
+USE IEEE.numeric_std.ALL;
+
+PACKAGE de2_115_start_pkg IS
+	TYPE t_pwm8_12bit_value IS ARRAY (0 to 11) OF unsigned(11 downto 0);                        		
+	
+	
+	COMPONENT pwm8_12bit IS
+	PORT (	
+		isl_clk : IN std_logic;
+		it_values: in t_pwm8_12bit_value;
+		oslv8_pwm: OUT std_logic(11 downto 0);
+	) ;
+	END COMPONENT de2_115_start;
+END PACKAGE pwm8_pkg;

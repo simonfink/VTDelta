@@ -1,0 +1,18 @@
+#deep-1
+
+meta {
+	version = "Fri Jul 26 09:19:42 CEST 2013";
+	description = "deep project file for SCARA";
+}
+
+project SCARA {
+	libpath = "I:\deep\lib";
+	boardtype = phyCoreMpc5200tiny;
+	ostype = ntbSTS;
+	imgfile = "T:\pub\huber\Scara.bin";
+
+#	enter names of rootclasses, e.g.
+#	rootclasses = "test.MyFirstTestClass","other.MySecondTestClass";
+	rootclasses = "ch.ntb.robotics.scara.main.TaskInstall","ch.ntb.robotics.scara.main.Led_UART3_yc";
+}
+

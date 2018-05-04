@@ -1,0 +1,748 @@
+TimeQuest Timing Analyzer report for spi_cs_mux
+Fri Apr 11 17:09:43 2014
+Quartus II 64-Bit Version 11.0 Build 157 04/27/2011 SJ Full Version
+
+
+---------------------
+; Table of Contents ;
+---------------------
+  1. Legal Notice
+  2. TimeQuest Timing Analyzer Summary
+  3. Parallel Compilation
+  4. SDC File List
+  5. Clocks
+  6. Fmax Summary
+  7. Setup Summary
+  8. Hold Summary
+  9. Recovery Summary
+ 10. Removal Summary
+ 11. Minimum Pulse Width Summary
+ 12. Setup: 'isl_clk'
+ 13. Hold: 'isl_clk'
+ 14. Recovery: 'isl_clk'
+ 15. Removal: 'isl_clk'
+ 16. Minimum Pulse Width: 'isl_clk'
+ 17. Minimum Pulse Width: 'isl_SCLK'
+ 18. Setup Times
+ 19. Hold Times
+ 20. Clock to Output Times
+ 21. Minimum Clock to Output Times
+ 22. Propagation Delay
+ 23. Minimum Propagation Delay
+ 24. Setup Transfers
+ 25. Hold Transfers
+ 26. Recovery Transfers
+ 27. Removal Transfers
+ 28. Report TCCS
+ 29. Report RSKM
+ 30. Unconstrained Paths
+ 31. TimeQuest Timing Analyzer Messages
+
+
+
+----------------
+; Legal Notice ;
+----------------
+Copyright (C) 1991-2011 Altera Corporation
+Your use of Altera Corporation's design tools, logic functions 
+and other software and tools, and its AMPP partner logic 
+functions, and any output files from any of the foregoing 
+(including device programming or simulation files), and any 
+associated documentation or information are expressly subject 
+to the terms and conditions of the Altera Program License 
+Subscription Agreement, Altera MegaCore Function License 
+Agreement, or other applicable license agreement, including, 
+without limitation, that your use is for the sole purpose of 
+programming logic devices manufactured by Altera and sold by 
+Altera or its authorized distributors.  Please refer to the 
+applicable agreement for further details.
+
+
+
++------------------------------------------------------------------------+
+; TimeQuest Timing Analyzer Summary                                      ;
++--------------------+---------------------------------------------------+
+; Quartus II Version ; Version 11.0 Build 157 04/27/2011 SJ Full Version ;
+; Revision Name      ; spi_cs_mux                                        ;
+; Device Family      ; MAX II                                            ;
+; Device Name        ; EPM570T100C5                                      ;
+; Timing Models      ; Final                                             ;
+; Delay Model        ; Slow Model                                        ;
+; Rise/Fall Delays   ; Unavailable                                       ;
++--------------------+---------------------------------------------------+
+
+
++------------------------------------------+
+; Parallel Compilation                     ;
++----------------------------+-------------+
+; Processors                 ; Number      ;
++----------------------------+-------------+
+; Number detected on machine ; 4           ;
+; Maximum allowed            ; 4           ;
+;                            ;             ;
+; Average used               ; 1.00        ;
+; Maximum used               ; 2           ;
+;                            ;             ;
+; Usage by Processor         ; % Time Used ;
+;     1 processor            ; 100.0%      ;
+;     2 processors           ; < 0.1%      ;
+;     3-4 processors         ;   0.0%      ;
++----------------------------+-------------+
+
+
++-----------------------------------------------------------+
+; SDC File List                                             ;
++-----------------------+--------+--------------------------+
+; SDC File Path         ; Status ; Read at                  ;
++-----------------------+--------+--------------------------+
+; ../src/spi_cs_mux.sdc ; OK     ; Fri Apr 11 17:09:42 2014 ;
++-----------------------+--------+--------------------------+
+
+
++---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Clocks                                                                                                                                                                                ;
++------------+------+---------+-----------+-------+--------+------------+-----------+-------------+-------+--------+-----------+------------+----------+--------+--------+--------------+
+; Clock Name ; Type ; Period  ; Frequency ; Rise  ; Fall   ; Duty Cycle ; Divide by ; Multiply by ; Phase ; Offset ; Edge List ; Edge Shift ; Inverted ; Master ; Source ; Targets      ;
++------------+------+---------+-----------+-------+--------+------------+-----------+-------------+-------+--------+-----------+------------+----------+--------+--------+--------------+
+; isl_clk    ; Base ; 10.000  ; 100.0 MHz ; 0.000 ; 5.000  ;            ;           ;             ;       ;        ;           ;            ;          ;        ;        ; { isl_clk }  ;
+; isl_SCLK   ; Base ; 125.000 ; 8.0 MHz   ; 0.000 ; 62.500 ;            ;           ;             ;       ;        ;           ;            ;          ;        ;        ; { isl_SCLK } ;
++------------+------+---------+-----------+-------+--------+------------+-----------+-------------+-------+--------+-----------+------------+----------+--------+--------+--------------+
+
+
++--------------------------------------------------+
+; Fmax Summary                                     ;
++------------+-----------------+------------+------+
+; Fmax       ; Restricted Fmax ; Clock Name ; Note ;
++------------+-----------------+------------+------+
+; 134.35 MHz ; 134.35 MHz      ; isl_clk    ;      ;
++------------+-----------------+------------+------+
+This panel reports FMAX for every clock in the design, regardless of the user-specified clock periods.  FMAX is only computed for paths where the source and destination registers or ports are driven by the same clock.  Paths of different clocks, including generated clocks, are ignored.  For paths between a clock and its inversion, FMAX is computed as if the rising and falling edges are scaled along with FMAX, such that the duty cycle (in terms of a percentage) is maintained. Altera recommends that you always use clock constraints and other slack reports for sign-off analysis.
+
+
++---------------------------------+
+; Setup Summary                   ;
++---------+-------+---------------+
+; Clock   ; Slack ; End Point TNS ;
++---------+-------+---------------+
+; isl_clk ; 0.390 ; 0.000         ;
++---------+-------+---------------+
+
+
++---------------------------------+
+; Hold Summary                    ;
++---------+-------+---------------+
+; Clock   ; Slack ; End Point TNS ;
++---------+-------+---------------+
+; isl_clk ; 1.556 ; 0.000         ;
++---------+-------+---------------+
+
+
++---------------------------------+
+; Recovery Summary                ;
++---------+-------+---------------+
+; Clock   ; Slack ; End Point TNS ;
++---------+-------+---------------+
+; isl_clk ; 2.100 ; 0.000         ;
++---------+-------+---------------+
+
+
++---------------------------------+
+; Removal Summary                 ;
++---------+-------+---------------+
+; Clock   ; Slack ; End Point TNS ;
++---------+-------+---------------+
+; isl_clk ; 7.346 ; 0.000         ;
++---------+-------+---------------+
+
+
++------------------------------------+
+; Minimum Pulse Width Summary        ;
++----------+---------+---------------+
+; Clock    ; Slack   ; End Point TNS ;
++----------+---------+---------------+
+; isl_clk  ; 4.734   ; 0.000         ;
+; isl_SCLK ; 121.711 ; 0.000         ;
++----------+---------+---------------+
+
+
++-------------------------------------------------------------------------------------------------------------------+
+; Setup: 'isl_clk'                                                                                                  ;
++-------+-----------------+-------------------+--------------+-------------+--------------+------------+------------+
+; Slack ; From Node       ; To Node           ; Launch Clock ; Latch Clock ; Relationship ; Clock Skew ; Data Delay ;
++-------+-----------------+-------------------+--------------+-------------+--------------+------------+------------+
+; 0.390 ; isl_SCLK        ; sync:sync_sck|q   ; isl_SCLK     ; isl_clk     ; 2.500        ; 3.547      ; 5.324      ;
+; 2.557 ; rxCount[2]      ; rxBuff[16]        ; isl_clk      ; isl_clk     ; 10.000       ; 0.000      ; 7.110      ;
+; 2.562 ; rxCount[2]      ; rxBuff[17]        ; isl_clk      ; isl_clk     ; 10.000       ; 0.000      ; 7.105      ;
+; 2.563 ; rxCount[2]      ; oslv_leds[0]~reg0 ; isl_clk      ; isl_clk     ; 10.000       ; 0.000      ; 7.104      ;
+; 2.563 ; rxCount[2]      ; oslv_leds[1]~reg0 ; isl_clk      ; isl_clk     ; 10.000       ; 0.000      ; 7.104      ;
+; 2.563 ; rxCount[2]      ; oslv_leds[2]~reg0 ; isl_clk      ; isl_clk     ; 10.000       ; 0.000      ; 7.104      ;
+; 2.563 ; rxCount[2]      ; oslv_leds[3]~reg0 ; isl_clk      ; isl_clk     ; 10.000       ; 0.000      ; 7.104      ;
+; 2.661 ; rxCount[1]      ; rxCount[4]        ; isl_clk      ; isl_clk     ; 10.000       ; 0.000      ; 7.006      ;
+; 2.746 ; rxCount[3]      ; rxBuff[16]        ; isl_clk      ; isl_clk     ; 10.000       ; 0.000      ; 6.921      ;
+; 2.751 ; rxCount[3]      ; rxBuff[17]        ; isl_clk      ; isl_clk     ; 10.000       ; 0.000      ; 6.916      ;
+; 2.752 ; rxCount[3]      ; oslv_leds[0]~reg0 ; isl_clk      ; isl_clk     ; 10.000       ; 0.000      ; 6.915      ;
+; 2.752 ; rxCount[3]      ; oslv_leds[1]~reg0 ; isl_clk      ; isl_clk     ; 10.000       ; 0.000      ; 6.915      ;
+; 2.752 ; rxCount[3]      ; oslv_leds[2]~reg0 ; isl_clk      ; isl_clk     ; 10.000       ; 0.000      ; 6.915      ;
+; 2.752 ; rxCount[3]      ; oslv_leds[3]~reg0 ; isl_clk      ; isl_clk     ; 10.000       ; 0.000      ; 6.915      ;
+; 2.864 ; sync:sync_cs|q  ; rxBuff[19]        ; isl_clk      ; isl_clk     ; 10.000       ; 0.000      ; 6.803      ;
+; 2.890 ; isl_SCLK        ; sync:sync_sck|q   ; isl_SCLK     ; isl_clk     ; 5.000        ; 3.547      ; 5.324      ;
+; 2.901 ; sync:sync_cs|q  ; oslv_leds[0]~reg0 ; isl_clk      ; isl_clk     ; 10.000       ; 0.000      ; 6.766      ;
+; 2.901 ; sync:sync_cs|q  ; oslv_leds[1]~reg0 ; isl_clk      ; isl_clk     ; 10.000       ; 0.000      ; 6.766      ;
+; 2.901 ; sync:sync_cs|q  ; oslv_leds[2]~reg0 ; isl_clk      ; isl_clk     ; 10.000       ; 0.000      ; 6.766      ;
+; 2.901 ; sync:sync_cs|q  ; oslv_leds[3]~reg0 ; isl_clk      ; isl_clk     ; 10.000       ; 0.000      ; 6.766      ;
+; 2.915 ; rxCount[1]      ; rxCount[5]        ; isl_clk      ; isl_clk     ; 10.000       ; 0.000      ; 6.752      ;
+; 3.036 ; rxCount[1]      ; rxBuff[30]        ; isl_clk      ; isl_clk     ; 10.000       ; 0.000      ; 6.631      ;
+; 3.038 ; rxCount[1]      ; rxBuff[31]        ; isl_clk      ; isl_clk     ; 10.000       ; 0.000      ; 6.629      ;
+; 3.095 ; rxCount[2]      ; rxBuff[30]        ; isl_clk      ; isl_clk     ; 10.000       ; 0.000      ; 6.572      ;
+; 3.097 ; rxCount[2]      ; rxBuff[31]        ; isl_clk      ; isl_clk     ; 10.000       ; 0.000      ; 6.570      ;
+; 3.122 ; rxCount[0]      ; oslv_leds[0]~reg0 ; isl_clk      ; isl_clk     ; 10.000       ; 0.000      ; 6.545      ;
+; 3.122 ; rxCount[0]      ; oslv_leds[1]~reg0 ; isl_clk      ; isl_clk     ; 10.000       ; 0.000      ; 6.545      ;
+; 3.122 ; rxCount[0]      ; oslv_leds[2]~reg0 ; isl_clk      ; isl_clk     ; 10.000       ; 0.000      ; 6.545      ;
+; 3.122 ; rxCount[0]      ; oslv_leds[3]~reg0 ; isl_clk      ; isl_clk     ; 10.000       ; 0.000      ; 6.545      ;
+; 3.151 ; rxCount[2]      ; rxBuff[19]        ; isl_clk      ; isl_clk     ; 10.000       ; 0.000      ; 6.516      ;
+; 3.340 ; rxCount[3]      ; rxBuff[19]        ; isl_clk      ; isl_clk     ; 10.000       ; 0.000      ; 6.327      ;
+; 3.365 ; sync:sync_cs|q  ; rxBuff[16]        ; isl_clk      ; isl_clk     ; 10.000       ; 0.000      ; 6.302      ;
+; 3.370 ; sync:sync_cs|q  ; rxBuff[17]        ; isl_clk      ; isl_clk     ; 10.000       ; 0.000      ; 6.297      ;
+; 3.374 ; rxCount[4]      ; rxBuff[19]        ; isl_clk      ; isl_clk     ; 10.000       ; 0.000      ; 6.293      ;
+; 3.386 ; oldSCLK         ; rxBuff[19]        ; isl_clk      ; isl_clk     ; 10.000       ; 0.000      ; 6.281      ;
+; 3.423 ; oldSCLK         ; oslv_leds[0]~reg0 ; isl_clk      ; isl_clk     ; 10.000       ; 0.000      ; 6.244      ;
+; 3.423 ; oldSCLK         ; oslv_leds[1]~reg0 ; isl_clk      ; isl_clk     ; 10.000       ; 0.000      ; 6.244      ;
+; 3.423 ; oldSCLK         ; oslv_leds[2]~reg0 ; isl_clk      ; isl_clk     ; 10.000       ; 0.000      ; 6.244      ;
+; 3.423 ; oldSCLK         ; oslv_leds[3]~reg0 ; isl_clk      ; isl_clk     ; 10.000       ; 0.000      ; 6.244      ;
+; 3.442 ; rxCount[4]      ; rxCount[5]        ; isl_clk      ; isl_clk     ; 10.000       ; 0.000      ; 6.225      ;
+; 3.458 ; rxCount[4]      ; oslv_leds[0]~reg0 ; isl_clk      ; isl_clk     ; 10.000       ; 0.000      ; 6.209      ;
+; 3.458 ; rxCount[4]      ; oslv_leds[1]~reg0 ; isl_clk      ; isl_clk     ; 10.000       ; 0.000      ; 6.209      ;
+; 3.458 ; rxCount[4]      ; oslv_leds[2]~reg0 ; isl_clk      ; isl_clk     ; 10.000       ; 0.000      ; 6.209      ;
+; 3.458 ; rxCount[4]      ; oslv_leds[3]~reg0 ; isl_clk      ; isl_clk     ; 10.000       ; 0.000      ; 6.209      ;
+; 3.465 ; rxCount[0]      ; rxCount[4]        ; isl_clk      ; isl_clk     ; 10.000       ; 0.000      ; 6.202      ;
+; 3.633 ; rxCount[2]      ; rxCount[5]        ; isl_clk      ; isl_clk     ; 10.000       ; 0.000      ; 6.034      ;
+; 3.697 ; rxCount[2]      ; rxCount[4]        ; isl_clk      ; isl_clk     ; 10.000       ; 0.000      ; 5.970      ;
+; 3.719 ; rxCount[0]      ; rxCount[5]        ; isl_clk      ; isl_clk     ; 10.000       ; 0.000      ; 5.948      ;
+; 3.746 ; rxCount[3]      ; rxCount[4]        ; isl_clk      ; isl_clk     ; 10.000       ; 0.000      ; 5.921      ;
+; 3.782 ; rxCount[1]      ; rxBuff[19]        ; isl_clk      ; isl_clk     ; 10.000       ; 0.000      ; 5.885      ;
+; 3.822 ; rxCount[3]      ; rxCount[5]        ; isl_clk      ; isl_clk     ; 10.000       ; 0.000      ; 5.845      ;
+; 3.887 ; oldSCLK         ; rxBuff[16]        ; isl_clk      ; isl_clk     ; 10.000       ; 0.000      ; 5.780      ;
+; 3.892 ; oldSCLK         ; rxBuff[17]        ; isl_clk      ; isl_clk     ; 10.000       ; 0.000      ; 5.775      ;
+; 3.954 ; sync:sync_sck|q ; rxBuff[19]        ; isl_clk      ; isl_clk     ; 10.000       ; 0.000      ; 5.713      ;
+; 3.991 ; sync:sync_sck|q ; oslv_leds[0]~reg0 ; isl_clk      ; isl_clk     ; 10.000       ; 0.000      ; 5.676      ;
+; 3.991 ; sync:sync_sck|q ; oslv_leds[1]~reg0 ; isl_clk      ; isl_clk     ; 10.000       ; 0.000      ; 5.676      ;
+; 3.991 ; sync:sync_sck|q ; oslv_leds[2]~reg0 ; isl_clk      ; isl_clk     ; 10.000       ; 0.000      ; 5.676      ;
+; 3.991 ; sync:sync_sck|q ; oslv_leds[3]~reg0 ; isl_clk      ; isl_clk     ; 10.000       ; 0.000      ; 5.676      ;
+; 3.997 ; rxCount[1]      ; rxCount[1]        ; isl_clk      ; isl_clk     ; 10.000       ; 0.000      ; 5.670      ;
+; 3.999 ; sync:sync_cs|q  ; rxBuff[30]        ; isl_clk      ; isl_clk     ; 10.000       ; 0.000      ; 5.668      ;
+; 4.001 ; sync:sync_cs|q  ; rxBuff[31]        ; isl_clk      ; isl_clk     ; 10.000       ; 0.000      ; 5.666      ;
+; 4.010 ; rxCount[4]      ; rxCount[4]        ; isl_clk      ; isl_clk     ; 10.000       ; 0.000      ; 5.657      ;
+; 4.030 ; rxBuff[30]      ; oslv_leds[0]~reg0 ; isl_clk      ; isl_clk     ; 10.000       ; 0.000      ; 5.637      ;
+; 4.030 ; rxBuff[30]      ; oslv_leds[1]~reg0 ; isl_clk      ; isl_clk     ; 10.000       ; 0.000      ; 5.637      ;
+; 4.030 ; rxBuff[30]      ; oslv_leds[2]~reg0 ; isl_clk      ; isl_clk     ; 10.000       ; 0.000      ; 5.637      ;
+; 4.030 ; rxBuff[30]      ; oslv_leds[3]~reg0 ; isl_clk      ; isl_clk     ; 10.000       ; 0.000      ; 5.637      ;
+; 4.031 ; sync:sync_cs|q  ; rxBuff[18]        ; isl_clk      ; isl_clk     ; 10.000       ; 0.000      ; 5.636      ;
+; 4.031 ; rxCount[5]      ; oslv_leds[0]~reg0 ; isl_clk      ; isl_clk     ; 10.000       ; 0.000      ; 5.636      ;
+; 4.031 ; rxCount[5]      ; oslv_leds[1]~reg0 ; isl_clk      ; isl_clk     ; 10.000       ; 0.000      ; 5.636      ;
+; 4.031 ; rxCount[5]      ; oslv_leds[2]~reg0 ; isl_clk      ; isl_clk     ; 10.000       ; 0.000      ; 5.636      ;
+; 4.031 ; rxCount[5]      ; oslv_leds[3]~reg0 ; isl_clk      ; isl_clk     ; 10.000       ; 0.000      ; 5.636      ;
+; 4.102 ; rxCount[0]      ; rxCount[1]        ; isl_clk      ; isl_clk     ; 10.000       ; 0.000      ; 5.565      ;
+; 4.200 ; rxCount[1]      ; rxCount[3]        ; isl_clk      ; isl_clk     ; 10.000       ; 0.000      ; 5.467      ;
+; 4.318 ; rxCount[2]      ; rxBuff[18]        ; isl_clk      ; isl_clk     ; 10.000       ; 0.000      ; 5.349      ;
+; 4.377 ; rxCount[3]      ; rxBuff[30]        ; isl_clk      ; isl_clk     ; 10.000       ; 0.000      ; 5.290      ;
+; 4.379 ; rxCount[3]      ; rxBuff[31]        ; isl_clk      ; isl_clk     ; 10.000       ; 0.000      ; 5.288      ;
+; 4.383 ; oldSCLK         ; txCount[1]        ; isl_clk      ; isl_clk     ; 10.000       ; 0.000      ; 5.284      ;
+; 4.383 ; oldSCLK         ; txCount[2]        ; isl_clk      ; isl_clk     ; 10.000       ; 0.000      ; 5.284      ;
+; 4.383 ; oldSCLK         ; txCount[5]        ; isl_clk      ; isl_clk     ; 10.000       ; 0.000      ; 5.284      ;
+; 4.383 ; oldSCLK         ; txCount[3]        ; isl_clk      ; isl_clk     ; 10.000       ; 0.000      ; 5.284      ;
+; 4.383 ; oldSCLK         ; txCount[4]        ; isl_clk      ; isl_clk     ; 10.000       ; 0.000      ; 5.284      ;
+; 4.403 ; oldSCLK         ; rxCount[4]        ; isl_clk      ; isl_clk     ; 10.000       ; 0.000      ; 5.264      ;
+; 4.403 ; oldSCLK         ; rxCount[5]        ; isl_clk      ; isl_clk     ; 10.000       ; 0.000      ; 5.264      ;
+; 4.403 ; oldSCLK         ; rxCount[1]        ; isl_clk      ; isl_clk     ; 10.000       ; 0.000      ; 5.264      ;
+; 4.455 ; sync:sync_sck|q ; rxBuff[16]        ; isl_clk      ; isl_clk     ; 10.000       ; 0.000      ; 5.212      ;
+; 4.460 ; sync:sync_sck|q ; rxBuff[17]        ; isl_clk      ; isl_clk     ; 10.000       ; 0.000      ; 5.207      ;
+; 4.507 ; rxCount[3]      ; rxBuff[18]        ; isl_clk      ; isl_clk     ; 10.000       ; 0.000      ; 5.160      ;
+; 4.521 ; oldSCLK         ; rxBuff[30]        ; isl_clk      ; isl_clk     ; 10.000       ; 0.000      ; 5.146      ;
+; 4.523 ; oldSCLK         ; rxBuff[31]        ; isl_clk      ; isl_clk     ; 10.000       ; 0.000      ; 5.144      ;
+; 4.541 ; rxCount[4]      ; rxBuff[18]        ; isl_clk      ; isl_clk     ; 10.000       ; 0.000      ; 5.126      ;
+; 4.553 ; oldSCLK         ; rxBuff[18]        ; isl_clk      ; isl_clk     ; 10.000       ; 0.000      ; 5.114      ;
+; 4.584 ; rxCount[1]      ; rxCount[2]        ; isl_clk      ; isl_clk     ; 10.000       ; 0.000      ; 5.083      ;
+; 4.603 ; rxCount[1]      ; oslv_leds[0]~reg0 ; isl_clk      ; isl_clk     ; 10.000       ; 0.000      ; 5.064      ;
+; 4.603 ; rxCount[1]      ; oslv_leds[1]~reg0 ; isl_clk      ; isl_clk     ; 10.000       ; 0.000      ; 5.064      ;
+; 4.603 ; rxCount[1]      ; oslv_leds[2]~reg0 ; isl_clk      ; isl_clk     ; 10.000       ; 0.000      ; 5.064      ;
+; 4.603 ; rxCount[1]      ; oslv_leds[3]~reg0 ; isl_clk      ; isl_clk     ; 10.000       ; 0.000      ; 5.064      ;
+; 4.632 ; rxBuff[31]      ; oslv_leds[0]~reg0 ; isl_clk      ; isl_clk     ; 10.000       ; 0.000      ; 5.035      ;
+; 4.632 ; rxBuff[31]      ; oslv_leds[1]~reg0 ; isl_clk      ; isl_clk     ; 10.000       ; 0.000      ; 5.035      ;
+; 4.632 ; rxBuff[31]      ; oslv_leds[2]~reg0 ; isl_clk      ; isl_clk     ; 10.000       ; 0.000      ; 5.035      ;
+; 4.632 ; rxBuff[31]      ; oslv_leds[3]~reg0 ; isl_clk      ; isl_clk     ; 10.000       ; 0.000      ; 5.035      ;
++-------+-----------------+-------------------+--------------+-------------+--------------+------------+------------+
+
+
++--------------------------------------------------------------------------------------------------------------------+
+; Hold: 'isl_clk'                                                                                                    ;
++-------+------------------+-------------------+--------------+-------------+--------------+------------+------------+
+; Slack ; From Node        ; To Node           ; Launch Clock ; Latch Clock ; Relationship ; Clock Skew ; Data Delay ;
++-------+------------------+-------------------+--------------+-------------+--------------+------------+------------+
+; 1.556 ; isl_SCLK         ; sync:sync_sck|q   ; isl_SCLK     ; isl_clk     ; 0.000        ; 3.547      ; 5.324      ;
+; 1.649 ; rxBuff[16]       ; rxBuff[16]        ; isl_clk      ; isl_clk     ; 0.000        ; 0.000      ; 1.870      ;
+; 1.650 ; rxBuff[17]       ; rxBuff[17]        ; isl_clk      ; isl_clk     ; 0.000        ; 0.000      ; 1.871      ;
+; 1.659 ; rxCount[0]       ; rxCount[0]        ; isl_clk      ; isl_clk     ; 0.000        ; 0.000      ; 1.880      ;
+; 1.669 ; txCount[5]       ; txCount[5]        ; isl_clk      ; isl_clk     ; 0.000        ; 0.000      ; 1.890      ;
+; 1.676 ; rxBuff[19]       ; rxBuff[19]        ; isl_clk      ; isl_clk     ; 0.000        ; 0.000      ; 1.897      ;
+; 1.684 ; rxBuff[30]       ; rxBuff[30]        ; isl_clk      ; isl_clk     ; 0.000        ; 0.000      ; 1.905      ;
+; 1.704 ; sync:sync_sck|q  ; oldSCLK           ; isl_clk      ; isl_clk     ; 0.000        ; 0.000      ; 1.925      ;
+; 1.782 ; rxBuff[17]       ; oslv_leds[1]~reg0 ; isl_clk      ; isl_clk     ; 0.000        ; 0.000      ; 2.003      ;
+; 1.784 ; rxBuff[16]       ; oslv_leds[0]~reg0 ; isl_clk      ; isl_clk     ; 0.000        ; 0.000      ; 2.005      ;
+; 1.786 ; rxBuff[19]       ; oslv_leds[3]~reg0 ; isl_clk      ; isl_clk     ; 0.000        ; 0.000      ; 2.007      ;
+; 2.136 ; txCount[3]       ; txCount[3]        ; isl_clk      ; isl_clk     ; 0.000        ; 0.000      ; 2.357      ;
+; 2.163 ; sync:sync_cs|q   ; oldSCLK           ; isl_clk      ; isl_clk     ; 0.000        ; 0.000      ; 2.384      ;
+; 2.231 ; rxBuff[18]       ; rxBuff[18]        ; isl_clk      ; isl_clk     ; 0.000        ; 0.000      ; 2.452      ;
+; 2.233 ; txCount[4]       ; txCount[4]        ; isl_clk      ; isl_clk     ; 0.000        ; 0.000      ; 2.454      ;
+; 2.258 ; txCount[2]       ; txCount[2]        ; isl_clk      ; isl_clk     ; 0.000        ; 0.000      ; 2.479      ;
+; 2.263 ; sync:sync_mosi|q ; rxBuff[17]        ; isl_clk      ; isl_clk     ; 0.000        ; 0.000      ; 2.484      ;
+; 2.267 ; sync:sync_mosi|q ; rxBuff[16]        ; isl_clk      ; isl_clk     ; 0.000        ; 0.000      ; 2.488      ;
+; 2.268 ; txCount[1]       ; txCount[1]        ; isl_clk      ; isl_clk     ; 0.000        ; 0.000      ; 2.489      ;
+; 2.286 ; oldSCLK          ; oldSCLK           ; isl_clk      ; isl_clk     ; 0.000        ; 0.000      ; 2.507      ;
+; 2.540 ; sync:sync_mosi|q ; rxBuff[19]        ; isl_clk      ; isl_clk     ; 0.000        ; 0.000      ; 2.761      ;
+; 2.562 ; txCount[0]       ; txCount[0]        ; isl_clk      ; isl_clk     ; 0.000        ; 0.000      ; 2.783      ;
+; 2.567 ; txCount[0]       ; txCount[1]        ; isl_clk      ; isl_clk     ; 0.000        ; 0.000      ; 2.788      ;
+; 2.667 ; sync:sync_mosi|q ; rxBuff[31]        ; isl_clk      ; isl_clk     ; 0.000        ; 0.000      ; 2.888      ;
+; 2.672 ; sync:sync_mosi|q ; rxBuff[18]        ; isl_clk      ; isl_clk     ; 0.000        ; 0.000      ; 2.893      ;
+; 2.968 ; txCount[3]       ; txCount[4]        ; isl_clk      ; isl_clk     ; 0.000        ; 0.000      ; 3.189      ;
+; 3.032 ; rxBuff[18]       ; oslv_leds[2]~reg0 ; isl_clk      ; isl_clk     ; 0.000        ; 0.000      ; 3.253      ;
+; 3.079 ; txCount[3]       ; txCount[5]        ; isl_clk      ; isl_clk     ; 0.000        ; 0.000      ; 3.300      ;
+; 3.127 ; rxCount[2]       ; rxCount[2]        ; isl_clk      ; isl_clk     ; 0.000        ; 0.000      ; 3.348      ;
+; 3.140 ; sync:sync_mosi|q ; rxBuff[30]        ; isl_clk      ; isl_clk     ; 0.000        ; 0.000      ; 3.361      ;
+; 3.173 ; txCount[4]       ; txCount[5]        ; isl_clk      ; isl_clk     ; 0.000        ; 0.000      ; 3.394      ;
+; 3.198 ; txCount[2]       ; txCount[3]        ; isl_clk      ; isl_clk     ; 0.000        ; 0.000      ; 3.419      ;
+; 3.208 ; txCount[1]       ; txCount[2]        ; isl_clk      ; isl_clk     ; 0.000        ; 0.000      ; 3.429      ;
+; 3.283 ; rxCount[0]       ; rxBuff[31]        ; isl_clk      ; isl_clk     ; 0.000        ; 0.000      ; 3.504      ;
+; 3.286 ; rxCount[0]       ; rxBuff[18]        ; isl_clk      ; isl_clk     ; 0.000        ; 0.000      ; 3.507      ;
+; 3.309 ; txCount[2]       ; txCount[4]        ; isl_clk      ; isl_clk     ; 0.000        ; 0.000      ; 3.530      ;
+; 3.315 ; oldSCLK          ; txCount[0]        ; isl_clk      ; isl_clk     ; 0.000        ; 0.000      ; 3.536      ;
+; 3.319 ; txCount[1]       ; txCount[3]        ; isl_clk      ; isl_clk     ; 0.000        ; 0.000      ; 3.540      ;
+; 3.393 ; rxCount[3]       ; rxCount[3]        ; isl_clk      ; isl_clk     ; 0.000        ; 0.000      ; 3.614      ;
+; 3.399 ; txCount[0]       ; txCount[2]        ; isl_clk      ; isl_clk     ; 0.000        ; 0.000      ; 3.620      ;
+; 3.420 ; txCount[2]       ; txCount[5]        ; isl_clk      ; isl_clk     ; 0.000        ; 0.000      ; 3.641      ;
+; 3.430 ; txCount[1]       ; txCount[4]        ; isl_clk      ; isl_clk     ; 0.000        ; 0.000      ; 3.651      ;
+; 3.444 ; sync:sync_sck|q  ; txCount[0]        ; isl_clk      ; isl_clk     ; 0.000        ; 0.000      ; 3.665      ;
+; 3.510 ; txCount[0]       ; txCount[3]        ; isl_clk      ; isl_clk     ; 0.000        ; 0.000      ; 3.731      ;
+; 3.541 ; txCount[1]       ; txCount[5]        ; isl_clk      ; isl_clk     ; 0.000        ; 0.000      ; 3.762      ;
+; 3.603 ; rxCount[0]       ; rxBuff[17]        ; isl_clk      ; isl_clk     ; 0.000        ; 0.000      ; 3.824      ;
+; 3.609 ; rxCount[0]       ; rxBuff[16]        ; isl_clk      ; isl_clk     ; 0.000        ; 0.000      ; 3.830      ;
+; 3.621 ; txCount[0]       ; txCount[4]        ; isl_clk      ; isl_clk     ; 0.000        ; 0.000      ; 3.842      ;
+; 3.656 ; sync:sync_sck|q  ; rxCount[3]        ; isl_clk      ; isl_clk     ; 0.000        ; 0.000      ; 3.877      ;
+; 3.656 ; sync:sync_sck|q  ; rxCount[2]        ; isl_clk      ; isl_clk     ; 0.000        ; 0.000      ; 3.877      ;
+; 3.656 ; sync:sync_sck|q  ; rxCount[0]        ; isl_clk      ; isl_clk     ; 0.000        ; 0.000      ; 3.877      ;
+; 3.732 ; txCount[0]       ; txCount[5]        ; isl_clk      ; isl_clk     ; 0.000        ; 0.000      ; 3.953      ;
+; 3.773 ; rxCount[1]       ; rxCount[5]        ; isl_clk      ; isl_clk     ; 0.000        ; 0.000      ; 3.994      ;
+; 3.938 ; rxCount[0]       ; rxBuff[19]        ; isl_clk      ; isl_clk     ; 0.000        ; 0.000      ; 4.159      ;
+; 3.943 ; rxCount[0]       ; rxBuff[30]        ; isl_clk      ; isl_clk     ; 0.000        ; 0.000      ; 4.164      ;
+; 4.004 ; rxBuff[31]       ; rxBuff[31]        ; isl_clk      ; isl_clk     ; 0.000        ; 0.000      ; 4.225      ;
+; 4.031 ; rxCount[0]       ; rxCount[2]        ; isl_clk      ; isl_clk     ; 0.000        ; 0.000      ; 4.252      ;
+; 4.056 ; isl_SCLK         ; sync:sync_sck|q   ; isl_SCLK     ; isl_clk     ; -2.500       ; 3.547      ; 5.324      ;
+; 4.159 ; rxCount[4]       ; rxBuff[17]        ; isl_clk      ; isl_clk     ; 0.000        ; 0.000      ; 4.380      ;
+; 4.164 ; rxCount[4]       ; rxBuff[16]        ; isl_clk      ; isl_clk     ; 0.000        ; 0.000      ; 4.385      ;
+; 4.195 ; rxCount[2]       ; rxCount[3]        ; isl_clk      ; isl_clk     ; 0.000        ; 0.000      ; 4.416      ;
+; 4.225 ; rxCount[1]       ; rxBuff[17]        ; isl_clk      ; isl_clk     ; 0.000        ; 0.000      ; 4.446      ;
+; 4.230 ; rxCount[1]       ; rxBuff[16]        ; isl_clk      ; isl_clk     ; 0.000        ; 0.000      ; 4.451      ;
+; 4.325 ; sync:sync_sck|q  ; rxBuff[18]        ; isl_clk      ; isl_clk     ; 0.000        ; 0.000      ; 4.546      ;
+; 4.341 ; sync:sync_sck|q  ; rxCount[4]        ; isl_clk      ; isl_clk     ; 0.000        ; 0.000      ; 4.562      ;
+; 4.341 ; sync:sync_sck|q  ; rxCount[5]        ; isl_clk      ; isl_clk     ; 0.000        ; 0.000      ; 4.562      ;
+; 4.341 ; sync:sync_sck|q  ; rxCount[1]        ; isl_clk      ; isl_clk     ; 0.000        ; 0.000      ; 4.562      ;
+; 4.345 ; rxCount[5]       ; rxCount[5]        ; isl_clk      ; isl_clk     ; 0.000        ; 0.000      ; 4.566      ;
+; 4.355 ; sync:sync_sck|q  ; rxBuff[31]        ; isl_clk      ; isl_clk     ; 0.000        ; 0.000      ; 4.576      ;
+; 4.357 ; sync:sync_sck|q  ; rxBuff[30]        ; isl_clk      ; isl_clk     ; 0.000        ; 0.000      ; 4.578      ;
+; 4.358 ; oldSCLK          ; rxCount[3]        ; isl_clk      ; isl_clk     ; 0.000        ; 0.000      ; 4.579      ;
+; 4.358 ; oldSCLK          ; rxCount[2]        ; isl_clk      ; isl_clk     ; 0.000        ; 0.000      ; 4.579      ;
+; 4.358 ; oldSCLK          ; rxCount[0]        ; isl_clk      ; isl_clk     ; 0.000        ; 0.000      ; 4.579      ;
+; 4.361 ; sync:sync_sck|q  ; txCount[1]        ; isl_clk      ; isl_clk     ; 0.000        ; 0.000      ; 4.582      ;
+; 4.361 ; sync:sync_sck|q  ; txCount[2]        ; isl_clk      ; isl_clk     ; 0.000        ; 0.000      ; 4.582      ;
+; 4.361 ; sync:sync_sck|q  ; txCount[5]        ; isl_clk      ; isl_clk     ; 0.000        ; 0.000      ; 4.582      ;
+; 4.361 ; sync:sync_sck|q  ; txCount[3]        ; isl_clk      ; isl_clk     ; 0.000        ; 0.000      ; 4.582      ;
+; 4.361 ; sync:sync_sck|q  ; txCount[4]        ; isl_clk      ; isl_clk     ; 0.000        ; 0.000      ; 4.582      ;
+; 4.403 ; rxCount[0]       ; rxCount[3]        ; isl_clk      ; isl_clk     ; 0.000        ; 0.000      ; 4.624      ;
+; 4.497 ; rxCount[1]       ; rxBuff[18]        ; isl_clk      ; isl_clk     ; 0.000        ; 0.000      ; 4.718      ;
+; 4.758 ; rxCount[4]       ; rxBuff[31]        ; isl_clk      ; isl_clk     ; 0.000        ; 0.000      ; 4.979      ;
+; 4.760 ; rxCount[4]       ; rxBuff[30]        ; isl_clk      ; isl_clk     ; 0.000        ; 0.000      ; 4.981      ;
+; 4.814 ; rxBuff[31]       ; oslv_leds[0]~reg0 ; isl_clk      ; isl_clk     ; 0.000        ; 0.000      ; 5.035      ;
+; 4.814 ; rxBuff[31]       ; oslv_leds[1]~reg0 ; isl_clk      ; isl_clk     ; 0.000        ; 0.000      ; 5.035      ;
+; 4.814 ; rxBuff[31]       ; oslv_leds[2]~reg0 ; isl_clk      ; isl_clk     ; 0.000        ; 0.000      ; 5.035      ;
+; 4.814 ; rxBuff[31]       ; oslv_leds[3]~reg0 ; isl_clk      ; isl_clk     ; 0.000        ; 0.000      ; 5.035      ;
+; 4.843 ; rxCount[1]       ; oslv_leds[0]~reg0 ; isl_clk      ; isl_clk     ; 0.000        ; 0.000      ; 5.064      ;
+; 4.843 ; rxCount[1]       ; oslv_leds[1]~reg0 ; isl_clk      ; isl_clk     ; 0.000        ; 0.000      ; 5.064      ;
+; 4.843 ; rxCount[1]       ; oslv_leds[2]~reg0 ; isl_clk      ; isl_clk     ; 0.000        ; 0.000      ; 5.064      ;
+; 4.843 ; rxCount[1]       ; oslv_leds[3]~reg0 ; isl_clk      ; isl_clk     ; 0.000        ; 0.000      ; 5.064      ;
+; 4.847 ; rxCount[1]       ; rxCount[2]        ; isl_clk      ; isl_clk     ; 0.000        ; 0.000      ; 5.068      ;
+; 4.893 ; oldSCLK          ; rxBuff[18]        ; isl_clk      ; isl_clk     ; 0.000        ; 0.000      ; 5.114      ;
+; 4.905 ; rxCount[4]       ; rxBuff[18]        ; isl_clk      ; isl_clk     ; 0.000        ; 0.000      ; 5.126      ;
+; 4.918 ; rxCount[4]       ; rxCount[5]        ; isl_clk      ; isl_clk     ; 0.000        ; 0.000      ; 5.139      ;
+; 4.923 ; oldSCLK          ; rxBuff[31]        ; isl_clk      ; isl_clk     ; 0.000        ; 0.000      ; 5.144      ;
+; 4.925 ; oldSCLK          ; rxBuff[30]        ; isl_clk      ; isl_clk     ; 0.000        ; 0.000      ; 5.146      ;
+; 4.939 ; rxCount[3]       ; rxBuff[18]        ; isl_clk      ; isl_clk     ; 0.000        ; 0.000      ; 5.160      ;
+; 4.986 ; sync:sync_sck|q  ; rxBuff[17]        ; isl_clk      ; isl_clk     ; 0.000        ; 0.000      ; 5.207      ;
+; 4.991 ; sync:sync_sck|q  ; rxBuff[16]        ; isl_clk      ; isl_clk     ; 0.000        ; 0.000      ; 5.212      ;
+; 5.043 ; oldSCLK          ; rxCount[4]        ; isl_clk      ; isl_clk     ; 0.000        ; 0.000      ; 5.264      ;
++-------+------------------+-------------------+--------------+-------------+--------------+------------+------------+
+
+
++-----------------------------------------------------------------------------------------------------------+
+; Recovery: 'isl_clk'                                                                                       ;
++-------+----------------+------------+--------------+-------------+--------------+------------+------------+
+; Slack ; From Node      ; To Node    ; Launch Clock ; Latch Clock ; Relationship ; Clock Skew ; Data Delay ;
++-------+----------------+------------+--------------+-------------+--------------+------------+------------+
+; 2.100 ; sync:sync_cs|q ; txCount[1] ; isl_clk      ; isl_clk     ; 10.000       ; 0.000      ; 7.567      ;
+; 2.100 ; sync:sync_cs|q ; txCount[0] ; isl_clk      ; isl_clk     ; 10.000       ; 0.000      ; 7.567      ;
+; 2.100 ; sync:sync_cs|q ; txCount[2] ; isl_clk      ; isl_clk     ; 10.000       ; 0.000      ; 7.567      ;
+; 2.100 ; sync:sync_cs|q ; txCount[5] ; isl_clk      ; isl_clk     ; 10.000       ; 0.000      ; 7.567      ;
+; 2.100 ; sync:sync_cs|q ; txCount[3] ; isl_clk      ; isl_clk     ; 10.000       ; 0.000      ; 7.567      ;
+; 2.100 ; sync:sync_cs|q ; txCount[4] ; isl_clk      ; isl_clk     ; 10.000       ; 0.000      ; 7.567      ;
+; 2.100 ; sync:sync_cs|q ; rxCount[3] ; isl_clk      ; isl_clk     ; 10.000       ; 0.000      ; 7.567      ;
+; 2.100 ; sync:sync_cs|q ; rxCount[2] ; isl_clk      ; isl_clk     ; 10.000       ; 0.000      ; 7.567      ;
+; 2.100 ; sync:sync_cs|q ; rxCount[4] ; isl_clk      ; isl_clk     ; 10.000       ; 0.000      ; 7.567      ;
+; 2.100 ; sync:sync_cs|q ; rxCount[0] ; isl_clk      ; isl_clk     ; 10.000       ; 0.000      ; 7.567      ;
+; 2.100 ; sync:sync_cs|q ; rxCount[5] ; isl_clk      ; isl_clk     ; 10.000       ; 0.000      ; 7.567      ;
+; 2.100 ; sync:sync_cs|q ; rxCount[1] ; isl_clk      ; isl_clk     ; 10.000       ; 0.000      ; 7.567      ;
++-------+----------------+------------+--------------+-------------+--------------+------------+------------+
+
+
++-----------------------------------------------------------------------------------------------------------+
+; Removal: 'isl_clk'                                                                                        ;
++-------+----------------+------------+--------------+-------------+--------------+------------+------------+
+; Slack ; From Node      ; To Node    ; Launch Clock ; Latch Clock ; Relationship ; Clock Skew ; Data Delay ;
++-------+----------------+------------+--------------+-------------+--------------+------------+------------+
+; 7.346 ; sync:sync_cs|q ; txCount[1] ; isl_clk      ; isl_clk     ; 0.000        ; 0.000      ; 7.567      ;
+; 7.346 ; sync:sync_cs|q ; txCount[0] ; isl_clk      ; isl_clk     ; 0.000        ; 0.000      ; 7.567      ;
+; 7.346 ; sync:sync_cs|q ; txCount[2] ; isl_clk      ; isl_clk     ; 0.000        ; 0.000      ; 7.567      ;
+; 7.346 ; sync:sync_cs|q ; txCount[5] ; isl_clk      ; isl_clk     ; 0.000        ; 0.000      ; 7.567      ;
+; 7.346 ; sync:sync_cs|q ; txCount[3] ; isl_clk      ; isl_clk     ; 0.000        ; 0.000      ; 7.567      ;
+; 7.346 ; sync:sync_cs|q ; txCount[4] ; isl_clk      ; isl_clk     ; 0.000        ; 0.000      ; 7.567      ;
+; 7.346 ; sync:sync_cs|q ; rxCount[3] ; isl_clk      ; isl_clk     ; 0.000        ; 0.000      ; 7.567      ;
+; 7.346 ; sync:sync_cs|q ; rxCount[2] ; isl_clk      ; isl_clk     ; 0.000        ; 0.000      ; 7.567      ;
+; 7.346 ; sync:sync_cs|q ; rxCount[4] ; isl_clk      ; isl_clk     ; 0.000        ; 0.000      ; 7.567      ;
+; 7.346 ; sync:sync_cs|q ; rxCount[0] ; isl_clk      ; isl_clk     ; 0.000        ; 0.000      ; 7.567      ;
+; 7.346 ; sync:sync_cs|q ; rxCount[5] ; isl_clk      ; isl_clk     ; 0.000        ; 0.000      ; 7.567      ;
+; 7.346 ; sync:sync_cs|q ; rxCount[1] ; isl_clk      ; isl_clk     ; 0.000        ; 0.000      ; 7.567      ;
++-------+----------------+------------+--------------+-------------+--------------+------------+------------+
+
+
++---------------------------------------------------------------------------------------------------------+
+; Minimum Pulse Width: 'isl_clk'                                                                          ;
++-------+--------------+----------------+------------------+---------+------------+-----------------------+
+; Slack ; Actual Width ; Required Width ; Type             ; Clock   ; Clock Edge ; Target                ;
++-------+--------------+----------------+------------------+---------+------------+-----------------------+
+; 4.734 ; 5.000        ; 0.266          ; High Pulse Width ; isl_clk ; Rise       ; oldSCLK               ;
+; 4.734 ; 5.000        ; 0.266          ; Low Pulse Width  ; isl_clk ; Rise       ; oldSCLK               ;
+; 4.734 ; 5.000        ; 0.266          ; High Pulse Width ; isl_clk ; Rise       ; oslv_leds[0]~reg0     ;
+; 4.734 ; 5.000        ; 0.266          ; Low Pulse Width  ; isl_clk ; Rise       ; oslv_leds[0]~reg0     ;
+; 4.734 ; 5.000        ; 0.266          ; High Pulse Width ; isl_clk ; Rise       ; oslv_leds[1]~reg0     ;
+; 4.734 ; 5.000        ; 0.266          ; Low Pulse Width  ; isl_clk ; Rise       ; oslv_leds[1]~reg0     ;
+; 4.734 ; 5.000        ; 0.266          ; High Pulse Width ; isl_clk ; Rise       ; oslv_leds[2]~reg0     ;
+; 4.734 ; 5.000        ; 0.266          ; Low Pulse Width  ; isl_clk ; Rise       ; oslv_leds[2]~reg0     ;
+; 4.734 ; 5.000        ; 0.266          ; High Pulse Width ; isl_clk ; Rise       ; oslv_leds[3]~reg0     ;
+; 4.734 ; 5.000        ; 0.266          ; Low Pulse Width  ; isl_clk ; Rise       ; oslv_leds[3]~reg0     ;
+; 4.734 ; 5.000        ; 0.266          ; High Pulse Width ; isl_clk ; Rise       ; rxBuff[16]            ;
+; 4.734 ; 5.000        ; 0.266          ; Low Pulse Width  ; isl_clk ; Rise       ; rxBuff[16]            ;
+; 4.734 ; 5.000        ; 0.266          ; High Pulse Width ; isl_clk ; Rise       ; rxBuff[17]            ;
+; 4.734 ; 5.000        ; 0.266          ; Low Pulse Width  ; isl_clk ; Rise       ; rxBuff[17]            ;
+; 4.734 ; 5.000        ; 0.266          ; High Pulse Width ; isl_clk ; Rise       ; rxBuff[18]            ;
+; 4.734 ; 5.000        ; 0.266          ; Low Pulse Width  ; isl_clk ; Rise       ; rxBuff[18]            ;
+; 4.734 ; 5.000        ; 0.266          ; High Pulse Width ; isl_clk ; Rise       ; rxBuff[19]            ;
+; 4.734 ; 5.000        ; 0.266          ; Low Pulse Width  ; isl_clk ; Rise       ; rxBuff[19]            ;
+; 4.734 ; 5.000        ; 0.266          ; High Pulse Width ; isl_clk ; Rise       ; rxBuff[30]            ;
+; 4.734 ; 5.000        ; 0.266          ; Low Pulse Width  ; isl_clk ; Rise       ; rxBuff[30]            ;
+; 4.734 ; 5.000        ; 0.266          ; High Pulse Width ; isl_clk ; Rise       ; rxBuff[31]            ;
+; 4.734 ; 5.000        ; 0.266          ; Low Pulse Width  ; isl_clk ; Rise       ; rxBuff[31]            ;
+; 4.734 ; 5.000        ; 0.266          ; High Pulse Width ; isl_clk ; Rise       ; rxCount[0]            ;
+; 4.734 ; 5.000        ; 0.266          ; Low Pulse Width  ; isl_clk ; Rise       ; rxCount[0]            ;
+; 4.734 ; 5.000        ; 0.266          ; High Pulse Width ; isl_clk ; Rise       ; rxCount[1]            ;
+; 4.734 ; 5.000        ; 0.266          ; Low Pulse Width  ; isl_clk ; Rise       ; rxCount[1]            ;
+; 4.734 ; 5.000        ; 0.266          ; High Pulse Width ; isl_clk ; Rise       ; rxCount[2]            ;
+; 4.734 ; 5.000        ; 0.266          ; Low Pulse Width  ; isl_clk ; Rise       ; rxCount[2]            ;
+; 4.734 ; 5.000        ; 0.266          ; High Pulse Width ; isl_clk ; Rise       ; rxCount[3]            ;
+; 4.734 ; 5.000        ; 0.266          ; Low Pulse Width  ; isl_clk ; Rise       ; rxCount[3]            ;
+; 4.734 ; 5.000        ; 0.266          ; High Pulse Width ; isl_clk ; Rise       ; rxCount[4]            ;
+; 4.734 ; 5.000        ; 0.266          ; Low Pulse Width  ; isl_clk ; Rise       ; rxCount[4]            ;
+; 4.734 ; 5.000        ; 0.266          ; High Pulse Width ; isl_clk ; Rise       ; rxCount[5]            ;
+; 4.734 ; 5.000        ; 0.266          ; Low Pulse Width  ; isl_clk ; Rise       ; rxCount[5]            ;
+; 4.734 ; 5.000        ; 0.266          ; High Pulse Width ; isl_clk ; Rise       ; sync:sync_cs|q        ;
+; 4.734 ; 5.000        ; 0.266          ; Low Pulse Width  ; isl_clk ; Rise       ; sync:sync_cs|q        ;
+; 4.734 ; 5.000        ; 0.266          ; High Pulse Width ; isl_clk ; Rise       ; sync:sync_miso_sens|q ;
+; 4.734 ; 5.000        ; 0.266          ; Low Pulse Width  ; isl_clk ; Rise       ; sync:sync_miso_sens|q ;
+; 4.734 ; 5.000        ; 0.266          ; High Pulse Width ; isl_clk ; Rise       ; sync:sync_mosi|q      ;
+; 4.734 ; 5.000        ; 0.266          ; Low Pulse Width  ; isl_clk ; Rise       ; sync:sync_mosi|q      ;
+; 4.734 ; 5.000        ; 0.266          ; High Pulse Width ; isl_clk ; Rise       ; sync:sync_sck|q       ;
+; 4.734 ; 5.000        ; 0.266          ; Low Pulse Width  ; isl_clk ; Rise       ; sync:sync_sck|q       ;
+; 4.734 ; 5.000        ; 0.266          ; High Pulse Width ; isl_clk ; Rise       ; txCount[0]            ;
+; 4.734 ; 5.000        ; 0.266          ; Low Pulse Width  ; isl_clk ; Rise       ; txCount[0]            ;
+; 4.734 ; 5.000        ; 0.266          ; High Pulse Width ; isl_clk ; Rise       ; txCount[1]            ;
+; 4.734 ; 5.000        ; 0.266          ; Low Pulse Width  ; isl_clk ; Rise       ; txCount[1]            ;
+; 4.734 ; 5.000        ; 0.266          ; High Pulse Width ; isl_clk ; Rise       ; txCount[2]            ;
+; 4.734 ; 5.000        ; 0.266          ; Low Pulse Width  ; isl_clk ; Rise       ; txCount[2]            ;
+; 4.734 ; 5.000        ; 0.266          ; High Pulse Width ; isl_clk ; Rise       ; txCount[3]            ;
+; 4.734 ; 5.000        ; 0.266          ; Low Pulse Width  ; isl_clk ; Rise       ; txCount[3]            ;
+; 4.734 ; 5.000        ; 0.266          ; High Pulse Width ; isl_clk ; Rise       ; txCount[4]            ;
+; 4.734 ; 5.000        ; 0.266          ; Low Pulse Width  ; isl_clk ; Rise       ; txCount[4]            ;
+; 4.734 ; 5.000        ; 0.266          ; High Pulse Width ; isl_clk ; Rise       ; txCount[5]            ;
+; 4.734 ; 5.000        ; 0.266          ; Low Pulse Width  ; isl_clk ; Rise       ; txCount[5]            ;
+; 5.000 ; 5.000        ; 0.000          ; High Pulse Width ; isl_clk ; Rise       ; isl_clk|combout       ;
+; 5.000 ; 5.000        ; 0.000          ; Low Pulse Width  ; isl_clk ; Rise       ; isl_clk|combout       ;
+; 5.000 ; 5.000        ; 0.000          ; High Pulse Width ; isl_clk ; Rise       ; oldSCLK|clk           ;
+; 5.000 ; 5.000        ; 0.000          ; Low Pulse Width  ; isl_clk ; Rise       ; oldSCLK|clk           ;
+; 5.000 ; 5.000        ; 0.000          ; High Pulse Width ; isl_clk ; Rise       ; oslv_leds[0]~reg0|clk ;
+; 5.000 ; 5.000        ; 0.000          ; Low Pulse Width  ; isl_clk ; Rise       ; oslv_leds[0]~reg0|clk ;
+; 5.000 ; 5.000        ; 0.000          ; High Pulse Width ; isl_clk ; Rise       ; oslv_leds[1]~reg0|clk ;
+; 5.000 ; 5.000        ; 0.000          ; Low Pulse Width  ; isl_clk ; Rise       ; oslv_leds[1]~reg0|clk ;
+; 5.000 ; 5.000        ; 0.000          ; High Pulse Width ; isl_clk ; Rise       ; oslv_leds[2]~reg0|clk ;
+; 5.000 ; 5.000        ; 0.000          ; Low Pulse Width  ; isl_clk ; Rise       ; oslv_leds[2]~reg0|clk ;
+; 5.000 ; 5.000        ; 0.000          ; High Pulse Width ; isl_clk ; Rise       ; oslv_leds[3]~reg0|clk ;
+; 5.000 ; 5.000        ; 0.000          ; Low Pulse Width  ; isl_clk ; Rise       ; oslv_leds[3]~reg0|clk ;
+; 5.000 ; 5.000        ; 0.000          ; High Pulse Width ; isl_clk ; Rise       ; rxBuff[16]|clk        ;
+; 5.000 ; 5.000        ; 0.000          ; Low Pulse Width  ; isl_clk ; Rise       ; rxBuff[16]|clk        ;
+; 5.000 ; 5.000        ; 0.000          ; High Pulse Width ; isl_clk ; Rise       ; rxBuff[17]|clk        ;
+; 5.000 ; 5.000        ; 0.000          ; Low Pulse Width  ; isl_clk ; Rise       ; rxBuff[17]|clk        ;
+; 5.000 ; 5.000        ; 0.000          ; High Pulse Width ; isl_clk ; Rise       ; rxBuff[18]|clk        ;
+; 5.000 ; 5.000        ; 0.000          ; Low Pulse Width  ; isl_clk ; Rise       ; rxBuff[18]|clk        ;
+; 5.000 ; 5.000        ; 0.000          ; High Pulse Width ; isl_clk ; Rise       ; rxBuff[19]|clk        ;
+; 5.000 ; 5.000        ; 0.000          ; Low Pulse Width  ; isl_clk ; Rise       ; rxBuff[19]|clk        ;
+; 5.000 ; 5.000        ; 0.000          ; High Pulse Width ; isl_clk ; Rise       ; rxBuff[30]|clk        ;
+; 5.000 ; 5.000        ; 0.000          ; Low Pulse Width  ; isl_clk ; Rise       ; rxBuff[30]|clk        ;
+; 5.000 ; 5.000        ; 0.000          ; High Pulse Width ; isl_clk ; Rise       ; rxBuff[31]|clk        ;
+; 5.000 ; 5.000        ; 0.000          ; Low Pulse Width  ; isl_clk ; Rise       ; rxBuff[31]|clk        ;
+; 5.000 ; 5.000        ; 0.000          ; High Pulse Width ; isl_clk ; Rise       ; rxCount[0]|clk        ;
+; 5.000 ; 5.000        ; 0.000          ; Low Pulse Width  ; isl_clk ; Rise       ; rxCount[0]|clk        ;
+; 5.000 ; 5.000        ; 0.000          ; High Pulse Width ; isl_clk ; Rise       ; rxCount[1]|clk        ;
+; 5.000 ; 5.000        ; 0.000          ; Low Pulse Width  ; isl_clk ; Rise       ; rxCount[1]|clk        ;
+; 5.000 ; 5.000        ; 0.000          ; High Pulse Width ; isl_clk ; Rise       ; rxCount[2]|clk        ;
+; 5.000 ; 5.000        ; 0.000          ; Low Pulse Width  ; isl_clk ; Rise       ; rxCount[2]|clk        ;
+; 5.000 ; 5.000        ; 0.000          ; High Pulse Width ; isl_clk ; Rise       ; rxCount[3]|clk        ;
+; 5.000 ; 5.000        ; 0.000          ; Low Pulse Width  ; isl_clk ; Rise       ; rxCount[3]|clk        ;
+; 5.000 ; 5.000        ; 0.000          ; High Pulse Width ; isl_clk ; Rise       ; rxCount[4]|clk        ;
+; 5.000 ; 5.000        ; 0.000          ; Low Pulse Width  ; isl_clk ; Rise       ; rxCount[4]|clk        ;
+; 5.000 ; 5.000        ; 0.000          ; High Pulse Width ; isl_clk ; Rise       ; rxCount[5]|clk        ;
+; 5.000 ; 5.000        ; 0.000          ; Low Pulse Width  ; isl_clk ; Rise       ; rxCount[5]|clk        ;
+; 5.000 ; 5.000        ; 0.000          ; High Pulse Width ; isl_clk ; Rise       ; sync_cs|q|clk         ;
+; 5.000 ; 5.000        ; 0.000          ; Low Pulse Width  ; isl_clk ; Rise       ; sync_cs|q|clk         ;
+; 5.000 ; 5.000        ; 0.000          ; High Pulse Width ; isl_clk ; Rise       ; sync_miso_sens|q|clk  ;
+; 5.000 ; 5.000        ; 0.000          ; Low Pulse Width  ; isl_clk ; Rise       ; sync_miso_sens|q|clk  ;
+; 5.000 ; 5.000        ; 0.000          ; High Pulse Width ; isl_clk ; Rise       ; sync_mosi|q|clk       ;
+; 5.000 ; 5.000        ; 0.000          ; Low Pulse Width  ; isl_clk ; Rise       ; sync_mosi|q|clk       ;
+; 5.000 ; 5.000        ; 0.000          ; High Pulse Width ; isl_clk ; Rise       ; sync_sck|q|clk        ;
+; 5.000 ; 5.000        ; 0.000          ; Low Pulse Width  ; isl_clk ; Rise       ; sync_sck|q|clk        ;
+; 5.000 ; 5.000        ; 0.000          ; High Pulse Width ; isl_clk ; Rise       ; txCount[0]|clk        ;
+; 5.000 ; 5.000        ; 0.000          ; Low Pulse Width  ; isl_clk ; Rise       ; txCount[0]|clk        ;
++-------+--------------+----------------+------------------+---------+------------+-----------------------+
+
+
++----------------------------------------------------------------------------------------+
+; Minimum Pulse Width: 'isl_SCLK'                                                        ;
++---------+--------------+----------------+-----------+----------+------------+----------+
+; Slack   ; Actual Width ; Required Width ; Type      ; Clock    ; Clock Edge ; Target   ;
++---------+--------------+----------------+-----------+----------+------------+----------+
+; 121.711 ; 125.000      ; 3.289          ; Port Rate ; isl_SCLK ; Rise       ; isl_SCLK ;
++---------+--------------+----------------+-----------+----------+------------+----------+
+
+
++---------------------------------------------------------------------------+
+; Setup Times                                                               ;
++---------------+------------+-------+-------+------------+-----------------+
+; Data Port     ; Clock Port ; Rise  ; Fall  ; Clock Edge ; Clock Reference ;
++---------------+------------+-------+-------+------------+-----------------+
+; isl_CS_n      ; isl_clk    ; 2.355 ; 2.355 ; Rise       ; isl_clk         ;
+; isl_MISO_SENS ; isl_clk    ; 2.640 ; 2.640 ; Rise       ; isl_clk         ;
+; isl_MOSI      ; isl_clk    ; 3.029 ; 3.029 ; Rise       ; isl_clk         ;
+; isl_SCLK      ; isl_clk    ; 2.110 ; 2.110 ; Rise       ; isl_clk         ;
+; isl_selector  ; isl_clk    ; 8.011 ; 8.011 ; Rise       ; isl_clk         ;
++---------------+------------+-------+-------+------------+-----------------+
+
+
++-----------------------------------------------------------------------------+
+; Hold Times                                                                  ;
++---------------+------------+--------+--------+------------+-----------------+
+; Data Port     ; Clock Port ; Rise   ; Fall   ; Clock Edge ; Clock Reference ;
++---------------+------------+--------+--------+------------+-----------------+
+; isl_CS_n      ; isl_clk    ; -1.801 ; -1.801 ; Rise       ; isl_clk         ;
+; isl_MISO_SENS ; isl_clk    ; -2.086 ; -2.086 ; Rise       ; isl_clk         ;
+; isl_MOSI      ; isl_clk    ; -2.475 ; -2.475 ; Rise       ; isl_clk         ;
+; isl_SCLK      ; isl_clk    ; -1.556 ; -1.556 ; Rise       ; isl_clk         ;
+; isl_selector  ; isl_clk    ; -2.049 ; -2.049 ; Rise       ; isl_clk         ;
++---------------+------------+--------+--------+------------+-----------------+
+
+
++-----------------------------------------------------------------------------+
+; Clock to Output Times                                                       ;
++---------------+------------+--------+--------+------------+-----------------+
+; Data Port     ; Clock Port ; Rise   ; Fall   ; Clock Edge ; Clock Reference ;
++---------------+------------+--------+--------+------------+-----------------+
+; osl_CS_0_n    ; isl_clk    ; 12.020 ; 12.020 ; Rise       ; isl_clk         ;
+; osl_CS_1_n    ; isl_clk    ; 12.083 ; 12.083 ; Rise       ; isl_clk         ;
+; osl_MISO      ; isl_clk    ; 16.564 ; 16.564 ; Rise       ; isl_clk         ;
+; osl_MOSI      ; isl_clk    ; 8.948  ; 8.948  ; Rise       ; isl_clk         ;
+; osl_SCLK      ; isl_clk    ; 9.702  ; 9.702  ; Rise       ; isl_clk         ;
+; oslv_leds[*]  ; isl_clk    ; 9.864  ; 9.864  ; Rise       ; isl_clk         ;
+;  oslv_leds[0] ; isl_clk    ; 9.265  ; 9.265  ; Rise       ; isl_clk         ;
+;  oslv_leds[1] ; isl_clk    ; 9.799  ; 9.799  ; Rise       ; isl_clk         ;
+;  oslv_leds[2] ; isl_clk    ; 9.504  ; 9.504  ; Rise       ; isl_clk         ;
+;  oslv_leds[3] ; isl_clk    ; 9.864  ; 9.864  ; Rise       ; isl_clk         ;
++---------------+------------+--------+--------+------------+-----------------+
+
+
++-----------------------------------------------------------------------------+
+; Minimum Clock to Output Times                                               ;
++---------------+------------+--------+--------+------------+-----------------+
+; Data Port     ; Clock Port ; Rise   ; Fall   ; Clock Edge ; Clock Reference ;
++---------------+------------+--------+--------+------------+-----------------+
+; osl_CS_0_n    ; isl_clk    ; 12.020 ; 12.020 ; Rise       ; isl_clk         ;
+; osl_CS_1_n    ; isl_clk    ; 12.083 ; 12.083 ; Rise       ; isl_clk         ;
+; osl_MISO      ; isl_clk    ; 9.669  ; 9.669  ; Rise       ; isl_clk         ;
+; osl_MOSI      ; isl_clk    ; 8.948  ; 8.948  ; Rise       ; isl_clk         ;
+; osl_SCLK      ; isl_clk    ; 9.702  ; 9.702  ; Rise       ; isl_clk         ;
+; oslv_leds[*]  ; isl_clk    ; 9.265  ; 9.265  ; Rise       ; isl_clk         ;
+;  oslv_leds[0] ; isl_clk    ; 9.265  ; 9.265  ; Rise       ; isl_clk         ;
+;  oslv_leds[1] ; isl_clk    ; 9.799  ; 9.799  ; Rise       ; isl_clk         ;
+;  oslv_leds[2] ; isl_clk    ; 9.504  ; 9.504  ; Rise       ; isl_clk         ;
+;  oslv_leds[3] ; isl_clk    ; 9.864  ; 9.864  ; Rise       ; isl_clk         ;
++---------------+------------+--------+--------+------------+-----------------+
+
+
++--------------------------------------------------------+
+; Propagation Delay                                      ;
++--------------+-------------+--------+----+----+--------+
+; Input Port   ; Output Port ; RR     ; RF ; FR ; FF     ;
++--------------+-------------+--------+----+----+--------+
+; isl_MISO_MOT ; osl_MISO    ; 10.284 ;    ;    ; 10.284 ;
+; isl_selector ; osl_CS_0_n  ; 10.383 ;    ;    ; 10.383 ;
+; isl_selector ; osl_CS_1_n  ; 10.446 ;    ;    ; 10.446 ;
+; isl_selector ; osl_MISO    ; 11.153 ;    ;    ; 11.153 ;
+; islv_ios[0]  ; osl_MISO    ; 13.819 ;    ;    ; 13.819 ;
+; islv_ios[1]  ; osl_MISO    ; 13.094 ;    ;    ; 13.094 ;
+; islv_ios[2]  ; osl_MISO    ; 14.604 ;    ;    ; 14.604 ;
+; islv_ios[3]  ; osl_MISO    ; 15.321 ;    ;    ; 15.321 ;
++--------------+-------------+--------+----+----+--------+
+
+
++--------------------------------------------------------+
+; Minimum Propagation Delay                              ;
++--------------+-------------+--------+----+----+--------+
+; Input Port   ; Output Port ; RR     ; RF ; FR ; FF     ;
++--------------+-------------+--------+----+----+--------+
+; isl_MISO_MOT ; osl_MISO    ; 10.284 ;    ;    ; 10.284 ;
+; isl_selector ; osl_CS_0_n  ; 10.383 ;    ;    ; 10.383 ;
+; isl_selector ; osl_CS_1_n  ; 10.446 ;    ;    ; 10.446 ;
+; isl_selector ; osl_MISO    ; 10.314 ;    ;    ; 10.314 ;
+; islv_ios[0]  ; osl_MISO    ; 13.819 ;    ;    ; 13.819 ;
+; islv_ios[1]  ; osl_MISO    ; 13.094 ;    ;    ; 13.094 ;
+; islv_ios[2]  ; osl_MISO    ; 14.604 ;    ;    ; 14.604 ;
+; islv_ios[3]  ; osl_MISO    ; 15.321 ;    ;    ; 15.321 ;
++--------------+-------------+--------+----+----+--------+
+
+
++-------------------------------------------------------------------+
+; Setup Transfers                                                   ;
++------------+----------+----------+----------+----------+----------+
+; From Clock ; To Clock ; RR Paths ; FR Paths ; RF Paths ; FF Paths ;
++------------+----------+----------+----------+----------+----------+
+; isl_clk    ; isl_clk  ; 210      ; 0        ; 0        ; 0        ;
+; isl_SCLK   ; isl_clk  ; 1        ; 1        ; 0        ; 0        ;
++------------+----------+----------+----------+----------+----------+
+Entries labeled "false path" only account for clock-to-clock false paths and not path-based false paths. As a result, actual path counts may be lower than reported.
+
+
++-------------------------------------------------------------------+
+; Hold Transfers                                                    ;
++------------+----------+----------+----------+----------+----------+
+; From Clock ; To Clock ; RR Paths ; FR Paths ; RF Paths ; FF Paths ;
++------------+----------+----------+----------+----------+----------+
+; isl_clk    ; isl_clk  ; 210      ; 0        ; 0        ; 0        ;
+; isl_SCLK   ; isl_clk  ; 1        ; 1        ; 0        ; 0        ;
++------------+----------+----------+----------+----------+----------+
+Entries labeled "false path" only account for clock-to-clock false paths and not path-based false paths. As a result, actual path counts may be lower than reported.
+
+
++-------------------------------------------------------------------+
+; Recovery Transfers                                                ;
++------------+----------+----------+----------+----------+----------+
+; From Clock ; To Clock ; RR Paths ; FR Paths ; RF Paths ; FF Paths ;
++------------+----------+----------+----------+----------+----------+
+; isl_clk    ; isl_clk  ; 12       ; 0        ; 0        ; 0        ;
++------------+----------+----------+----------+----------+----------+
+Entries labeled "false path" only account for clock-to-clock false paths and not path-based false paths. As a result, actual path counts may be lower than reported.
+
+
++-------------------------------------------------------------------+
+; Removal Transfers                                                 ;
++------------+----------+----------+----------+----------+----------+
+; From Clock ; To Clock ; RR Paths ; FR Paths ; RF Paths ; FF Paths ;
++------------+----------+----------+----------+----------+----------+
+; isl_clk    ; isl_clk  ; 12       ; 0        ; 0        ; 0        ;
++------------+----------+----------+----------+----------+----------+
+Entries labeled "false path" only account for clock-to-clock false paths and not path-based false paths. As a result, actual path counts may be lower than reported.
+
+
+---------------
+; Report TCCS ;
+---------------
+No dedicated SERDES Transmitter circuitry present in device or used in design
+
+
+---------------
+; Report RSKM ;
+---------------
+No dedicated SERDES Receiver circuitry present in device or used in design
+
+
++------------------------------------------------+
+; Unconstrained Paths                            ;
++---------------------------------+-------+------+
+; Property                        ; Setup ; Hold ;
++---------------------------------+-------+------+
+; Illegal Clocks                  ; 0     ; 0    ;
+; Unconstrained Clocks            ; 0     ; 0    ;
+; Unconstrained Input Ports       ; 9     ; 9    ;
+; Unconstrained Input Port Paths  ; 34    ; 34   ;
+; Unconstrained Output Ports      ; 9     ; 9    ;
+; Unconstrained Output Port Paths ; 24    ; 24   ;
++---------------------------------+-------+------+
+
+
++------------------------------------+
+; TimeQuest Timing Analyzer Messages ;
++------------------------------------+
+Info: *******************************************************************
+Info: Running Quartus II 64-Bit TimeQuest Timing Analyzer
+    Info: Version 11.0 Build 157 04/27/2011 SJ Full Version
+    Info: Processing started: Fri Apr 11 17:09:41 2014
+Info: Command: quartus_sta spi_cs_mux -c spi_cs_mux
+Info: qsta_default_script.tcl version: #1
+Info: Parallel compilation is enabled and will use 4 of the 4 processors detected
+Info: Low junction temperature is 0 degrees C
+Info: High junction temperature is 85 degrees C
+Info: Started post-fitting delay annotation
+Info: Delay annotation completed successfully
+Info: Reading SDC File: '../src/spi_cs_mux.sdc'
+Info: Worst-case setup slack is 0.390
+    Info:     Slack End Point TNS Clock 
+    Info: ========= ============= =====================
+    Info:     0.390         0.000 isl_clk 
+Info: Worst-case hold slack is 1.556
+    Info:     Slack End Point TNS Clock 
+    Info: ========= ============= =====================
+    Info:     1.556         0.000 isl_clk 
+Info: Worst-case recovery slack is 2.100
+    Info:     Slack End Point TNS Clock 
+    Info: ========= ============= =====================
+    Info:     2.100         0.000 isl_clk 
+Info: Worst-case removal slack is 7.346
+    Info:     Slack End Point TNS Clock 
+    Info: ========= ============= =====================
+    Info:     7.346         0.000 isl_clk 
+Info: Worst-case minimum pulse width slack is 4.734
+    Info:     Slack End Point TNS Clock 
+    Info: ========= ============= =====================
+    Info:     4.734         0.000 isl_clk 
+    Info:   121.711         0.000 isl_SCLK 
+Info: The selected device family is not supported by the report_metastability command.
+Info: Design is not fully constrained for setup requirements
+Info: Design is not fully constrained for hold requirements
+Info: Quartus II 64-Bit TimeQuest Timing Analyzer was successful. 0 errors, 0 warnings
+    Info: Peak virtual memory: 303 megabytes
+    Info: Processing ended: Fri Apr 11 17:09:43 2014
+    Info: Elapsed time: 00:00:02
+    Info: Total CPU time (on all processors): 00:00:01
+
+

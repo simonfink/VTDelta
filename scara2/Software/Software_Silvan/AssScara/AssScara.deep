@@ -1,0 +1,22 @@
+#deep-1
+
+meta {
+	version = "Mon Mar 17 14:11:47 CET 2014";
+	description = "deep project file for AssScara";
+}
+
+project AssScara {
+	libpath = "I:\deep\lib";
+	boardtype = phyCoreMpc5200tiny;
+	ostype = ntbSTS;
+#	programmertype = bdi2000;
+
+#	enter names of rootclasses, e.g.
+#	rootclasses = "ch.ntb.ems.ass.scara.ViewerAndSamples.MotorController";
+#	rootclasses = "ch.ntb.ems.ass.scara.ViewerAndSamples.Playground";
+# 	rootclasses = "ch.ntb.ems.ass.scara.ViewerAndSamples.HWViewer";
+	rootclasses = "ch.ntb.ems.ass.scara.AssScara";
+
+#	imgformat = BIN;
+	imgfile = "T:/pub/huber/AssScara.bin";
+}

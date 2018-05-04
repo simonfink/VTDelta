@@ -1,0 +1,5 @@
+board=ntbMpc555HB
+eclipse.preferences.version=1
+libPath=I\:\\deep\\lib
+os=ntbSTS
+programmer=ntbMpc555UsbBdi

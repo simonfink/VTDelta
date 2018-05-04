@@ -1,0 +1,155 @@
+Flow report for ProjektMotorRegel
+Fri Feb 21 09:03:48 2014
+Quartus II 32-bit Version 12.0 Build 178 05/31/2012 SJ Full Version
+
+
+---------------------
+; Table of Contents ;
+---------------------
+  1. Legal Notice
+  2. Flow Summary
+  3. Flow Settings
+  4. Flow Non-Default Global Settings
+  5. Flow Elapsed Time
+  6. Flow OS Summary
+  7. Flow Log
+
+
+
+----------------
+; Legal Notice ;
+----------------
+Copyright (C) 1991-2012 Altera Corporation
+Your use of Altera Corporation's design tools, logic functions 
+and other software and tools, and its AMPP partner logic 
+functions, and any output files from any of the foregoing 
+(including device programming or simulation files), and any 
+associated documentation or information are expressly subject 
+to the terms and conditions of the Altera Program License 
+Subscription Agreement, Altera MegaCore Function License 
+Agreement, or other applicable license agreement, including, 
+without limitation, that your use is for the sole purpose of 
+programming logic devices manufactured by Altera and sold by 
+Altera or its authorized distributors.  Please refer to the 
+applicable agreement for further details.
+
+
+
++--------------------------------------------------------------------------------+
+; Flow Summary                                                                   ;
++------------------------------------+-------------------------------------------+
+; Flow Status                        ; Successful - Fri Feb 21 09:03:44 2014     ;
+; Quartus II 32-bit Version          ; 12.0 Build 178 05/31/2012 SJ Full Version ;
+; Revision Name                      ; ProjektMotorRegel                         ;
+; Top-level Entity Name              ; MotorStromRegelung                        ;
+; Family                             ; Cyclone IV E                              ;
+; Device                             ; EP4CE10E22C7                              ;
+; Timing Models                      ; Final                                     ;
+; Total logic elements               ; 1,880 / 10,320 ( 18 % )                   ;
+;     Total combinational functions  ; 1,688 / 10,320 ( 16 % )                   ;
+;     Dedicated logic registers      ; 1,040 / 10,320 ( 10 % )                   ;
+; Total registers                    ; 1040                                      ;
+; Total pins                         ; 32 / 92 ( 35 % )                          ;
+; Total virtual pins                 ; 0                                         ;
+; Total memory bits                  ; 32,768 / 423,936 ( 8 % )                  ;
+; Embedded Multiplier 9-bit elements ; 0 / 46 ( 0 % )                            ;
+; Total PLLs                         ; 1 / 2 ( 50 % )                            ;
++------------------------------------+-------------------------------------------+
+
+
++-----------------------------------------+
+; Flow Settings                           ;
++-------------------+---------------------+
+; Option            ; Setting             ;
++-------------------+---------------------+
+; Start date & time ; 02/21/2014 09:03:06 ;
+; Main task         ; Compilation         ;
+; Revision Name     ; ProjektMotorRegel   ;
++-------------------+---------------------+
+
+
++--------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Flow Non-Default Global Settings                                                                                                                             ;
++-------------------------------------+------------------------------------------------------------+-------------------+--------------------+------------------+
+; Assignment Name                     ; Value                                                      ; Default Value     ; Entity Name        ; Section Id       ;
++-------------------------------------+------------------------------------------------------------+-------------------+--------------------+------------------+
+; COMPILER_SIGNATURE_ID               ; 153251987939.139296978617048                               ; --                ; --                 ; --               ;
+; ENABLE_SIGNALTAP                    ; On                                                         ; --                ; --                 ; --               ;
+; IP_TOOL_NAME                        ; ALTPLL                                                     ; --                ; --                 ; --               ;
+; IP_TOOL_NAME                        ; LPM_MULT                                                   ; --                ; --                 ; --               ;
+; IP_TOOL_VERSION                     ; 12.0                                                       ; --                ; --                 ; --               ;
+; IP_TOOL_VERSION                     ; 12.0                                                       ; --                ; --                 ; --               ;
+; MAX_CORE_JUNCTION_TEMP              ; 85                                                         ; --                ; --                 ; --               ;
+; MIN_CORE_JUNCTION_TEMP              ; 0                                                          ; --                ; --                 ; --               ;
+; MISC_FILE                           ; src/pwm_pll.cmp                                            ; --                ; --                 ; --               ;
+; MISC_FILE                           ; src/pwm_pll.ppf                                            ; --                ; --                 ; --               ;
+; OUTPUT_IO_TIMING_FAR_END_VMEAS      ; Half Signal Swing                                          ; --                ; --                 ; --               ;
+; OUTPUT_IO_TIMING_FAR_END_VMEAS      ; Half Signal Swing                                          ; --                ; --                 ; --               ;
+; OUTPUT_IO_TIMING_NEAR_END_VMEAS     ; Half Vccio                                                 ; --                ; --                 ; --               ;
+; OUTPUT_IO_TIMING_NEAR_END_VMEAS     ; Half Vccio                                                 ; --                ; --                 ; --               ;
+; PARTITION_COLOR                     ; 16764057                                                   ; --                ; MotorStromRegelung ; Top              ;
+; PARTITION_FITTER_PRESERVATION_LEVEL ; PLACEMENT_AND_ROUTING                                      ; --                ; MotorStromRegelung ; Top              ;
+; PARTITION_NETLIST_TYPE              ; SOURCE                                                     ; --                ; MotorStromRegelung ; Top              ;
+; SLD_NODE_CREATOR_ID                 ; 110                                                        ; --                ; --                 ; auto_signaltap_0 ;
+; SLD_NODE_ENTITY_NAME                ; sld_signaltap                                              ; --                ; --                 ; auto_signaltap_0 ;
+; SLD_NODE_PARAMETER_ASSIGNMENT       ; SLD_DATA_BITS=4                                            ; --                ; --                 ; auto_signaltap_0 ;
+; SLD_NODE_PARAMETER_ASSIGNMENT       ; SLD_TRIGGER_BITS=4                                         ; --                ; --                 ; auto_signaltap_0 ;
+; SLD_NODE_PARAMETER_ASSIGNMENT       ; SLD_NODE_INFO=805334528                                    ; --                ; --                 ; auto_signaltap_0 ;
+; SLD_NODE_PARAMETER_ASSIGNMENT       ; SLD_POWER_UP_TRIGGER=0                                     ; --                ; --                 ; auto_signaltap_0 ;
+; SLD_NODE_PARAMETER_ASSIGNMENT       ; SLD_STORAGE_QUALIFIER_INVERSION_MASK_LENGTH=0              ; --                ; --                 ; auto_signaltap_0 ;
+; SLD_NODE_PARAMETER_ASSIGNMENT       ; SLD_ATTRIBUTE_MEM_MODE=OFF                                 ; --                ; --                 ; auto_signaltap_0 ;
+; SLD_NODE_PARAMETER_ASSIGNMENT       ; SLD_STATE_FLOW_USE_GENERATED=0                             ; --                ; --                 ; auto_signaltap_0 ;
+; SLD_NODE_PARAMETER_ASSIGNMENT       ; SLD_STATE_BITS=11                                          ; --                ; --                 ; auto_signaltap_0 ;
+; SLD_NODE_PARAMETER_ASSIGNMENT       ; SLD_BUFFER_FULL_STOP=1                                     ; --                ; --                 ; auto_signaltap_0 ;
+; SLD_NODE_PARAMETER_ASSIGNMENT       ; SLD_CURRENT_RESOURCE_WIDTH=1                               ; --                ; --                 ; auto_signaltap_0 ;
+; SLD_NODE_PARAMETER_ASSIGNMENT       ; SLD_TRIGGER_LEVEL=1                                        ; --                ; --                 ; auto_signaltap_0 ;
+; SLD_NODE_PARAMETER_ASSIGNMENT       ; SLD_TRIGGER_IN_ENABLED=0                                   ; --                ; --                 ; auto_signaltap_0 ;
+; SLD_NODE_PARAMETER_ASSIGNMENT       ; SLD_ADVANCED_TRIGGER_ENTITY=basic,1,                       ; --                ; --                 ; auto_signaltap_0 ;
+; SLD_NODE_PARAMETER_ASSIGNMENT       ; SLD_TRIGGER_LEVEL_PIPELINE=1                               ; --                ; --                 ; auto_signaltap_0 ;
+; SLD_NODE_PARAMETER_ASSIGNMENT       ; SLD_ENABLE_ADVANCED_TRIGGER=0                              ; --                ; --                 ; auto_signaltap_0 ;
+; SLD_NODE_PARAMETER_ASSIGNMENT       ; SLD_INVERSION_MASK=000000000000000000000000000000000000000 ; --                ; --                 ; auto_signaltap_0 ;
+; SLD_NODE_PARAMETER_ASSIGNMENT       ; SLD_INVERSION_MASK_LENGTH=39                               ; --                ; --                 ; auto_signaltap_0 ;
+; SLD_NODE_PARAMETER_ASSIGNMENT       ; SLD_SEGMENT_SIZE=8192                                      ; --                ; --                 ; auto_signaltap_0 ;
+; SLD_NODE_PARAMETER_ASSIGNMENT       ; SLD_NODE_CRC_HIWORD=51893                                  ; --                ; --                 ; auto_signaltap_0 ;
+; SLD_NODE_PARAMETER_ASSIGNMENT       ; SLD_SAMPLE_DEPTH=8192                                      ; --                ; --                 ; auto_signaltap_0 ;
+; SLD_NODE_PARAMETER_ASSIGNMENT       ; SLD_NODE_CRC_LOWORD=32492                                  ; --                ; --                 ; auto_signaltap_0 ;
+; TOP_LEVEL_ENTITY                    ; MotorStromRegelung                                         ; ProjektMotorRegel ; --                 ; --               ;
+; USE_SIGNALTAP_FILE                  ; stp1.stp                                                   ; --                ; --                 ; --               ;
++-------------------------------------+------------------------------------------------------------+-------------------+--------------------+------------------+
+
+
++-------------------------------------------------------------------------------------------------------------------------------+
+; Flow Elapsed Time                                                                                                             ;
++---------------------------+--------------+-------------------------+---------------------+------------------------------------+
+; Module Name               ; Elapsed Time ; Average Processors Used ; Peak Virtual Memory ; Total CPU Time (on all processors) ;
++---------------------------+--------------+-------------------------+---------------------+------------------------------------+
+; Analysis & Synthesis      ; 00:00:14     ; 1.0                     ; 381 MB              ; 00:00:10                           ;
+; Fitter                    ; 00:00:17     ; 1.9                     ; 514 MB              ; 00:00:17                           ;
+; Assembler                 ; 00:00:02     ; 1.0                     ; 319 MB              ; 00:00:02                           ;
+; TimeQuest Timing Analyzer ; 00:00:07     ; 2.3                     ; 366 MB              ; 00:00:05                           ;
+; Total                     ; 00:00:40     ; --                      ; --                  ; 00:00:34                           ;
++---------------------------+--------------+-------------------------+---------------------+------------------------------------+
+
+
++----------------------------------------------------------------------------------------+
+; Flow OS Summary                                                                        ;
++---------------------------+------------------+-----------+------------+----------------+
+; Module Name               ; Machine Hostname ; OS Name   ; OS Version ; Processor type ;
++---------------------------+------------------+-----------+------------+----------------+
+; Analysis & Synthesis      ; pcwems007        ; Windows 7 ; 6.1        ; x86_64         ;
+; Fitter                    ; pcwems007        ; Windows 7 ; 6.1        ; x86_64         ;
+; Assembler                 ; pcwems007        ; Windows 7 ; 6.1        ; x86_64         ;
+; TimeQuest Timing Analyzer ; pcwems007        ; Windows 7 ; 6.1        ; x86_64         ;
++---------------------------+------------------+-----------+------------+----------------+
+
+
+------------
+; Flow Log ;
+------------
+quartus_map --read_settings_files=on --write_settings_files=off ProjektMotorRegel -c ProjektMotorRegel
+quartus_fit --read_settings_files=off --write_settings_files=off ProjektMotorRegel -c ProjektMotorRegel
+quartus_asm --read_settings_files=off --write_settings_files=off ProjektMotorRegel -c ProjektMotorRegel
+quartus_sta ProjektMotorRegel -c ProjektMotorRegel
+
+
+

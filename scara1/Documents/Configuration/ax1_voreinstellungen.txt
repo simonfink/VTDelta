@@ -1,0 +1,39 @@
+REGLERPARAMETER LISTE
+
+  Reglermodul Version ................................: 5.9C
+  Hardware............................................: 
+
+Motor Parameter
+  Motor...............................................: Mavilor BLS 72
+  Polpaare............................................: 4
+  Resolver Offset.....................................: 90
+  Phasenreihenfolge...................................: 240°
+  Phasenverschiebung (°elektr./1000 U/M)..............: 2.59
+
+Ausgangsstrom
+  Maximalstrom (% Imax)...............................: 76
+  Nennstrom (% Imax)..................................: 47
+  I²t Funktion........................................: Begr.
+
+Reglerparameter
+  Regler..............................................: PI
+  P Verstärkung.......................................: 190.31
+  I1 Verstärkung......................................: 20.51
+  I2 Verst. / P Verst. Lageregler.....................: 0.075
+  Vorverstärkung Lageregler...........................: 1.000
+  Tiefpaß Drehzahlabweichung (Hz).....................: 637
+
+Ein-/Ausgang Parameter
+  Max. Drehzahl (U/M).................................: 3600
+  Analogeingang Tiefpaß Filter (Hz)...................: 1000
+  Beschl. / Bremszeit (s).............................: 0.005
+  Drehrichtung umkehren...............................: Nein
+  Geberauflösung......................................: 4096
+  Anzahl der Nullimpulse..............................: 1
+  Nullimpuls Verschiebung.............................: 0
+  Nullimpuls Breite...................................: 16
+
+Spezielle Funktionen
+  Cogging torque Kompensation.........................: Nein
+  Reduzierte Motorwellensteifheit bei Stillstand......: Nein
+

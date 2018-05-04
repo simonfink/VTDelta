@@ -1,0 +1,315 @@
+{
+		"device0": {
+		"library": "libcomedieeros.so",
+		"devHandle": "/dev/comedi0",
+		"subdevice2": {
+			"type": "DigOut",
+			"channel0": {
+				"signalId": "safeUserLight"
+			},
+			"channel1": {
+				"signalId": "sampleTime",
+				"inverted": true
+			},
+			"channel4": {
+				"type": "DigIn",
+				"signalId": "approval",
+				"inverted": true
+			},
+			"channel5": {
+				"type": "DigIn",
+				"signalId": "safeUserButton",
+				"inverted": true
+			}
+		},
+		"subdevice11": {
+			"type": "Fqd",
+			"channel8": {
+				"signalId": "q2r",
+				"encChannelA": 8,
+				"encChannelB": 10,
+				"encChannelZ": 9,
+				"scale": [ { "id" : "enc",
+							"minIn": 	0, "maxIn": 6.28318530718,
+							"minOut":	0, "maxOut": 16384 }
+					 ],
+				"range": [ { "id" : "enc",
+								"noLimit": 	true }
+					 ],
+				"unit": "rad"
+			}
+		},
+		"subdevice12": {
+			"type": "Fqd",
+			"channel3": {
+				"signalId": "q3",
+				"encChannelA": 3,
+				"encChannelB": 11,
+				"encChannelZ": 4,
+				"scale": [ { "id" : "enc",
+							"minIn": 	0, "maxIn": 6.28318530718,
+							"minOut":	0, "maxOut": 16384 }
+					 ],
+				"range": [ { "id" : "enc",
+								"noLimit": 	true }
+					 ],
+				"unit": "rad"
+			}
+		}
+	},
+	"device1": {
+		"library": "libcomedieeros.so",
+		"devHandle": "/dev/comedi1",
+		"subdevice0": {
+			"type": "AnalogIn",
+			"channel1": {
+				"signalId": "force_fx",
+				"scale": [ { "id" : "analogIn",
+							"minIn":	-10.0, 	"maxIn": 	10.0,
+							"minOut":	0,	"maxOut": 	65535 }
+					 ],
+				"range": [ { "id" : "analogIn",
+							"minIn":	-10.0, 	"maxIn": 	10.0,
+							"minOut":	0,	"maxOut": 	65535 }
+					 ],
+				"unit": "V"
+			},
+			"channel2": {
+				"signalId": "force_fy",
+				"scale": [ { "id" : "analogIn",
+							"minIn":	-10.0, 	"maxIn": 	10.0,
+							"minOut":	0,	"maxOut": 	65535 }
+					 ],
+				"range": [ { "id" : "analogIn",
+							"minIn":	-10.0, 	"maxIn": 	10.0,
+							"minOut":	0,	"maxOut": 	65535 }
+					 ],
+				"unit": "V"
+			},
+			"channel3": {
+				"signalId": "force_fz",
+				"scale": [ { "id" : "analogIn",
+							"minIn":	-10.0, 	"maxIn": 	10.0,
+							"minOut":	0,	"maxOut": 	65535 }
+					 ],
+				"range": [ { "id" : "analogIn",
+							"minIn":	-10.0, 	"maxIn": 	10.0,
+							"minOut":	0,	"maxOut": 	65535 }
+					 ],
+				"unit": "V"
+			},
+			"channel5": {
+				"signalId": "force_mx",
+				"scale": [ { "id" : "analogIn",
+							"minIn":	-10.0, 	"maxIn": 	10.0,
+							"minOut":	0,	"maxOut": 	65535 }
+					 ],
+				"range": [ { "id" : "analogIn",
+							"minIn":	-10.0, 	"maxIn": 	10.0,
+							"minOut":	0,	"maxOut": 	65535 }
+					 ],
+				"unit": "V"
+			},
+			"channel6": {
+				"signalId": "force_my",
+				"scale": [ { "id" : "analogIn",
+							"minIn":	-10.0, 	"maxIn": 	10.0,
+							"minOut":	0,	"maxOut": 	65535 }
+					 ],
+				"range": [ { "id" : "analogIn",
+							"minIn":	-10.0, 	"maxIn": 	10.0,
+							"minOut":	0,	"maxOut": 	65535 }
+					 ],
+				"unit": "V"
+			},
+			"channel7": {
+				"signalId": "force_mz",
+				"scale": [ { "id" : "analogIn",
+							"minIn":	-10.0, 	"maxIn": 	10.0,
+							"minOut":	0,	"maxOut": 	65535 }
+					 ],
+				"range": [ { "id" : "analogIn",
+							"minIn":	-10.0, 	"maxIn": 	10.0,
+							"minOut":	0,	"maxOut": 	65535 }
+					 ],
+				"unit": "V"
+			}
+		},
+		"subdevice1": {
+			"type": "AnalogOut",
+			"channel0": {
+				"signalId": "setCurrent0",
+				"scale": [ { "id" : "dac",
+								"minIn": 	0, 	"maxIn": 	65535,
+								"minOut": 	-10.0, "maxOut": 	10.0 }
+					 ],
+				"range": [ { "id" : "dac",
+							"minIn": 	0, 	"maxIn": 	65535,
+							"minOut": 	-10.0, 	"maxOut": 	10.0 }
+					 ],
+				"unit": "V"
+			},
+			"channel1": {
+				"signalId": "setCurrent1",
+				"scale": [ { "id" : "dac",
+								"minIn": 	0, 	"maxIn": 	65535,
+								"minOut": 	-10.0, "maxOut": 	10.0 }
+					 ],
+				"range": [ { "id" : "dac",
+							"minIn": 	0, 	"maxIn": 	65535,
+							"minOut": 	-10.0, 	"maxOut": 	10.0 }
+					 ],
+				"unit": "V"
+			},
+			"channel2": {
+				"signalId": "setCurrent2",
+				"scale": [ { "id" : "dac",
+								"minIn": 	0, 	"maxIn": 	65535,
+								"minOut": 	-10.0, "maxOut": 	10.0 }
+					 ],
+				"range": [ { "id" : "dac",
+							"minIn": 	0, 	"maxIn": 	65535,
+							"minOut": 	-10.0, 	"maxOut": 	10.0 }
+					 ],
+				"unit": "V"
+			},
+			"channel3": {
+				"signalId": "setCurrent3",
+				"scale": [ { "id" : "dac",
+								"minIn": 	0, 	"maxIn": 	65535,
+								"minOut": 	-10.0, "maxOut": 	10.0 }
+					 ],
+				"range": [ { "id" : "dac",
+							"minIn": 	0, 	"maxIn": 	65535,
+							"minOut": 	-10.0, 	"maxOut": 	10.0 }
+					 ],
+				"unit": "V"
+			}
+		},
+		"subdevice2": {
+			"type": "DigOut",
+			"channel0": {
+				"signalId": "enable0"
+			},
+			"channel1": {
+				"signalId": "enable1"
+			},
+			"channel2": {
+				"signalId": "enable2"
+			},
+			"channel3": {
+				"signalId": "enable3"
+			},
+			"channel4": {
+				"signalId": "brake0",
+				"inverted": true
+			},
+			"channel5": {
+				"signalId": "brake1",
+				"inverted": true
+			},
+			"channel6": {
+				"signalId": "brake2",
+				"inverted": true
+			},
+			"channel7": {
+				"signalId": "brake3",
+				"inverted": true
+			},
+			"channel12": {
+				"type": "DigIn",
+				"signalId": "limitSwitchQ0p",
+				"inverted": true
+			},
+			"channel13": {
+				"type": "DigIn",
+				"signalId": "limitSwitchQ0n",
+				"inverted": true
+			},
+			"channel14": {
+				"type": "DigIn",
+				"signalId": "limitSwitchQ1p",
+				"inverted": true
+			},
+			"channel15": {
+				"type": "DigIn",
+				"signalId": "limitSwitchQ1n",
+				"inverted": true
+			},
+			"channel16": {
+				"type": "DigIn",
+				"signalId": "limitSwitchQ2p",
+				"inverted": true
+			},
+			"channel17": {
+				"type": "DigIn",
+				"signalId": "limitSwitchQ2n",
+				"inverted": true
+			},
+			"channel18": {
+				"type": "DigIn",
+				"signalId": "limitSwitchQ3p",
+				"inverted": true
+			},
+			"channel19": {
+				"type": "DigIn",
+				"signalId": "limitSwitchQ3n",
+				"inverted": true
+			},
+			"channel22": {
+				"signalId": "watchdog"
+			},
+			"channel28": {
+				"signalId": "setDriveCurrentControl0",
+				"inverted": true
+			},
+			"channel29": {
+				"signalId": "setDriveCurrentControl1",
+				"inverted": true
+			},
+			"channel30": {
+				"signalId": "setDriveCurrentControl2",
+				"inverted": true
+			},
+			"channel31": {
+				"signalId": "setDriveCurrentControl3",
+				"inverted": true
+			}
+		},
+		"subdevice11": {
+			"type": "Fqd",
+			"channel8": {
+				"signalId": "q0",
+				"encChannelA": 8,
+				"encChannelB": 10,
+				"encChannelZ": 9,
+				"scale": [ { "id" : "enc",
+							"minIn": 	0, "maxIn": 6.28318530718,
+							"minOut":	0, "maxOut": 16384 }
+					 ],
+				"range": [ { "id" : "enc",
+								"noLimit": 	true }
+					 ],
+				"unit": "rad"
+			}
+		},
+		"subdevice12": {
+			"type": "Fqd",
+			"channel3": {
+				"signalId": "q1",
+				"encChannelA": 3,
+				"encChannelB": 11,
+				"encChannelZ": 4,
+				"scale": [ { "id" : "enc",
+							"minIn": 	0, "maxIn": 6.28318530718,
+							"minOut":	0, "maxOut": 16384 }
+					 ],
+				"range": [ { "id" : "enc",
+								"noLimit": 	true }
+					 ],
+				"unit": "rad"
+			}
+		}
+	}
+}
+

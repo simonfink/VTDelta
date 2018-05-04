@@ -1,0 +1,179 @@
+{
+	"device0": {
+		"library": "libflinkeeros.so",
+		"devHandle": "/dev/flink0",
+		"subdevice1": {
+			"type": "Fqd",
+			"channel0": {
+				"signalId": "enc0",
+				"scale": [ { "id" : "enc",
+								"minIn": 	0, "maxIn": 6.28318530718,
+								"minOut":	0, "maxOut": 4096 }
+					 ],
+				"range": [ { "id" : "enc",
+								"noLimit": 	true }
+					 ],
+				"unit": "rad"
+			},
+			"channel1": {
+				"signalId": "enc1",
+				"scale": [ { "id" : "enc",
+								"minIn": 	0, "maxIn": -6.28318530718,
+								"minOut":	0, "maxOut": 4096 }
+					 ],
+				"range": [ { "id" : "enc",
+								"noLimit": 	true }
+					 ],
+				"unit": "rad"
+			}
+		},
+		"subdevice2": {
+			"type": "Watchdog",
+			"channel0": {
+				"signalId": "Wdt"
+			}
+		},
+		"subdevice3": {
+			"type": "AnalogOut",
+			"channel0": {
+				"signalId": "dacOut0",
+				"scale": [ { "id" : "dac",
+								"minIn": 	1000, 	"maxIn": 	36000,
+								"minOut": 	-9.59, "maxOut": 	9.20 }
+					 ],
+				"range": [ { "id" : "dac",
+								"minIn":	0,  	"maxIn": 	65536,
+								"minOut":	-10.0,	"maxOut": 	10.0 }
+					 ],
+				"unit": "V"
+			},
+			"channel1": {
+				"signalId": "dacOut1",
+				"scale": [ { "id" : "dac",
+								"minIn": 	1000, 	"maxIn": 	36000,
+								"minOut": 	-9.50, "maxOut": 	9.45 }
+					 ],
+				"range": [ { "id" : "dac",
+								"minIn":	0,  	"maxIn": 	65536,
+								"minOut":	-10.0,	"maxOut": 	10.0 }
+					 ],
+				"unit": "V"
+			},
+			"channel2": {
+				"signalId": "hallXout",
+				"scale": [ { "id" : "dac",
+								"minIn": 	1000, 	"maxIn": 	36000,
+								"minOut": 	-9.47, "maxOut": 	9.38 }
+					 ],
+				"range": [ { "id" : "dac",
+								"minIn":	0,  	"maxIn": 	65536,
+								"minOut":	-10.0,	"maxOut": 	10.0 }
+					 ],
+				"unit": "V"
+			},
+			"channel3": {
+				"signalId": "hallYout",
+				"scale": [ { "id" : "dac",
+								"minIn": 	1000, 	"maxIn": 	36000,
+								"minOut": 	-9.41, "maxOut": 	9.44 }
+					 ],
+				"range": [ { "id" : "dac",
+								"minIn":	0,  	"maxIn": 	65536,
+								"minOut":	-10.0,	"maxOut": 	10.0 }
+					 ],
+				"unit": "V"
+			},
+		},
+		"subdevice4": {
+			"type": "AnalogIn",
+			"channel0": {
+				"signalId": "hall1",
+				"scale": [ { "id" : "adc",
+							"minIn": 	0.0, 	"maxIn": 	5.0,
+							"minOut": 	0, 	"maxOut": 	4096 }
+					 ],
+				"range": [ { "id" : "adc",
+							"minIn":	0.0, 	"maxIn": 	5.0 ,
+							"minOut":	0,	"maxOut": 	4096 }
+					 ],
+				"unit": "V"
+			},
+			"channel1": {
+				"signalId": "hall0",
+				"scale": [ { "id" : "adc",
+							"minIn": 	0.0, 	"maxIn": 	5.0,
+							"minOut": 	0, 	"maxOut": 	4096 }
+					 ],
+				"range": [ { "id" : "adc",
+							"minIn":	0.0, 	"maxIn": 	5.0 ,
+							"minOut":	0,	"maxOut": 	4096 }
+					 ],
+				"unit": "V"
+			},
+			"channel2": {
+				"signalId": "hall3",
+				"scale": [ { "id" : "adc",
+							"minIn": 	0.0, 	"maxIn": 	5.0,
+							"minOut": 	0, 	"maxOut": 	4096 }
+					 ],
+				"range": [ { "id" : "adc",
+							"minIn":	0.0, 	"maxIn": 	5.0 ,
+							"minOut":	0,	"maxOut": 	4096 }
+					 ],
+				"unit": "V"
+			},
+			"channel3": {
+				"signalId": "hall2",
+				"scale": [ { "id" : "adc",
+							"minIn": 	0.0, 	"maxIn": 	5.0,
+							"minOut": 	0, 	"maxOut": 	4096 }
+					 ],
+				"range": [ { "id" : "adc",
+							"minIn":	0.0, 	"maxIn": 	5.0 ,
+							"minOut":	0,	"maxOut": 	4096 }
+					 ],
+				"unit": "V"
+			}
+		},
+		"subdevice5": {
+			"type": "DigOut",
+			"channel0": {
+				"signalId": "blueLed_balancingButton"
+			},
+			"channel1": {
+				"signalId": "testToggle"
+			},
+			"channel2": {
+				"signalId": "greenLed_highSpeedButton"
+			},
+			"channel3": {
+				"signalId": "redLed_approvalButton"
+			},
+			"channel5": {
+				"signalId": "enable"
+			},
+			"channel6": {
+				"signalId": "redLed_stopButton"
+			}
+		},
+		"subdevice6": {
+			"type": "DigIn",
+			"channel0": {
+				"signalId": "balancingButton"
+			},
+			"channel1": {
+				"signalId": "stopButton"
+			},
+			"channel2": {
+				"signalId": "highSpeedButton"
+			},
+			"channel3": {
+				"signalId": "approvalButton"
+			},
+			"channel6": {
+				"signalId": "emergencyButton"
+			}
+		}
+	}
+}
+

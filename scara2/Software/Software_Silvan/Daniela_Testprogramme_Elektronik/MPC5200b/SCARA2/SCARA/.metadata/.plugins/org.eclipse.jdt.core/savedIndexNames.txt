@@ -1,0 +1,19 @@
+INDEX VERSION 1.126+D:\ass-scara\Software\Daniela_20140221\MPC5200b\SCARA2\SCARA\.metadata\.plugins\org.eclipse.jdt.core
+4257325822.index
+4155206848.index
+2519976100.index
+305854171.index
+3974580528.index
+163172794.index
+1498219845.index
+1299022128.index
+1995173708.index
+30765161.index
+1115467115.index
+3133528496.index
+2941312705.index
+4108727661.index
+3065916431.index
+1563077825.index
+4041092966.index
+1697886153.index

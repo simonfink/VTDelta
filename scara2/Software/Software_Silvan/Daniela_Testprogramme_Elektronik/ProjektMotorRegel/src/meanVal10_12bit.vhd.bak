@@ -1,0 +1,91 @@
+-----------------------------------------------------------------------------
+--     ____  _____          __    __    ________    _______
+--    |    | \    \        |   \ |  |  |__    __|  |   __  \
+--    |____|  \____\       |    \|  |     |  |     |  |__>  ) 
+--     ____   ____         |  |\ \  |     |  |     |   __  <
+--    |    | |    |        |  | \   |     |  |     |  |__>  )
+--    |____| |____|        |__|  \__|     |__|     |_______/
+--
+--    INTERSTATE UNIVERSITY OF AAPLIED SCIENCES OF TECHNOLOGY
+--
+--    Campus Buchs - Werdenbergstrasse 4 - CH-9471 Buchs
+--    Campus Waldau - Schoenauweg4 - CH9013 St. Gallen
+--
+--    Tel. +41 (0)81 755 33 11   Fax +41 (0)81 756 54 34
+--
+-------------------------------------------------------------------------------
+-- Project : 	MotorStromRegelung
+-- Unit    : 	pwm8_12bit.vhd
+-- Author  : 	David Frommelt
+-- Created : 	October 2012
+-------------------------------------------------------------------------------
+-- Copyright(C) 2011: Interstate University of Applied Sciences NTB, Buchs
+-------------------------------------------------------------------------------
+
+-- Package zur Erzeugung eines Dreieck-PWM Profils mit 12 Bit Auflösung
+LIBRARY IEEE;
+USE IEEE.std_logic_1164.ALL;
+USE IEEE.numeric_std.ALL;
+
+PACKAGE meanVal10_12bit_pkg IS
+	 COMPONENT meanVal10_12bit
+		PORT (
+			isl_clk : IN std_logic;
+			is12_val: IN signed(11 downto 0);
+			ii_index: IN INTEGER RANGE 9 DOWNTO 0;
+			isl_write:	IN std_logic;
+			osl12_val	OUT std_logic;
+		);
+	END COMPONENT meanVal10_12bit;
+END PACKAGE meanVal10_12bit_pkg;	
+
+-----------------------------------------------------------------------------
+LIBRARY IEEE;
+USE IEEE.std_logic_1164.ALL;
+USE IEEE.numeric_std.ALL;
+USE work.pwm8_pkg.ALL;
+
+ENTITY meanVal10_12bit IS
+	PORT (	
+			isl_clk : IN std_logic;
+			is12_val: IN signed(11 downto 0);
+			ii_index: IN INTEGER RANGE 9 DOWNTO 0;
+			isl_write:	IN std_logic;
+			osl12_val	OUT std_logic;
+	) ;
+END ENTITY meanVal10_12bit;
+
+
+-----------------------------------------------------------------------------
+ARCHITECTURE main of meanVal10_12bit IS
+	
+	TYPE t_pwm_registers IS RECORD
+
+	END RECORD;
+	
+	SIGNAL r, r_next : t_pwm_registers;
+
+	BEGIN
+	
+	comb_procss: PROCESS(r, it_values)
+	VARIABLE v : t_pwm_registers;
+
+	BEGIN
+		v:= r;
+		
+		IF cnt_adc =0 THEN
+		
+		
+		r_next <= v;
+	END PROCESS;
+	
+	reg_process: PROCESS(isl_clk)
+	BEGIN
+		IF rising_edge(isl_clk) THEN
+			r<=r_next;
+		END IF;
+		
+	END PROCESS;
+	
+END ARCHITECTURE meanVal10_12bit;
+	

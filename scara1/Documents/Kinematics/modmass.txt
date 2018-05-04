@@ -1,0 +1,53 @@
+﻿VOLUMEN =  1.2634327e-05  M^3
+FLÄCHENINHALT =  2.3427066e-02  M^2
+MITTLERE DICHTE =  2.9377493e+03 KILOGRAMM / M^3
+MASSE =  3.7116484e-02 KILOGRAMM 
+
+SCHWERPUNKT in Bezug auf den Koordinatenrahmen _01_STAB:
+X   Y   Z  0.0000000e+00  0.0000000e+00  1.1207953e-01  M
+
+Trägheit in Bezug auf Koordinatensystem _01_STAB  (KILOGRAMM * M^2)
+
+TRÄGHEITSTENSOR:
+Ixx Ixy Ixz  8.4410069e-04 -2.3723986e-11  0.0000000e+00
+Iyx Iyy Iyz -2.3723986e-11  8.4410151e-04  0.0000000e+00
+Izx Izy Izz  0.0000000e+00  0.0000000e+00  9.6497191e-07
+
+Trägheit im Schwerpunkt in Bezug auf Koordinatenrahmen _01_STAB  (KILOGRAMM * M^2)
+
+TRÄGHEITSTENSOR:
+Ixx Ixy Ixz  3.7785001e-04 -2.3723986e-11  0.0000000e+00
+Iyx Iyy Iyz -2.3723986e-11  3.7785084e-04  0.0000000e+00
+Izx Izy Izz  0.0000000e+00  0.0000000e+00  9.6497191e-07
+
+HAUPTTRÄGHEITSMOMENT:  (KILOGRAMM * M^2)
+I1  I2  I3   9.6497191e-07  3.7785084e-04  3.7785001e-04
+
+Rotationsmatrix von _01_STAB Orientierung auf Hauptachsen:
+       0.00000        1.00000        0.00000
+       0.00000        0.00000        1.00000
+       1.00000        0.00000        0.00000
+
+Rotationswinkel von _01_STAB Orientierung auf Hauptachsen (in Grad):
+Winkel um x  y  z -90.000          0.000        -90.000 
+
+Umlaufbewegungsradius in Bezug auf die Hauptachsen:
+R1  R2  R3 5.0988698e-03  1.0089666e-01  1.0089655e-01  M
+
+---------------------------------------------
+
+Masseneigenschaften der Komponenten der Baugruppe
+(in Baugruppeneinheiten und dem Koordinatensystem _01_STAB)
+
+   DICHTE             MASSE          SCHW.PKT.:  X        Y         Z
+
+                10_ARM_STAB_ROHR            MATERIAL:                            ALUMINIUM
+         2.71020e+03  2.80001e-02  0.00000e+00  0.00000e+00  1.50505e-01
+             11_ARM_STAB_ADAPTER            MATERIAL:                            ALUMINIUM
+         2.71020e+03  2.44963e-03  0.00000e+00  0.00000e+00 -1.04461e-03
+                          MAGNET            MATERIAL:                              UNKNOWN
+         7.80000e+03  2.20291e-03  0.00000e+00  0.00000e+00 -9.00000e-04
+                          MAGNET            MATERIAL:                              UNKNOWN
+         7.80000e+03  2.20291e-03  0.00000e+00  0.00000e+00 -1.09000e-02
+                   12_ARM_SPITZE            MATERIAL:                            ALUMINIUM
+         2.71020e+03  2.26093e-03  0.00000e+00  0.00000e+00 -1.13283e-02
