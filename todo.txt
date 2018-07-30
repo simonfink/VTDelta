@@ -1,27 +1,28 @@
 VT Delta
 --------
 
--Claudia: Rechte für github.com/eeduro (sfink, graf) und ems svn (Scara)
--Überarbeitung Zeitplan -> bis Anfang August
+-Claudia: Rechte für github.com/eeduro (sfink, graf) und ems svn (Scara)     -- done
+-Überarbeitung Zeitplan -> bis Anfang August                                 -- done
 
 Abgabe: Anfang August
 ---------------------
 -Bericht: Evaluation, Auslastung (Messungen), Theorie (Berechnungen), Aufbau Sequencer(neu), SafetySystem(Änderungen), ControlSystem(evtl neu), HAL(neu) (knapp, 8-10 Seiten)
 -Präsentation: Demo, Diagramme Control-Safety-Hal-Sequencer, ...
--Homepage: Vorzeigebeispiel für EEROS (Beschreibung unterteilen -> Controlsysetem, Sequencer, Mechanik(extern),... -> Einzelne Punkte + Verweise auf eeros falls zu detailliert)
+-Homepage: Vorzeigebeispiel für EEROS (Beschreibung unterteilen -> Controlsystem, Sequencer, Mechanik(extern),... -> Einzelne Punkte + Verweise auf eeros falls zu detailliert)
 -Projektdoku: Students wiki -> + link auf github repo
 -EVA: 30 Minuten Prüfungsgespräch c++
 
 Beginn Migration:
 -----------------
 -BBBlue:
---Pinbelegung für eeros
---Inbetriebnahme + eeros -> (Beispiel Motor laufen lassen)
---Elektromagne (PowerOUT?)
+--Pinbelegung für eeros              -- done
+--Inbetriebnahme + eeros -> (Beispiel Motor laufen lassen)   -- done
+--Elektromagnet (PowerOUT?)  -- nein -> print    -- done
 -Analyse:
---ControlSystem Diagramm (á la Simulink) (siehe Scara -> ems svn) (->Claudia)
---Diagramm SafetySystem (events -> Übergang)
+--ControlSystem Diagramm (á la Simulink) (siehe Scara -> ems svn) (->Claudia)    -- done
+--Diagramm SafetySystem (events -> Übergang)               -- done
 --Sequencer
+--Lochrasterprint für Motoren                               -- done
 
 -Versionen im Vergleich -> wann hat was geändert
 -Visualisierung mit ARVIS
