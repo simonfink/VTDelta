@@ -6,17 +6,17 @@ using namespace eeduro::delta;
 using namespace eeros::sequencer;
 using namespace eeros::safety;
 
-MoveBlockSequence::MoveBlockSequence(std::string name, Sequencer& sequencer, DeltaControlSystem& controlSys, BaseSequence* caller, SafetySystem& safetySys, Calibration& calibration): 
+MoveBlockSequence::MoveBlockSequence(std::string name, Sequencer& sequencer, DeltaControlSystem& controlSys, BaseSequence* caller, SafetySystem& safetySys, Calibration& calibration, eeros::sequencer::Monitor& mouseMove): 
   Sequence(name, sequencer, caller, true),
   controlSys(controlSys),
   safetySys(safetySys),
   move("move", seq, this, controlSys, calibration),
   up("up", seq, this, controlSys, calibration),
   down("down", seq, this, controlSys, calibration),
-  grab("grab", seq, this, controlSys, calibration),
-  release("release", seq, this, controlSys, calibration)
+  grab("grab", seq, this, controlSys),
+  release("release", seq, this, controlSys)
 {
-
+  addMonitor(&mouseMove);
 }
 
 int MoveBlockSequence::operator()(int from, int to)

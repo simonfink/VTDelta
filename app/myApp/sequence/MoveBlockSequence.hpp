@@ -8,13 +8,14 @@
 #include "../step/down.hpp"
 #include "../step/grab.hpp"
 #include "../step/release.hpp"
+#include "../step/emag.hpp"
 #include <array>
 
 namespace eeduro {
 	namespace delta {
 		class MoveBlockSequence : public eeros::sequencer::Sequence {
 		public:
-			MoveBlockSequence(std::string name, eeros::sequencer::Sequencer& sequencer, DeltaControlSystem& controlSys,BaseSequence* caller, eeros::safety::SafetySystem& safetySys, Calibration& calibration);
+			MoveBlockSequence(std::string name, eeros::sequencer::Sequencer& sequencer, DeltaControlSystem& controlSys,BaseSequence* caller, eeros::safety::SafetySystem& safetySys, Calibration& calibration, eeros::sequencer::Monitor& mouseMove);
 			
 			int operator() (int from, int to);
 			
@@ -26,8 +27,8 @@ namespace eeduro {
 			Move move;
 			Up up;
 			Down down;
-			Grab grab;
-			Release release;
+ 			Grab grab;
+ 			Release release;
 			int from;
 			int to;
 		};

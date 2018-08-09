@@ -137,11 +137,13 @@ DeltaSafetyProperties::DeltaSafetyProperties(DeltaControlSystem& controlSys, dou
     slSystemReady.addEvent(doAutoMoving,slAutoMoving,safety::kPublicEvent);
     slSystemReady.addEvent(doMouseTeaching,slMouseTeaching,safety::kPublicEvent);
     slAutoMoving.addEvent(doMouseTeaching, slMouseTeaching, eeros::safety::kPublicEvent);
+    slMouseTeaching.addEvent(doAutoMoving, slAutoMoving, safety::kPublicEvent);
     //slSystemReady.addEvent(doJoystickTeaching,slAutoMoving,safety::kPublicEvent);
     slSystemReady.addEvent(doParking,slParking,kPublicEvent);
 
     slAutoMoving.addEvent(stopMoving,slSystemReady,safety::kPublicEvent);
     slMouseTeaching.addEvent(stopMoving,slSystemReady,safety::kPublicEvent);
+
     slJoystickTeaching.addEvent(stopMoving,slSystemReady,safety::kPublicEvent);
     
     slCalibrating.addEvent(doSystemReady, slSystemReady, eeros::safety::kPublicEvent);
@@ -167,7 +169,7 @@ DeltaSafetyProperties::DeltaSafetyProperties(DeltaControlSystem& controlSys, dou
     slParking.setInputActions({check(emergencyStop,false,doEmergency),ignore(approval)});//, ignore(startAgain)});
     slParked.setInputActions({check(emergencyStop,false,doEmergency),ignore(approval)});//, ignore(startAgain)});
     slSystemReady.setInputActions({check(emergencyStop,false,doEmergency),ignore(approval)});//, ignore(startAgain)});
-    slAutoMoving.setInputActions({check(emergencyStop,false,doEmergency),ignore(approval)});//, ignore(startAgain)});
+    slAutoMoving.setInputActions({check(emergencyStop,false,doEmergency),check(approval, false, doMouseTeaching)});//, ignore(startAgain)});
     slMouseTeaching.setInputActions({check(emergencyStop,false,doEmergency),ignore(approval)});//, ignore(startAgain)});
     slJoystickTeaching.setInputActions({check(emergencyStop,false,doEmergency),ignore(approval)});//, ignore(startAgain)});
     slCalibrating.setInputActions({ignore(emergencyStop), check(approval, false, doSystemReady)});
@@ -210,17 +212,14 @@ DeltaSafetyProperties::DeltaSafetyProperties(DeltaControlSystem& controlSys, dou
 
     slEmergency.setLevelAction([&](SafetyContext*privateContext){
       static int count=0;
-      static bool first = true;
       
        controlSys.voltageSetPoint.setValue({0.0,0.0,0.0,0.0});
        controlSys.voltageSwitch.switchToInput(1);
        controlSys.inputSwitch.switchToInput(1);
-       if(first){
-	 first = false;
-	 
- 	 eeros::sequencer::Sequencer::instance().abort();
-	 
-	}
+       controlSys.stop();
+       
+       eeros::sequencer::Sequencer::instance().abort();
+
 
       if(emergencyStop->get())
 	count++;
@@ -228,11 +227,10 @@ DeltaSafetyProperties::DeltaSafetyProperties(DeltaControlSystem& controlSys, dou
 	count=0;
 
       if(count>static_cast<unsigned int>(2.0/tdn)){
-	first = true;
 	count = 0;
  	auto& sequencer = sequencer::Sequencer::instance();
- 	sequencer.getSequenceByName("Main Sequence")->start();
-	controlSys.start();	
+  	sequencer.getSequenceByName("Main Sequence")->start();
+ 	controlSys.start();
 	controlSys.inputSwitch.switchToInput(1);
 	controlSys.voltageSwitch.switchToInput(0);
 	privateContext->triggerEvent(doCalibrating);
@@ -245,7 +243,7 @@ DeltaSafetyProperties::DeltaSafetyProperties(DeltaControlSystem& controlSys, dou
     });
     
     slCalibrating.setLevelAction([&](SafetyContext*privateContext){
-       std::cout << "mouse: " << controlSys.mouse.getOut().getSignal().getValue() << std::endl;
+//        std::cout << "mouse: " << controlSys.mouse.getOut().getSignal().getValue() << std::endl;
 //        std::cout << "inputSwitch: " << controlSys.inputSwitch.getOut().getSignal().getValue() << std::endl;
 //       std::cout << "enc4: " << controlSys.enc4.getOut().getSignal().getValue() << std::endl;
 //        std::cout << "mot: " << controlSys.voltageSwitch.getOut().getSignal().getValue() << std::endl;
@@ -266,7 +264,7 @@ DeltaSafetyProperties::DeltaSafetyProperties(DeltaControlSystem& controlSys, dou
     });
 
     slSystemOn.setLevelAction([&](SafetyContext*privateContext){
-      controlSys.enableAxis();
+//       controlSys.enableAxis();
       privateContext->triggerEvent(doPoweringUp);
     });
     
@@ -281,7 +279,6 @@ DeltaSafetyProperties::DeltaSafetyProperties(DeltaControlSystem& controlSys, dou
 
       
       if(count==1){
-	controlSys.start();
 	controlSys.homed=false;
 	controlSys.voltageSwitch.switchToInput(1);
  	controlSys.setVoltageForInitializing({q012InitVoltage,q012InitVoltage,q012InitVoltage,q3InitVoltage});
@@ -355,7 +352,7 @@ DeltaSafetyProperties::DeltaSafetyProperties(DeltaControlSystem& controlSys, dou
 	  controlSys.enc3.callInputFeature<>("resetFqd");
 // 	  controlSys.enc4.callInputFeature<>("resetFqd");
  	  controlSys.mouse.reset(0,0,0,0);
-//  	  controlSys.voltageSwitch.switchToInput(0);
+  	  controlSys.voltageSwitch.switchToInput(0);
 	  controlSys.homed = true;
 	  count=0;
 	  privateContext->triggerEvent(homeingDone);
@@ -376,8 +373,6 @@ DeltaSafetyProperties::DeltaSafetyProperties(DeltaControlSystem& controlSys, dou
 	  double motV = 0.0;
 	  double motEnc = controlSys.enc4.getOut().getSignal().getValue();
 	  
-	  std::cout << "motenc: " << motEnc << std::endl;
-	  std::cout << "motV:" << motV << std::endl;
 	  
 	  if(motEnc <= -2.8 && motEnc > -2.82){
 	      mot4Homed = true;
@@ -392,6 +387,8 @@ DeltaSafetyProperties::DeltaSafetyProperties(DeltaControlSystem& controlSys, dou
 	  if(mot4Homed){
 	    mot4Homed = false;
 	    controlSys.enc4.callInputFeature<>("resetFqd");
+	    controlSys.setVoltageForInitializing({0.0,0.0,0.0,0.0});
+ 	    controlSys.start();
 	    count = 0;
 	    privateContext->triggerEvent(doSystemReady);
 	  }
@@ -401,9 +398,25 @@ DeltaSafetyProperties::DeltaSafetyProperties(DeltaControlSystem& controlSys, dou
     
     slSystemReady.setLevelAction([&](SafetyContext*privateContext){ 
 // 	  eeros::sequencer::Sequencer::instance().getSequenceByName("Mouse Sequence")->start();
-  	  controlSys.inputSwitch.switchToInput(0);
-	  controlSys.voltageSwitch.switchToInput(0);
-	  privateContext->triggerEvent(doAutoMoving);
+//    	  controlSys.inputSwitch.switchToInput(1);
+//  	  controlSys.voltageSwitch.switchToInput(0);
+       auto& sequencer = eeros::sequencer::Sequencer::instance();
+       sequencer.abort();
+       controlSys.inputSwitch.switchToInput(0);
+       controlSys.voltageSwitch.switchToInput(0);
+       
+	
+//  	if(sequencer.getSequenceByName("Main Sequence")->getRunningState() != eeros::sequencer::SequenceState::running){
+//  	  std::cout << "slAutoMoving starting Main Sequence" << std::endl;
+// 	sequencer.getSequenceByName("Main Sequence")->start();
+	  
+	    
+//  	}
+//  	  controlSys.emagVal.setValue(controlSys.mouse.getButtonOut().getSignal().getValue()[0]);
+// 	  std::cout << "move: " << controlSys.inputSwitch.getOut().getSignal().getValue() << std::endl;
+// 	  std::cout << "mouse: " << controlSys.mouse.getOut().getSignal().getValue() << std::endl;
+// 	  controlSys.emagVal.setValue(false);
+	privateContext->triggerEvent(doAutoMoving);
 
 	
 	
@@ -411,12 +424,11 @@ DeltaSafetyProperties::DeltaSafetyProperties(DeltaControlSystem& controlSys, dou
     });
     
     slAutoMoving.setLevelAction([&](SafetyContext*privateContext){
-	static auto& sequencer = eeros::sequencer::Sequencer::instance();
-	
-	if(sequencer.getSequenceByName("Main Sequence")->getRunningState() != eeros::sequencer::SequenceState::running){
-	  sequencer.getSequenceByName("Main Sequence")->start();
+ 	static auto& sequencer = eeros::sequencer::Sequencer::instance();
+// 	
+ 	if(sequencer.getSequenceByName("Main Sequence")->getRunningState() != eeros::sequencer::SequenceState::running){
+ 	  sequencer.getSequenceByName("Main Sequence")->start();
 	  
-	    
 	}
 	 
 //       static std::string runningSeq = "Sort Sequence";
@@ -442,19 +454,10 @@ DeltaSafetyProperties::DeltaSafetyProperties(DeltaControlSystem& controlSys, dou
     });
     
     slMouseTeaching.setLevelAction([&](SafetyContext*privateContext){
-      static int count = 0;
-      static bool first = true;
-      if(first){
-	first = false;
-	controlSys.inputSwitch.switchToInput(1);
-	controlSys.voltageSwitch.switchToInput(0);
-      }
-//        std::cout << "inputSwitch: " << controlSys.inputSwitch.getOut().getSignal().getValue() << std::endl;
-//       std::cout << "enc4: " << controlSys.enc4.getOut().getSignal().getValue() << std::endl;
-//        std::cout << "mot: " << controlSys.voltageSwitch.getOut().getSignal().getValue() << std::endl;
-      controlSys.emagVal.setValue(controlSys.mouse.getButtonOut().getSignal().getValue()[0]);
-//       std::cout << "mouse: " << controlSys.mouse.getOut().getSignal().getValue() << std::endl;
+      
     });
+    
+    
 
     //Defineentrylevel
     setEntryLevel(slOff);

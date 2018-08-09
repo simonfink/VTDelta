@@ -9,6 +9,7 @@
 #include "CalibrateSequence.hpp"
 #include "SortSequence.hpp"
 #include "ShuffleSequence.hpp"
+#include "ExceptionSequence.hpp"
 #include <array>
 
 namespace eeduro {
@@ -26,9 +27,13 @@ namespace eeduro {
 			eeros::safety::SafetySystem& safetySys;
 			DeltaSafetyProperties& properties;
 			
-			CalibrateSequence calibSeq;
+ 			CalibrateSequence calibSeq;
 			SortSequence sortSeq;
 			ShuffleSequence shuffSeq;
+			MouseSequence mouseSeq;
+			
+			MouseExceptionSequence mexSeq;
+// 			AutoMoveExceptionSequence amexSeq;
 			
 			Calibration& calibration;
 			

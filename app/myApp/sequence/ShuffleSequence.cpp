@@ -8,14 +8,14 @@ using namespace eeduro::delta;
 using namespace eeros::sequencer;
 using namespace eeros::safety;
 
-ShuffleSequence::ShuffleSequence(std::string name, eeros::sequencer::Sequencer& sequencer,eeros::sequencer::BaseSequence* caller, DeltaControlSystem& controlSys, eeros::safety::SafetySystem& safetySys, Calibration& calibration) :
-	Sequence(name, sequencer),
+ShuffleSequence::ShuffleSequence(std::string name, eeros::sequencer::Sequencer& sequencer,eeros::sequencer::BaseSequence* caller, DeltaControlSystem& controlSys, eeros::safety::SafetySystem& safetySys, Calibration& calibration, eeros::sequencer::Monitor& mouseMove) :
+	Sequence(name, sequencer, caller, false),
 	move("move", sequencer, this, controlSys, calibration),
 	detect("detect", sequencer, this, controlSys, calibration),
-	moveBlock("moveBlock", sequencer,controlSys, this, safetySys, calibration),
+	moveBlock("moveBlock", sequencer,controlSys, this, safetySys, calibration, mouseMove),
 	controlSys(controlSys),
 	safetySys(safetySys){
-	  
+	  addMonitor(&mouseMove);
 	  const AxisVector start_position{ 0, 0, -0.015, 0 };
 	
 	  controlSys.pathPlanner.setInitPos(start_position);  

@@ -15,17 +15,19 @@ MainSequence::MainSequence(std::string name, eeros::sequencer::Sequencer& sequen
 	calibration(calibration),
 	safetySys(safetySys),
 	sequencer(sequencer),
-	sortSeq("Sort Sequence", sequencer, this, controlSys, safetySys, calibration),
-	shuffSeq("Shuffle Sequence", sequencer, this, controlSys, safetySys, calibration),
-	calibSeq("Calibration Sequence", sequencer, this, controlSys, safetySys, calibration),
-	
 	mmc(controlSys),
-	mouseMove("MouseMoveMonitor", this, mmc, eeros::sequencer::SequenceProp::abort){
-	  sequencer.addSequence(sortSeq);
-	  sequencer.addSequence(shuffSeq);
-	  sequencer.addSequence(calibSeq);
-	  
-	  addMonitor(&mouseMove);
+	mexSeq("Mouse Exception Sequence", sequencer, this,  safetySys, properties, controlSys),
+// 	amexSeq("Mouse Exception Sequence", sequencer, this, controlSys,  safetySys, properties),
+	mouseMove("MouseMoveMonitor", this, mmc, eeros::sequencer::SequenceProp::restart, &mexSeq),
+	sortSeq("Sort Sequence", sequencer, this, controlSys, safetySys, calibration, mouseMove),
+	shuffSeq("Shuffle Sequence", sequencer, this, controlSys, safetySys, calibration, mouseMove),
+	mouseSeq("Mouse Sequence", sequencer, this, controlSys, safetySys, calibration, properties),
+ 	calibSeq("Calibration Sequence", sequencer, this, controlSys, safetySys, calibration)
+	
+	  {
+	    sequencer.addSequence(sortSeq);
+	    sequencer.addSequence(shuffSeq);
+	    sequencer.addSequence(calibSeq);
 	  }
 	
 
@@ -34,7 +36,7 @@ int MainSequence::action() {
  
  
  while(safetySys.getCurrentLevel() < properties.slSystemReady);
- 
+  log.warn() << "starting mainsequence";
 //   auto& sequencer = sequencer::Sequencer::instance();
 //   const AxisVector start_position{ 0, 0, -0.015, 0 };
 	
@@ -45,7 +47,7 @@ int MainSequence::action() {
 //   CalibrateSequence* calSeq = static_cast<CalibrateSequence>(sequencer.getSequenceByName("Calibration Sequence"));
   
   while(Sequencer::running){
-   log.info() << safetySys.getCurrentLevel().getDescription();
+    log.info() << safetySys.getCurrentLevel().getDescription();
 
    
    if(safetySys.getCurrentLevel() == properties.slAutoMoving){
@@ -61,18 +63,18 @@ int MainSequence::action() {
    if(safetySys.getCurrentLevel() == properties.slEmergency){
    }
    
-   if(safetySys.getCurrentLevel() == properties.slCalibrating){
-       calibSeq.start();
-       calibSeq.waitAndTerminate();
+   else if(safetySys.getCurrentLevel() == properties.slCalibrating){
+        calibSeq.start();
+        calibSeq.waitAndTerminate();
    }
    
-   if(safetySys.getCurrentLevel() == properties.slMouseTeaching){
+   else if(safetySys.getCurrentLevel() == properties.slMouseTeaching){
+// 	 controlSys.emagVal.setValue(controlSys.mouse.getButtonOut().getSignal().getValue()[0]);
+ 	 mouseSeq.start();
+ 	 mouseSeq.wait();
 //       sequencer.getSequenceByName("Mouse Sequence")->start();
    }
-   
-//    sequencer.getSequenceByName("Calibration Sequence")->start();
-//    sequencer.getSequenceByName("Mouse Sequence")->wait();
- 
+    
   }
 }
 

@@ -6,23 +6,21 @@ using namespace eeduro::delta;
 using namespace eeros::sequencer;
 using namespace eeros::safety;
 
-SortSequence::SortSequence(std::string name, eeros::sequencer::Sequencer& sequencer, eeros::sequencer::BaseSequence* caller, DeltaControlSystem& controlSys, eeros::safety::SafetySystem& safetySys, Calibration& calibration):
-	Sequence(name, sequencer),
+SortSequence::SortSequence(std::string name, eeros::sequencer::Sequencer& sequencer, eeros::sequencer::BaseSequence* caller, DeltaControlSystem& controlSys, eeros::safety::SafetySystem& safetySys, Calibration& calibration, eeros::sequencer::Monitor& mouseMove):
+	Sequence(name, sequencer, caller, false),
 	move("move", sequencer, this, controlSys, calibration),
 	detect("detect", sequencer, this, controlSys, calibration),
-	moveBlock("moveBlock", sequencer,controlSys, this, safetySys, calibration),
+	moveBlock("moveBlock", sequencer,controlSys, this, safetySys, calibration, mouseMove),
 	controlSys(controlSys),
-	mmCond(controlSys),
-	m("sortSequenceMoveMouse", this, mmCond, SequenceProp::abort),
 	safetySys(safetySys){
-	      addMonitor(&m);
+	      addMonitor(&mouseMove);
 	  }
 	
 bool SortSequence::checkPreCondition()
 {
-  const AxisVector start_position{ 0, 0, -0.015, 0 };
+//   const AxisVector start_position{ 0, 0, -0.015, 0 };
 	
-  controlSys.pathPlanner.setInitPos(start_position);  
+//   controlSys.pathPlanner.setInitPos(start_position);  
   controlSys.inputSwitch.switchToInput(0);		// set input to pathplanner
 	
   return true;

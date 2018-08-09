@@ -7,7 +7,6 @@ using namespace eeduro::delta;
 
 DeltaControlSystem::DeltaControlSystem(double td) : 
 	mouse("/dev/input/event1"),
-	//joystick("/dev/input/js0"),
 	pathPlanner({1, 1, 1, 5}, {10, 10, 10, 50}, td),
 	i(i1524, i1524, i1524, i0816),
 	kM(kM1524, kM1524, kM1524, kM0816),
@@ -18,8 +17,6 @@ DeltaControlSystem::DeltaControlSystem(double td) :
 	emag("emag"),
 	
 	jacobian(kinematic.get_offset()),
-	
-// 	inverter(-1.0),
 	
 	posController(kp),
 	speedController(kd),
@@ -36,7 +33,6 @@ DeltaControlSystem::DeltaControlSystem(double td) :
 	enc2("enc2"),
 	enc3("enc3"),
 	enc4("enc4"),
-
 
 	mot1("motor1"),
 	mot2("motor2"),
@@ -206,15 +202,15 @@ DeltaControlSystem::DeltaControlSystem(double td) :
 	timedomain.addBlock(emag);
 	
 
-	eeros::task::Periodic tdPer("tdPer",(dt*100), timedomain);
-	tdPer.monitors.push_back([&](eeros::PeriodicCounter &c, eeros::logger::Logger &log) {
- 	  log.info() <<  mouse.getButtonOut().getSignal();
-	  log.info() <<  mouse.getOut().getSignal();
-	  //log.info() << "motorModel: " << motorModel.getOut().getSignal().getValue();
-	  //log.info() << "voltage set point: " << voltageSetPoint.getOut().getSignal().getValue();
-	});
-	eeros::Executor::instance().add(timedomain);
-	//eeros::Executor::instance().add(tdPer);
+// 	eeros::task::Periodic tdPer("tdPer",(dt*100), timedomain);
+// 	tdPer.monitors.push_back([&](eeros::PeriodicCounter &c, eeros::logger::Logger &log) {
+//  	  log.info() <<  mouse.getButtonOut().getSignal();
+// 	  log.info() <<  mouse.getOut().getSignal();
+// 	  //log.info() << "motorModel: " << motorModel.getOut().getSignal().getValue();
+// 	  //log.info() << "voltage set point: " << voltageSetPoint.getOut().getSignal().getValue();
+// 	});
+ 	eeros::Executor::instance().add(timedomain);
+// 	eeros::Executor::instance().add(tdPer);
 	
 }
 
@@ -224,20 +220,15 @@ void DeltaControlSystem::start() {
 
 void DeltaControlSystem::stop() {
 	timedomain.stop();
-	//timedomain.join();
 }
 
 void DeltaControlSystem::enableAxis() {
 	voltageSwitch.switchToInput(0);
-	//board.setEnable(true);
-	//board.setReset(false);
 }
 
 void DeltaControlSystem::disableAxis() {
 	voltageSwitch.switchToInput(1);
 	voltageSetPoint.setValue({0.0,0.0,0.0,0.0});
-	//board.setEnable(false);
-	//board.setReset(true);
 }
 
 void DeltaControlSystem::setVoltageForInitializing(AxisVector u) {
@@ -266,12 +257,11 @@ bool DeltaControlSystem::switchToPosControl() {
 void DeltaControlSystem::goToPos(double x, double y, double z, double phi) {
 	AxisVector p;
 	p << x, y, z, phi;
-	//pathPlanner.gotoPoint(p);
+	pathPlanner.gotoPoint(p);
 }
 
 void DeltaControlSystem::initBoard() {
-	/*if(!board.open("/dev/spidev1.0"))
-		throw EEROSException("failed to open SPI device");*/
+
 }
 
 AxisVector DeltaControlSystem::getTcpPos() {

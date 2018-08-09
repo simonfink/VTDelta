@@ -9,7 +9,7 @@ using namespace eeros::safety;
 
 
 CalibrateSequence::CalibrateSequence(std::string name, eeros::sequencer::Sequencer& sequencer,eeros::sequencer::BaseSequence* caller, DeltaControlSystem& controlSys, eeros::safety::SafetySystem& safetySys, Calibration& calibration) :
-	Sequence(name, sequencer),
+	Sequence(name, sequencer,caller, true),
 	controlSys(controlSys),
 	safetySys(safetySys),
 	safetyProp(safetyProp),
@@ -80,14 +80,10 @@ int CalibrateSequence::action() {
 // 	while(safetySys.getCurrentLevel() != safetyProp.slCalibrating);
 	
 	
-// 	waitUntilReady();
-  
-	log.info() << "start calib action";
+//  	waitUntilReady();
 	
 	usleep(500000);
 	
-	//safetySys->triggerEvent(events::doEmergency);
-// 	controlSys.disableAxis();
 // 	log.info() << "axis disabled";
 	
 	const char *block[] = { "[no block]", "[block 1]", "[block 2]", "[block 3]" };

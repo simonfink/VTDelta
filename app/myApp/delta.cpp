@@ -20,6 +20,7 @@
 #include "sequence/SortSequence.hpp"
 #include "sequence/MouseSequence.hpp"
 #include "sequence/MainSequence.hpp"
+#include "sequence/ExceptionSequence.hpp"
 
 //#include "conditions/MissingBlock.hpp"
 #include "conditions/MoveMouse.hpp"
@@ -69,20 +70,20 @@ int main(int argc, char **argv) {
 	
 	auto& sequencer = Sequencer::instance();
 
-	MainSequence mainSequence("Main Sequence", sequencer, controlSys, safetySys, properties, calibration);
+  	MainSequence mainSequence("Main Sequence", sequencer, controlSys, safetySys, properties, calibration);
 // 	MouseSequence mouseSequence("Mouse Sequence", sequencer, controlSys, safetySys, calibration);
 // 	SortSequence sortSequence("Sort Sequence", sequencer, controlSys, safetySys,calibration);
 // 	ShuffleSequence shuffleSequence("Shuffle Sequence",sequencer, controlSys, safetySys, calibration);
-// 	CalibrateSequence calibSequence("Calibration Sequence", sequencer, controlSys, safetySys, calibration);
+//  	CalibrateSequence calibSequence("Calibration Sequence", sequencer, controlSys, safetySys, calibration);
+// 	ExceptionSequence exSeq("Exception Sequence", sequencer, controlSys, safetySys, properties);
 	
-	
-	sequencer.addSequence(mainSequence);
+ 	sequencer.addSequence(mainSequence);
 // 	sequencer.addSequence(mouseSequence);
 // 	sequencer.addSequence(sortSequence);
 // 	sequencer.addSequence(shuffleSequence);
-// 	sequencer.addSequence(calibSequence);
+//  	sequencer.addSequence(calibSequence);
 	
-//  	calibSequence.start();
+//   	calibSequence.start();
 //  	mainSequence.start();
 	
 	

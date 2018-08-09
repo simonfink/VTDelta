@@ -10,7 +10,7 @@ class MissingBlockCondition : public eeros::sequencer::Condition{
 public:
   MissingBlockCondition(){ }
   bool validate() {
-    
+    return true;
   }
   
 };

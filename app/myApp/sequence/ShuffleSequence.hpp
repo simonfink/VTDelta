@@ -12,7 +12,7 @@ namespace eeduro {
 	namespace delta {
 		class ShuffleSequence : public eeros::sequencer::Sequence {
 		public:
-			ShuffleSequence(std::string name, eeros::sequencer::Sequencer& sequencer,eeros::sequencer::BaseSequence* caller, DeltaControlSystem& controlSys, eeros::safety::SafetySystem& safetySys, Calibration& calibration);
+			ShuffleSequence(std::string name, eeros::sequencer::Sequencer& sequencer,eeros::sequencer::BaseSequence* caller, DeltaControlSystem& controlSys, eeros::safety::SafetySystem& safetySys, Calibration& calibration, eeros::sequencer::Monitor& mouseMove);
 			
 			int action();
 			

@@ -48,7 +48,7 @@ Calibration::~Calibration() { }
 
 
 void Calibration::loadDefaults() {
-	std::cout << "load defaults" << std::endl;
+// 	std::cout << "load defaults" << std::endl;
 	for (int i = 0; i < 4; i++) {
 		position[i].x = 0;
 		position[i].y = 0;
@@ -66,7 +66,7 @@ void Calibration::loadDefaults() {
 		}
 	}
 	transportation_height = -0.03;
-	std::cout << "loaded defaults" << std::endl;
+// 	std::cout << "loaded defaults" << std::endl;
 }
 
 

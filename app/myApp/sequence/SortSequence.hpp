@@ -14,7 +14,7 @@ namespace eeduro {
 	namespace delta {
 		class SortSequence : public eeros::sequencer::Sequence {
 		public:
-			SortSequence(std::string name, eeros::sequencer::Sequencer& sequencer,eeros::sequencer::BaseSequence* caller, DeltaControlSystem& controlSys, eeros::safety::SafetySystem& safetySys, Calibration& calibration);
+			SortSequence(std::string name, eeros::sequencer::Sequencer& sequencer,eeros::sequencer::BaseSequence* caller, DeltaControlSystem& controlSys, eeros::safety::SafetySystem& safetySys, Calibration& calibration, eeros::sequencer::Monitor& mouseMove);
 			
 			int action();
 			
@@ -29,9 +29,6 @@ namespace eeduro {
 			Move move;
 			Detect detect;
 			MoveBlockSequence moveBlock;
-			
-			MoveMouseCondition mmCond;
-			eeros::sequencer::Monitor m;
 		};
 	}
 }
