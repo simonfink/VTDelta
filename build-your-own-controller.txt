@@ -1,0 +1,911 @@
+======== Delta Roboter Tutorial - Build your own controller ========
+{{ :delta:build_own_controller:deltarobot2.png?300 |Photo by  EEROS Team, NTB University of Technology, Buchs & St. Gallen, Switzerland, http://eeros.org/}}
+
+======= Preamble =======
+It took about three days to get to know EEROS and another two days to write this tutorial. If you find mistakes or have suggestion for improvement, please take a fraction of your time and edit this tutorial.
+
+======= Delta's accessories =======
+
+The package with the delta robot should include:
+
+| Power Supply    | {{:delta:build_own_controller:power_supply.jpg?300|}}    | 
+| Lan cable    |   |
+| USB hub with usb cable   | {{:delta:build_own_controller:usb_hub.jpg?300|werz}}     |
+| XBox controller with USB connector   |{{:delta:build_own_controller:xbox.jpg?300|werz}}     |
+| Mouse with scroll wheel left/right function | {{:delta:build_own_controller:mouse.jpg?300|werz}}|
+| Special: TTL-232R-3V3 Cable.\\You need this cable, if you don't know the delta's IP-Address.| {{:delta:build_own_controller:ttl-232R-3v3.jpg?300|werz}}|
+| Special: Mini USB cable\\You need this cable, if you don't know the delta's IP-Address.  |     |
+
+====== Ready to play? ======
+You get your delta and of course you want to play with it and see what he can do. You can! But do as listed below:\\
+  *  First of all: **To turn off the delta, press the red stop button for 5 seconds or send a halt command to it and then switch the power off!** Don't plug out the power of your computer before it has shut down either.
+  * The red stop button stops the delta, theoretically it should restart afterwards.
+  * Please read the safety instructions, chapter 1.2 under [[http://hw.eeros.org/eeduro/downloads/delta_getting_started.pdf|Delta Getting Started Tutorial]]
+
+After that you can start:
+  - Plug in power and the USB Hub connected with mouse and XBox adapter. Turn the XBox controller on. USB Devices plugged in after the start will not be recognized.
+  - Switch the power on.
+  - Wait until the white led's have turned off, during this time the BeagleBoard is starting.
+  - Press start. **Attention** delta will be moving!!
+  - You can now steer with the mouse: Move will move, scroll up and down will change the Z-position and pressing the scroll wheel to left or right will turn the magnet. 
+  - Press the blue mode button. From then on the XBox controller now controls the delta. Move with right stick, up and down with the left stick and LT / RT to turn the Magnet. If this mode is skipped, check if the XBox controller has battery.
+  - Press the blue mode button again. The delta shows automatic moves. If you press the blue button again it starts the mouse mode again.
+
+====== Preparations ======
+===== VM =====
+
+  * Install Oracle VM Virtual Box Manager [[https://www.virtualbox.org/|VM]] or from the [[https://intranet.ntb.ch/ntb//kiosk/|Kiosk]] (NTB students)
+  * 64-bit
+  * 8GB RAM
+  * Hard disk VDI (VirtualBox Disk Image) dynamic allocated, 50GB ROM
+
+
+===== Linux =====
+  * Any 64-Bit Linux Version.
+  * This tutorial works with Linux Mint 17.2 Rafaela 64Bit [[http://www.linuxmint.com/|mint]]
+  * Remark for VM beginners: its easier to work if you allow copy/paste from host to target  and vice versa. [[http://www.liberiangeek.net/2013/09/copy-paste-virtualbox-host-guest-machines/|copy/paste]].
+  * Set your computer name to **delta**. You can choose another name, but you have to adapt paths during this tutorial.
+  * Remember your password!
+  * Remember the snapshot function of Virtual Box? Make a snapshot after the clean Linux installation.
+
+===== EEROS =====
+  * Download EEROS on your VM [[http://wiki.eeros.org/getting_started/install_and_setup_development_environment|EEROS]]
+  *  You don't need comedilib or flink for this tutorial.
+  * Download EEROS to /home/delta/eeros-framework (execute git clone command in the folder /home/delta).  If you use a different location you have to adapt links and references during this tutorial on your own.
+  * Suggestion: make a snapshot of your VM after a successful download
+  * To test the EEROS installation, make the hello world tutorial: [[http://wiki.eeros.org/getting_started/tutorials/helloworld|hello world]]. Note: your path to EEROS is: /home/delta/eeros-framework, use this path in the extra arguments.
+
+===== EEDURO =====
+  * Download and install EEDURO on your VM from [[https://github.com/eeduro/eeduro-scripts|EEDURO]] and follow the README.md
+  * As described in README.md, build for Host and Target. **Don't execute copy2robot, clean or distclean now!**
+
+===== Putty =====
+  * Download and install Putty on your host, not in your VM. [[http://www.putty.org/|putty]]
+
+===== Credentials of delta =====
+  * Ask your responsible advisor for username, password and IP- Address of the delta.
+
+======= Connect to delta =======
+Plug in the power supply, the USB hub with mouse and XBox and the lan cable. Then start the delta with the ON button. Wait till the BeagleBoard has booted and the white light has turned off.
+The connection procedure depends the knowledge of the IP-Address. If you know it, you're lucky and you can proceed to [[start#connect_to_console|Connect to console]].
+
+Remark to NTB students: with own laptop, you have to connect with VPN, otherwise it will not work.
+
+===== Get delta's IP-Address =====
+==== With TTL232 and mini USB ====
+Turn off the power and remove all cables. Turn the delta upside down and open the bottom. Remove the BeagleBone Board and connect the mini USB and the TTL232 {{ :delta:build_own_controller:ftdi_serial_debug.jpg?200|http://www.armhf.com/wp-content/uploads/2013/06/ftdi_serial_debug.jpg}}(see Delta's accessories) to a computer.\\ If your computer doesn't recognize the TTL232, you have to install a driver [[http://www.ftdichip.com/Drivers/CDM/CDM%20v2.12.06%20WHQL%20Certified.zip|try this link]].
+Open your device manager and get the number of the COM, on which TTL232 is plugged in.
+Then open Putty and connect with the following settings:\\
+
+{{:delta:build_own_controller:putty_settings_serial.png?400|}}
+
+Press Open. Follow the instructions under [[start#login|login]].
+
+After that, you want to get the IP-Address of delta. type "ifconfig" and press enter. The IP-Address appears in the section: eth0, inetaddr.
+
+==== Only with mini USB ====
+Note: there is a way to get the delta's IP-Address without the TTL232, but over micro USB and the IP-Address of the USB-Adapter. If you have to do it because you don't have a TTL232, please make an instruction here.
+
+  * Connect the mini USB with the PC.
+  * Then open Putty and enter the IP address 192.168.7.2 and choose as Connection type SSH (see image). You will get a security warning, click yes. Then follow the instructions under [[delta:build_own_controller:start#login|login]].
+{{:delta:build_own_controller:00_putty_bbb.png?400|}}
+  * Tip to black window the the following instruction. Under the point eth0 you can find the IP-Adresse. 
+<code>"ifconfig"</code> . 
+**Note:** If you are using Linux running on a VM, there could be some issues to connect the Delta-Roboter with the PC. Try to get remote control with Windows (driver needed) or get the serial connection done over TTL232.  
+===== Connect to console======
+==== From VM ====
+Usually you want to connect the delta with the VM. To do so, open a console and type: <code>"ssh root@the.ip.of.delta"</code>. Then follow the instructions under [[start#login|login]].
+==== From Host ====
+Open Putty, set the parameters as shown below and press "Open".\\
+{{:delta:build_own_controller:putty_settings_ssh.png?400|werz}}
+
+
+===== Login =====
+The first time you do this you will see a security alert in the putty console - press "Yes". 
+Then the following appears on the putty console: <code>"login as:"</code> Write the username you got from your advisor and hit enter. Then enter the password and confirm with enter. Don't be alarmed if the console does not response while you type your password.
+If you logged in successfully, the console will show up like this: \\
+<code>
+Welcome to Ubuntu 14.04.1 LTS (GNU/Linux 3.8.13-bone63 armv7l)
+ * Documentation:  https://help.ubuntu.com/
+Last login: Wed Oct  7 11:34:45 2015 from 146.136.53.139
+root@arm:~# 
+</code>
+
+====== Test programms ======
+The delta has test programms, which allow you to test several things. They are a perfect entry point.
+Open your VM and [[start#connect_from_vm|connect]] to the delta. Navigate to the folder /opt/eeduro/bin with: 
+
+<code>
+  $ cd /opt/eeduro/bin/
+</code>
+List the files in this folder with 
+<code>
+  $ ls
+</code>
+
+The following will be shown: 
+<code>
+button  eeduro-ctrl  eeduro-delta  encoder  led  magnet  voltage
+</code>
+
+The green color means that the files are executable, see more under [[http://pthakkar.com/2013/03/linux-color-files-ls-command/|colors linux files]].\\
+To execute these test programms, you have to stop the actual program. Which starts every time you start delta.
+
+  - Type:<code>$ screen -r eeduro</code>
+  - The console will write a lot of text. To stop it, press (Ctrl) + (c) for about 2-3 seconds.
+  - The programm is stopped if you can <code>
+screen is terminating]
+root@arm:/opt/eeduro/bin\# ^C</code>
+on your console.
+
+Now load the button test program. Type: 
+
+<code>  $ ./button</code>
+
+If everything works fine, you can press the buttons and you get a log on the console:
+
+<code>button 1: down
+button 1: up</code>
+
+
+You can see the source code of the button test programm here: /home/delta/eeduro-project/eeduro/test/button.cpp
+
+You can also try out the other programms too.
+
+Remark: Its not possible anymore to halt delta by pressing the button for 5 seconds. Instead type "halt" in the console and then turn the power off.
+
+===== Problems =====
+If your testprogram does not work, check README.md.
+
+====== Toolchain ======
+Now you want to write you own programm. But first you have to set up the toolchain.\\
+  - Start KDevelop. If you still have the last session from [[start#eeros|"Hello World"]] open, click: Session, Start New Session.
+  - Now click: Project, Open / Import Project.
+  - Navigate to: /home/delta/eeduro-project and select CMakeLists.txt. Press Next.
+  - Name the new Project "eeduro-project", click Finish.
+  - Change Build Directory to /home/delta/eeduro-project/build-armhf/
+  - With the following settings, the code is compiled for the delta roboter.  Put the following to the extra arguments input field:**-DCMAKE_TOOLCHAIN_FILE=/home/delta/eeduro-project/linaro-tc/toolchain.cmake -DADDITIONAL_INCLUDE_DIRS="/home/delta/eeduro-project/eeduro/eeduro/include/;/home/delta/eeduro-project/eeros/includes/" -DADDITIONAL_LINK_DIRS="/home/delta/eeduro-project/build-armhf/eeros/src/;/home/delta/eeduro-project/build-armhf/eeduro/eeduro/"** It's no typo, one folder is actually called include and the other include**s**. \\ ATTENTION: be sure to have the Linux Double Quotes, copy and paste can modify them! 
+  - Build.
+  - If you open the project view in KDevelop, you can unfold the eeduro-project and open copy2robot.sh.
+  - Change the setc remote_host "192.168.7.2" to your IP-Address and save.
+  - Execute the copy2robot script with the console.
+  - Now you have to go trough the chapter [[start#test_programms|test programms]] again. If it works, you have done everything right.
+
+Remark: Now is a good time to make another snapshot of your VM.
+
+===== Problems ======
+Be really careful with the additional includes, check if these files are where you expect them an check for typos.
+ 
+====== Your own testprogramm ======
+Now create a new testprogramm. The LED's inside the buttons should glow while they are pressed.\\
+Go to the folder /home/delta/eeduro-project/eeduro/test and create a new file button_led.cpp.\\
+
+Copy the following code into this file and program the missing fragment.
+
+<code>
+#include <iostream>
+#include <unistd.h>
+#include <eeduro/Board.hpp>
+
+int main(int argc, char *argv[])
+{
+	eeduro::Board board;
+	
+	if (!board.open("/dev/spidev1.0")) {
+		std::cerr << "cannot open SPI device " << std::endl;
+		return 1;
+	}
+
+	bool button[3] = { };
+	while (true) {
+		board.run();
+		for (int i = 0; i < 3; i++) {
+			do it yourself!
+		}
+		usleep(30000);
+	}
+	board.close();
+	return 0;
+}
+</code>
+Note: if you are not able to write the code in on your own, the source code is in the [[/start#button_ledcpp|appendix]].\\
+
+Then open CMakeList which is in the same folder. Add the following code to the end of the file: 
+
+<code>
+add_executable(button_led button_led.cpp)
+target_link_libraries(button_led eeduro eeros)
+</code>
+
+Now go to copy2robot.sh and past the following line under the line with voltage: 
+
+<code>
+cp build-armhf/eeduro/test/button_led $tmpdir/bin
+</code>
+
+Execute copy2robot.sh. ([[start#test_programms|Like here]]), [[/start#connect_to_delta|connect]] to delta and [[start#test_programms|check]] if button_led was successfully copied into /opt/eeduro/bin. \\
+
+Now try to run the new test programm, as described [[start#test_programms|here]].
+
+======= Hello Structure =======
+
+Readers with experience in cmake can skip this chapter.\\ \\
+Bigger projects need to be well structured, so you have to organize your code in folders.
+Lets create a project with this structure:
+
+{{:delta:build_own_controller:dirtree1.png?300|bild dirtree}}
+
+Create a new project in KDevelop, as usual, with Projects, Create New Project, Standard Terminal and enter the name structure_project in the location /home/delta/projects. Set the same Extra Arguments as [[start#toolchain | before]]. The EEDURO include is useless now, but you may want to extend this project later.
+
+
+Now navigate to the new folder structure. As you can see, KDevelop has already created CMakeLists.txt(structure), main.cpp and structure.kdev4.
+Create two folders one called "src" and the other called "include". Move main.cpp into src, then open src. Create the following empty files: CMakeLists.txt,
+ControlSystem.cpp and SafetyProperties.cpp. Open the folder "include" and create another folder called "structure_project". Here you create ControlSystem.hpp and SafetyProperties.hpp. The .cpp and .hpp (except main.cpp) have no functionality but are a good basis when you want to extend this project.
+\\
+
+Open the CMakeLists.txt(src) and paste the following into it: 
+<code>
+add_executable(structure main.cpp ControlSystem.cpp SafetyProperties.cpp)
+target_link_libraries(structure eeros eeduro)
+</code>
+
+
+ControlSystem.cpp and SafetyProperties.cpp in add_executable are just written here that you see how you add them when you need these classes. "structure" is the name of the executable that will be builded. Once again, the target_link_libraries eeduro is useless, you don't need it now. 
+Open the CMakeLists.txt(structure_project) and paste the following into it:
+<code>
+cmake_minimum_required(VERSION 2.8)
+project(structure)
+
+include_directories(${ADDITIONAL_INCLUDE_DIRS})
+link_directories(${ADDITIONAL_LINK_DIRS})
+
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
+add_subdirectory(src)
+</code>
+
+With add_subdirectory, you specifiy which folders should be included. They need to have their own CMakeLists.txt.
+
+Open the main.cpp and paste the same code as in Hello World into it:
+<code>
+#include <iostream>
+#include <eeros/logger/Logger.hpp>
+#include <eeros/logger/StreamLogWriter.hpp>
+ 
+int main() {
+	using namespace eeros::logger;
+ 
+	StreamLogWriter w(std::cout);
+	Logger<LogWriter>::setDefaultWriter(&w);
+	Logger<LogWriter> log;
+ 
+	log.info() << "Hello, EEROS";
+ 
+	return 0;
+}
+</code>
+Build and try to execute. Don't remember how? See [[http://wiki.eeros.org/getting_started/tutorials/helloworld|hello world]].
+
+
+======= Motor Control =======
+When you create your first controller, you will see the strength of EEROS - it's block schemes.
+For that, remove the delta's arms, (3), see figure below\\
+{{:delta:build_own_controller:delta_assembly.png?400|EEDURO Delta - Getting Started Guide, Stefan Landis, Martin Züger, NTB University of Applied Sciences of Technology Buchs http://hw.eeros.org/eeduro/downloads/delta_getting_started.pdf}}.
+
+===== Controller =====
+We want implement a P-Controller to control the velocity of the driving side.  In the figure below, you can see a block diagram of the control system.\\
+{{:delta:build_own_controller:00_controll_system.png?700|}}\\
+Important is, that the speed and position are measured on the motor side. If you want to control the speed/position of the axis, you have to the gear and its gear transmission ratio into account.
+In the next figure, you see a scheme of the motors used in the delta.
+{{:delta:build_own_controller:scheme_motor.png?450|werz}},
+
+We have the following components in the control system:
+
+|Board Speedout Block| |Reads the speed of the four motors of the delta. This is a eeros::math::Matrix<NOF_AXIS, 1, double> with NOF_AXIS = 4. You see on your delta, that the motors are enumerated. If you want to read the speed of motor 1, you have to read out the value at position 0 of this matrix.|
+|Board In Block| |This is where you set the values of the voltage for each motor. Its a 4x1 Matrix again.|
+|Constant c|[CONSTANT] |This is the specified value of the rotation speed. In a later step you can exchange this fix value with a trajektorien generator.|
+|demux |[DEMUX]|In the booster phase, you want to control one of the motors, the one with the number 1. To do so, you split the incoming board speed up with this demux.|
+|mux |[MUX]|The inverse of the demux.|
+|gear |[GAIN]|You can control the position/speed on the other side of the gear.|
+|inverseGear |[GAIN]|You still have to set the values for the motor.|
+|sum1 |[SUM]|Calculates the variance.|
+|kv |[GAIN] |Cruise control system with a proportional controller.|
+|inertia |[GAIN]|Mass moment of inertia, motor and system.|
+|saturation |[SATURATION]|Limit the upper and lower bounds of the Voltage.|
+|motormodel|[MOTORMODEL]|Calculates the needed voltage of the motor from given motor speed and torque. |
+\\
+The Delta-Roboter is using a DC-Motor from Faulhaber ({{:delta:build_own_controller:mgross_motor_1524_sr.pdf|1524012SR}}) with the gear 15/8. He has the following physical Parameters:
+|nominal voltage | U<sub>M1</sub>  | 12 VDC |
+|ferrule resistor| R<sub>M</sub>   | 19.8 Ω |
+|motor constant  | k<sub>M</sub>   | 11.4 mN/A |
+|moment of inertia |J              | 0.65 gcm<sup>2</sup>|
+|gear ratio      | i               | 76     |    
+
+
+     
+
+
+===== Structure =====
+Create a project with the following structure or extend one of your existing projects. You need this structure and these classes:
+\\
+
+{{:delta:build_own_controller:dirtree2.png?300|dirtree 2}}
+
+Try to specify the CMakeLists on your own or adapt an existing one. If you fail, the code is in the [[start#motor_controll_cmakefiles|appendix]].
+
+===== Constants =====
+In the file constants.hpp, we specify all constant values. All other classes use just the constant name to get the value. The advantage is, that you can change your value in a single file and don't need to search through all you code.
+<code>
+// values from:
+//http://www.glockenankermotor.com/pdf/01_DC-Kleinstmotoren/01_DC-Kleinstmotoren/EN_1524SR_DFF.pdf?XTCsid=b756fdbe0a224d9bf142067327118796
+//https://fmcc.faulhaber.com/resources/img/DE_15-8_FMM.PDF
+//http://wiki.ntb.ch/stud/_media/omnimobot/masterthesis_stefan_landis.pdf
+
+
+// Controller parameters
+constexpr double dt = 0.001; // [s]
+constexpr double dOpt = 0.7;	//optimalerDaemphungswert
+constexpr double omega0 = 357.0; //[rad/s];
+constexpr double kvValue = 2.0*omega0*dOpt;
+
+// Electrical and mechanical parameters
+constexpr double i1524 = 387283.0/5103.0;	// gear ratio for the 3 main axis --> 76
+constexpr double kM1524 = 11.4e-3; // [NM/A];
+constexpr double RA1524 = 19.8; // [Ohm]
+constexpr double stallTorqueMotor1524 = 6.76e-3;// [NM]
+constexpr double stallTorqueGear1524 = 100e-3;// [NM]
+constexpr double maxStallTorque1524 = stallTorqueMotor1524<i1524*stallTorqueGear1524?stallTorqueMotor1524:stallTorqueGear1524*i1524;
+constexpr double rotorInertia1524 = 0.65e-7;// [NM]
+constexpr double inertiaValue1524 = rotorInertia1524*i1524*i1524;
+constexpr double motorModelValue1524 = rotorInertia1524*i1524*i1524;
+</code>
+
+===== MotorModel =====
+There is no EEROS block for a MotorModel, so you have to create it on your own.
+The function of this block is to calculate the voltage when torque and actual speed are given. The calculation is based on [[http://wiki.ntb.ch/stud/_media/omnimobot/masterthesis_stefan_landis.pdf|Masterthesis Stefan Landis]]. \\
+
+The MotorModel.hpp:
+<code>
+#include <eeros/control/Block1i1o.hpp>
+
+class MotorModel : public eeros::control::Block {
+public:
+	MotorModel(const double kM, const double RA);
+	
+	virtual eeros::control::Input<double>& getTorqueIn();
+	virtual eeros::control::Input<double>& getSpeedIn();
+	virtual eeros::control::Output<double>& getOut();
+	
+	virtual void run();
+	
+protected:
+	eeros::control::Input<double> torque;
+	eeros::control::Input<double> speed;
+	eeros::control::Output<double> voltage;
+	
+	double kM, RA;
+};
+
+};
+</code>
+As you can see, you extend the block class here.\\
+
+And the MotorModel.cpp:
+
+<code>
+#include "SimpleControlSystem/MotorModel.hpp"
+
+MotorModel::MotorModel(const double kM, const double RA) : kM(kM), RA(RA) { }
+
+eeros::control::Input<double>& MotorModel::getSpeedIn() {
+	return speed;
+}
+
+eeros::control::Input<double>& MotorModel::getTorqueIn() {
+	return torque;
+}
+
+eeros::control::Output<double>& MotorModel::getOut() {
+	return voltage;
+}
+
+void MotorModel::run() {
+	double u, M, w;
+	M = torque.getSignal().getValue();
+	w = speed.getSignal().getValue();
+	u = RA * M / kM + w * kM;
+	voltage.getSignal().setValue(u);
+	voltage.getSignal().setTimestamp(torque.getSignal().getTimestamp());
+}
+</code>
+
+===== SimpleControlSystem =====
+
+In SimpleControlSystem.hpp you define the instances, methods and the constructor. 
+The public constructor gets the argument double ts, and there are three public void methods: start(), stop() and initBoard(). 
+It has these public instances:
+<code>	
+//Sum with 2 inputs, typename double
+eeros::control::Sum<2,double> sum1;
+eeros::control::Gain<> kv;
+eeros::control::Gain<> inertia;
+eeros::control::Gain<> gear;
+eeros::control::Gain<> inverseGear;
+eeros::control::Saturation<double> saturation;
+MotorModel motormodel;
+// typename double
+eeros::control::Constant<double> c;
+//define 4 outputs (double) and the inpout is a 4x1 Matrix (double)
+eeros::control::DeMux<4,double,eeros::math::Matrix<4,1,double>> demux;
+//define 4 inputs (double) and the output is a 4x1 Matrix (double)
+eeros::control::Mux<4,double,eeros::math::Matrix<4,1,double>> mux;
+// typename double
+eeros::control::Constant<double> voltage;
+// Blocks			
+eeduro::Board	board;
+</code>
+Additionally, it has a private instance of the TimeDomain. In the TimeDomain you have to specify the order of the calculation of your blocks. 
+<code>
+eros::control::TimeDomain timedomain;
+</code>
+Can this code fragment be optimized? Did you hear about the namespace declarations?
+\\
+
+In SimpleControlSystem.cpp you exactly specify the blocks from your controller scheme.
+Step 1 is to initialize all your blocks
+<code>
+...
+//init the blocks
+gear(i1524),
+saturation(upper-,and lower bound), 
+do the same with inverseGear, kv, inertia, motormodel
+...
+</code>
+Step 2 is to define the block properties:
+<code>
+...
+// Define blocks properties  
+sum1.negateInput(1);
+c.setValue(0.5);
+...
+</code>
+Step 3 is to define the block connections:
+<code>
+...
+demux.getIn().connect(board.getSpeedOut());	
+gear.getIn().connect(demux.getOut(0));
+sum1.getIn(1).connect(gear.getOut());
+sum1.getIn(0).connect(c.getOut());
+kv.getIn().connect(sum1.getOut());
+continue here with inertia --> inverseGear --> motorModel (2 inputs/1 output) --> saturation  --> mux and finally
+board.getIn().connect(mux.getOut());
+...
+</code>
+
+Step 4 is to add the blocks to the run method. You do that by adding the blocks to the timeDomain. The order is really important, you can't get values from a block that is not calculated.
+<code>
+...
+// Add blocks to run method
+timedomain.addBlock(&board);
+timedomain.addBlock(&demux);
+... more here ..
+timedomain.addBlock(&voltage);
+timedomain.addBlock(&mux);
+...
+</code>
+As a last step you have to implement the three methods start() stop() and initBoard(). Cheat here and look how its done in eeduro-project/eeduro/delta/ControlSystem.cpp
+
+The source code of the SimpleControlSystem.hpp and SimpleControlSystem.cpp are in the [[start#simplecontrolsystem1|appendix]], but you will understand nothing if you just copy and paste it...
+
+
+===== main.cpp =====
+
+First of all, you have to make sure, that the Linux command (Ctrl) + (c) can stop your program. To do so, create a boolean "running" then a signalHandler which sets running to false if it is called. Finally, you have to set this handler to the system with the call signal(SIGINT, signalHandler); This is the first step in your main method. In all your loops in the main.cpp you have to check this value.
+
+The second step in the main method is to specify and start the loggers. The easiest way is to cheat and copy it from the delta.cpp file in the eeduro-project/eeduro/delta/ folder
+
+Step three is to create an instance of SimpleControlSystem and initialize it.
+delta.cpp uses the ControlSystem. Instead of that, main.cpp should use the SimpleControlSystem created before. Call it controlSys.
+Initialize the hardware:
+<code>
+//initialize hardware
+controlSys.initBoard();
+controlSys.start();
+
+controlSys.board.setReset(false);
+controlSys.board.setEnable(true);
+</code>
+Then your program should run as long as you don't press (Ctrl) + (c).
+Do this with a while loop
+<code>
+while (running) {
+	//debug log here
+	sleep(1);
+}
+</code>
+The debug output calls are in the [[start#debug_calls_maincpp|appendix]], they are really useful!
+
+At the end of your main, you need to close the board.
+<code>
+// close hardware
+controlSys.board.setReset(true);
+controlSys.board.setEnable(false);
+
+controlSys.board.run();
+controlSys.board.close();
+</code>
+The source code of the main.cpp isin the [[start#maincpp1|appendix]], but you will understand nothing if you just copy and paste it...
+
+That's it! Now you have realized your own motor controller. The copy2roboter.sh must be enxtended in order to download the file simplesystem. Go to copy2robot.sh and past the follwing line: 
+
+<code>
+ cp "path_to_simplesystem" $tmpdir/bin
+</code>
+"path_to_simplesystem" is the path of the execute table from the project simplesystem. 
+
+ 
+
+====== Appendix ======
+===== Code Appendix =====
+==== button_led.cpp ====
+<code>
+#include <iostream>
+#include <unistd.h>
+#include <eeduro/Board.hpp>
+
+int main(int argc, char *argv[])
+{
+	eeduro::Board board;
+	
+	if (!board.open("/dev/spidev1.0")) {
+		std::cerr << "cannot open SPI device " << std::endl;
+		return 1;
+	}
+
+	bool button[3] = { };
+	while (true) {
+		board.run();
+		for (int i = 0; i < 3; i++) {
+			if (button[i] != board.button[i]) {
+				if (board.button[i]) {
+					board.led[i] = 1;
+				} else {
+					board.led[i] = 0;
+				}
+				button[i] = board.button[i];
+			}
+		}
+		usleep(30000);
+	}
+	board.close();
+	return 0;
+}
+</code>
+
+==== Motor Controll CMakeFiles ====
+CMakeLists.txt(simpleproject)
+<code>
+cmake_minimum_required(VERSION 2.8)
+project(simplesystem)
+
+include_directories(${ADDITIONAL_INCLUDE_DIRS})
+link_directories(${ADDITIONAL_LINK_DIRS} "${CMAKE_BINARY_DIR}/src/")
+
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
+
+include_directories(include)
+add_subdirectory(src)
+</code>
+
+CMakeLists.txt(src)
+<code>
+add_library(simplesystem-lib
+	    MotorModel.cpp
+	    SimpleControlSystem.cpp
+	    )
+
+add_executable(simplesystem main.cpp SimpleControlSystem.cpp MotorModel.cpp) 
+
+target_link_libraries(simplesystem eeros eeduro simplesystem-lib)
+</code>
+
+==== SimpleControlSystem ====
+SimpleControlSystem.hpp
+<code>
+#ifndef MYCONTROLSYSTEM_HPP_
+#define MYCONTROLSYSTEM_HPP_
+
+#include <eeros/control/Sum.hpp>
+#include <eeros/control/D.hpp>
+#include <eeros/control/Gain.hpp>
+#include <eeros/control/Constant.hpp>
+#include <eeros/control/PeripheralInput.hpp>
+#include <eeros/control/PeripheralOutput.hpp>
+#include <eeros/control/TimeDomain.hpp>
+#include <eeros/control/Saturation.hpp>
+#include <eeduro/Board.hpp>
+#include <eeros/control/Constant.hpp>
+#include <eeros/control/DeMux.hpp>
+#include <eeros/control/Mux.hpp>
+
+#include "MotorModel.hpp"
+
+class SimpleControlSystem {
+
+public:
+	SimpleControlSystem(double ts);
+	
+	void start();
+	void stop();
+	
+	void initBoard();
+	
+	//Sum with 2 inputs, typename double
+ 	eeros::control::Sum<2,double> sum1;
+ 	eeros::control::Gain<> kv;
+	eeros::control::Gain<> inertia;
+	eeros::control::Gain<> gear;
+ 	eeros::control::Gain<> inverseGearTau;
+	eeros::control::Gain<> inverseGearOmega;
+	eeros::control::Saturation<double> saturation;
+	MotorModel motormodel;
+	// typename double
+ 	eeros::control::Constant<double> c;
+ 	//define 4 outputs (double) and the inpout is a 4x1 Matrix (double)
+	eeros::control::DeMux<4,double,eeros::math::Matrix<4,1,double>> demux;
+	//define 4 inputs (double) and the output is a 4x1 Matrix (double)
+	eeros::control::Mux<4,double,eeros::math::Matrix<4,1,double>> mux;
+ 	// typename double
+	eeros::control::Constant<double> voltage;
+	// Blocks			
+	eeduro::Board	board;
+	
+protected:
+	
+private:
+	eeros::control::TimeDomain timedomain;
+};
+
+#endif // MYCONTROLSYSTEM_HPP_
+</code>
+
+
+SimpleControlSystem.cpp
+<code>
+#include "SimpleControlSystem/SimpleControlSystem.hpp"
+#include "SimpleControlSystem/constants.hpp"
+
+using namespace eeros::control;
+
+SimpleControlSystem::SimpleControlSystem(double ts) : 
+
+	//init the blocks
+	gear(i1524),
+	inverseGearTau(1.0/i1524),	//TODO lw constanten verwenden
+ 	inverseGearOmega(1.0/i1524),
+ 	saturation(-12.0, 12.0), 	//TODO abklaeren warum min, max und nicht wie in der doku max, min und warum trotzdem beides laeuft?
+ 	kv(2.0*0.7*357.0),
+	inertia(0.65*1/(1000*10000) * i1524*i1524),	//0.65*1/(1000*10000) * i1524*i1524 --> Datasheet (Faulhaber 1524012R) J = 0.65 gcm²
+	motormodel(11.4*0.001, 19.8),			//Datasheet (Faulhaber 1524012R): Km = 11.4 mNm/A , R = 19.8 Ohm 
+ 	timedomain("Main time domain", ts, true) {
+	  
+
+	
+ 	// Define blocks properties  
+ 	sum1.negateInput(1);					//Eingang zwei negieren
+	c.setValue(15);
+	
+	
+	demux.getIn().connect(board.getSpeedOut());	
+	inverseGearOmega.getIn().connect(demux.getOut(0));
+ 	sum1.getIn(1).connect(inverseGearOmega.getOut());
+	sum1.getIn(0).connect(c.getOut());
+	kv.getIn().connect(sum1.getOut());
+	inertia.getIn().connect(kv.getOut());
+ 	inverseGearTau.getIn().connect(inertia.getOut());
+	motormodel.getSpeedIn().connect(demux.getOut(0));
+	motormodel.getTorqueIn().connect(inverseGearTau.getOut());
+	saturation.getIn().connect(motormodel.getOut());
+	mux.getIn(0).connect(saturation.getOut());
+	board.getIn().connect(mux.getOut());
+	
+	
+	// Add blocks to run method
+	timedomain.addBlock(&board);
+	timedomain.addBlock(&demux);
+	timedomain.addBlock(&inverseGearOmega);
+	timedomain.addBlock(&gear);
+	timedomain.addBlock(&c);
+	timedomain.addBlock(&sum1);
+ 	timedomain.addBlock(&kv);
+	timedomain.addBlock(&inertia);
+	timedomain.addBlock(&inverseGearTau);
+	timedomain.addBlock(&motormodel);
+	timedomain.addBlock(&saturation);
+	timedomain.addBlock(&voltage);
+	timedomain.addBlock(&mux);
+}
+
+void SimpleControlSystem::start() {
+	timedomain.start();
+}
+
+void SimpleControlSystem::stop() {
+	timedomain.stop();
+}
+
+void SimpleControlSystem::initBoard() {
+	if(!board.open("/dev/spidev1.0"))
+		throw -1;
+}
+
+</code>
+
+==== Debug Calls main.cpp ====
+<code>
+		std::cout << "------------------------------------------------------------------------------ "  << std::endl; 
+		//read out the position of all motors
+		eeros::math::Matrix<4,1,double> enc = controlSys.board.getPosOut().getSignal().getValue();
+		std::cout << "enc_ist Antriebsseite			: " << enc(0) << "; " << enc(1) << "; " << enc(2) << "; " << enc(3) << "  [rad]" << std::endl;
+		
+		//get the value of the constant
+ 		std::cout << "omega_soll Abtriebsseite 		: " << controlSys.c.getOut().getSignal().getValue() << "  [rad/sec]" << std::endl;
+
+		//check the speed out from the board	
+ 		std::cout << "omega_ist Antriebsseite vom Board	: " << controlSys.board.getSpeedOut().getSignal().getValue()[0] << "; " << controlSys.board.getSpeedOut().getSignal().getValue()[1] << "; " << controlSys.board.getSpeedOut().getSignal().getValue()[2] << "; " << controlSys.board.getSpeedOut().getSignal().getValue()[3] << "  [rad/sec]" << std::endl;
+
+		//check the value of out of the demux
+ 		std::cout << "demux out omega_ist Antriebsseite 	: " << controlSys.demux.getOut(0).getSignal().getValue()  << "  [rad/sec]" << std::endl;
+		
+		// checkt the values from gear
+		std::cout << "inverseGearOmega omega_ist Antriebs. 	: " << controlSys.inverseGearOmega.getOut().getSignal().getValue() << "  [rad/sec]" << std::endl;
+
+		// check the calculation inside sum1 block
+		std::cout << "sum in 0 				: " << controlSys.sum1.getIn(0).getSignal().getValue() << "  [rad/sec]" <<  std::endl;
+		std::cout << "sum in 1 				: " << controlSys.sum1.getIn(1).getSignal().getValue() << "  [rad/sec]" << std::endl;
+		std::cout << "sum out  				: " << controlSys.sum1.getOut().getSignal().getValue() << "  [rad/sec]" << std::endl;
+		
+		//check the calculation inside kv block
+		std::cout << "kv in 					: " << controlSys.kv.getIn().getSignal().getValue() << "  [rad/sec]"<<  std::endl;
+		std::cout << "kv out					: " << controlSys.kv.getOut().getSignal().getValue() << "  [rad/sec²]"<< std::endl;
+		
+		//check the calculation inside gear block
+		std::cout << "inertia in 				: " << controlSys.inertia.getIn().getSignal().getValue() << "  [rad/sec²]" << std::endl;
+		std::cout << "inertia out				: " << controlSys.inertia.getOut().getSignal().getValue() << "  [Nm]" << std::endl;
+		
+		//checkt the values from inverseGear
+		std::cout << "inverse Gear tau in  			: " << controlSys.inverseGearTau.getIn().getSignal().getValue() << "  [Nm]" << std::endl;
+		std::cout << "inverse Gear tau out 			: " << controlSys.inverseGearTau.getOut().getSignal().getValue() << "  [Nm]" << std::endl;
+		
+ 		//check the calculation inside motormodel block
+ 		std::cout << "motormodel in tau Antriebsseite		: " << controlSys.motormodel.getTorqueIn().getSignal().getValue() << "  [Nm]" << std::endl;
+ 		std::cout << "motormodel in omega_ist Antriebsseite	: " << controlSys.motormodel.getSpeedIn().getSignal().getValue() << "  [rad/sec]" << std::endl;
+		std::cout << "motormodel out 				: " << controlSys.motormodel.getOut().getSignal().getValue() << "  [V]" << std::endl;
+		
+		//checkt the values from saturation
+		std::cout << "saturation in  				: " << controlSys.saturation.getIn().getSignal().getValue() << "  [V]" << std::endl;
+		std::cout << "saturation out 				: " << controlSys.saturation.getOut().getSignal().getValue() << "  [V]" << std::endl;
+
+</code>
+
+==== main.cpp ====
+<code>
+#include <iostream>
+#include <ostream>
+#include <fstream>
+#include <stdlib.h>
+#include <unistd.h>
+
+#include <eeros/hal/HAL.hpp>
+#include <eeros/safety/SafetySystem.hpp>
+#include <eeros/logger/StreamLogWriter.hpp>
+#include "SimpleControlSystem//SimpleControlSystem.hpp"
+
+#include <eeros/logger/SysLogWriter.hpp>
+#include <../../linaro-tc/arm-linux-gnueabihf/libc/usr/include/stdio.h>
+
+#include <iostream>
+#include <unistd.h>
+#include <signal.h>
+
+using namespace eeros;
+using namespace eeros::hal;
+using namespace eeros::control;
+using namespace eeros::safety;
+using namespace eeros::logger;
+
+// enable to stop the program with ctrl c
+volatile bool running = true;
+
+// handler on press on ctrl c that will set running to false
+void signalHandler(int signum) {
+	running = false;
+
+}
+	
+	
+int main() {
+	//set the interrupt handler
+	signal(SIGINT, signalHandler);
+	
+	//start the loggers
+	StreamLogWriter w(std::cout);
+	SysLogWriter s("delta");
+	w.show(~0);
+	s.show();
+	
+	Logger<LogWriter>::setDefaultWriter(&w);	
+	Logger<LogWriter> log('M');
+	
+		
+	log.trace() << "Application sismplesystem started...";
+	
+	// create control system
+	//TODO lw 0.001 durch dt ersetzten und testen
+	SimpleControlSystem controlSys(0.0001);
+	
+	// initialize hardware
+	controlSys.initBoard();
+	controlSys.start();
+	
+	controlSys.board.setReset(false);
+	controlSys.board.setEnable(true);
+	
+	while (running) {
+		std::cout << "------------------------------------------------------------------------------ "  << std::endl; 
+		//read out the position of all motors
+		eeros::math::Matrix<4,1,double> enc = controlSys.board.getPosOut().getSignal().getValue();
+		std::cout << "enc_ist Antriebsseite			: " << enc(0) << "; " << enc(1) << "; " << enc(2) << "; " << enc(3) << "  [rad]" << std::endl;
+		
+		//get the value of the constant
+ 		std::cout << "omega_soll Abtriebsseite 		: " << controlSys.c.getOut().getSignal().getValue() << "  [rad/sec]" << std::endl;
+
+		//check the speed out from the board	
+ 		std::cout << "omega_ist Antriebsseite vom Board	: " << controlSys.board.getSpeedOut().getSignal().getValue()[0] << "; " << controlSys.board.getSpeedOut().getSignal().getValue()[1] << "; " << controlSys.board.getSpeedOut().getSignal().getValue()[2] << "; " << controlSys.board.getSpeedOut().getSignal().getValue()[3] << "  [rad/sec]" << std::endl;
+
+		//check the value of out of the demux
+ 		std::cout << "demux out omega_ist Antriebsseite 	: " << controlSys.demux.getOut(0).getSignal().getValue()  << "  [rad/sec]" << std::endl;
+		
+		// checkt the values from gear
+		std::cout << "inverseGearOmega omega_ist Antriebs. 	: " << controlSys.inverseGearOmega.getOut().getSignal().getValue() << "  [rad/sec]" << std::endl;
+
+		// check the calculation inside sum1 block
+		std::cout << "sum in 0 				: " << controlSys.sum1.getIn(0).getSignal().getValue() << "  [rad/sec]" <<  std::endl;
+		std::cout << "sum in 1 				: " << controlSys.sum1.getIn(1).getSignal().getValue() << "  [rad/sec]" << std::endl;
+		std::cout << "sum out  				: " << controlSys.sum1.getOut().getSignal().getValue() << "  [rad/sec]" << std::endl;
+		
+		//check the calculation inside kv block
+		std::cout << "kv in 					: " << controlSys.kv.getIn().getSignal().getValue() << "  [rad/sec]"<<  std::endl;
+		std::cout << "kv out					: " << controlSys.kv.getOut().getSignal().getValue() << "  [rad/sec²]"<< std::endl;
+		
+		//check the calculation inside gear block
+		std::cout << "inertia in 				: " << controlSys.inertia.getIn().getSignal().getValue() << "  [rad/sec²]" << std::endl;
+		std::cout << "inertia out				: " << controlSys.inertia.getOut().getSignal().getValue() << "  [Nm]" << std::endl;
+		
+		//checkt the values from inverseGear
+		std::cout << "inverse Gear tau in  			: " << controlSys.inverseGearTau.getIn().getSignal().getValue() << "  [Nm]" << std::endl;
+		std::cout << "inverse Gear tau out 			: " << controlSys.inverseGearTau.getOut().getSignal().getValue() << "  [Nm]" << std::endl;
+		
+ 		//check the calculation inside motormodel block
+ 		std::cout << "motormodel in tau Antriebsseite		: " << controlSys.motormodel.getTorqueIn().getSignal().getValue() << "  [Nm]" << std::endl;
+ 		std::cout << "motormodel in omega_ist Antriebsseite	: " << controlSys.motormodel.getSpeedIn().getSignal().getValue() << "  [rad/sec]" << std::endl;
+		std::cout << "motormodel out 				: " << controlSys.motormodel.getOut().getSignal().getValue() << "  [V]" << std::endl;
+		
+		//checkt the values from saturation
+		std::cout << "saturation in  				: " << controlSys.saturation.getIn().getSignal().getValue() << "  [V]" << std::endl;
+		std::cout << "saturation out 				: " << controlSys.saturation.getOut().getSignal().getValue() << "  [V]" << std::endl;
+		
+		sleep(1);
+	}
+	
+	
+	 //close hardware
+	controlSys.board.setReset(true);
+	controlSys.board.setEnable(false);
+	
+	controlSys.board.run();
+	controlSys.board.close();
+	
+	return 0;	
+}
+
+</code>
