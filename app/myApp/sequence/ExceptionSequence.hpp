@@ -25,6 +25,13 @@ namespace eeduro {
 			int action(){
 			    sequencer.abort();
 			    controlSys.start();
+			    controlSys.pathPlanner.gotoPoint({0.0,0.0,-0.015,0.0});
+			    while (!controlSys.pathPlanner.posReached()) {
+// 				std::cout << "move to: " << controlSys.pathPlanner.getPosOut().getSignal().getValue() << std::endl;
+// 				std::cout << "moving: " << controlSys.directKin.getOut().getSignal().getValue() << std::endl;
+				usleep(100000);
+				std::this_thread::yield();
+			    } 
 			    controlSys.inputSwitch.switchToInput(1);
 			    controlSys.voltageSwitch.switchToInput(0);
 			    safetySys.triggerEvent(properties.doMouseTeaching);
@@ -58,8 +65,15 @@ namespace eeduro {
 			int action(){
  			    sequencer.abort();
 			    controlSys.start();
+			    controlSys.pathPlanner.gotoPoint({0.0,0.0,-0.015,0.0});
 			    controlSys.inputSwitch.switchToInput(0);
 			    controlSys.voltageSwitch.switchToInput(0);
+			    while (!controlSys.pathPlanner.posReached()) {
+// 				std::cout << "move to: " << controlSys.pathPlanner.getPosOut().getSignal().getValue() << std::endl;
+// 				std::cout << "moving: " << controlSys.directKin.getOut().getSignal().getValue() << std::endl;
+				usleep(100000);
+				std::this_thread::yield();
+			    } 
 // 			    sequencer.getSequenceByName("Main Sequence")->start();
 			    safetySys.triggerEvent(properties.doAutoMoving);
 			}

@@ -35,7 +35,6 @@ public:
 	eeros::control::SafetyLevel slSystemReady;
 	eeros::control::SafetyLevel slAutoMoving;
 	eeros::control::SafetyLevel slMouseTeaching;
-	eeros::control::SafetyLevel slJoystickTeaching;	
 	eeros::control::SafetyLevel slCalibrating;
 	
 	// Define all possible events
@@ -60,7 +59,6 @@ public:
 	eeros::control::SafetyEvent doSystemReady;
 	eeros::control::SafetyEvent doAutoMoving;
 	eeros::control::SafetyEvent doMouseTeaching;
-	eeros::control::SafetyEvent doJoystickTeaching;
 	eeros::control::SafetyEvent stopMoving;
 	eeros::control::SafetyEvent doCalibrating;
 	

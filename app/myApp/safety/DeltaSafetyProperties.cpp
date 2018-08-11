@@ -42,7 +42,6 @@ DeltaSafetyProperties::DeltaSafetyProperties(DeltaControlSystem& controlSys, dou
 	doSystemReady("Do system ready"),
 	doAutoMoving("Do auto moving"),
 	doMouseTeaching("Do mouse teaching"),
-	doJoystickTeaching("Do joystick teaching"),
 	stopMoving("Stop moving"),
 	doCalibrating("Do calibrating"),
 	
@@ -66,7 +65,6 @@ DeltaSafetyProperties::DeltaSafetyProperties(DeltaControlSystem& controlSys, dou
 	slSystemReady("System ready"),
 	slAutoMoving("Auto moving"),
 	slMouseTeaching("Mouse teaching"),
-	slJoystickTeaching("Joystick teaching"),
 	slCalibrating("Calibrating"),
 	tdn(td)
 	{
@@ -106,7 +104,6 @@ DeltaSafetyProperties::DeltaSafetyProperties(DeltaControlSystem& controlSys, dou
 	addLevel(slSystemReady);
 	addLevel(slAutoMoving);
 	addLevel(slMouseTeaching);
-	addLevel(slJoystickTeaching);
 	addLevel(slCalibrating);
 	
 	//############Add events to the levels############
@@ -144,7 +141,6 @@ DeltaSafetyProperties::DeltaSafetyProperties(DeltaControlSystem& controlSys, dou
     slAutoMoving.addEvent(stopMoving,slSystemReady,safety::kPublicEvent);
     slMouseTeaching.addEvent(stopMoving,slSystemReady,safety::kPublicEvent);
 
-    slJoystickTeaching.addEvent(stopMoving,slSystemReady,safety::kPublicEvent);
     
     slCalibrating.addEvent(doSystemReady, slSystemReady, eeros::safety::kPublicEvent);
 
@@ -171,7 +167,6 @@ DeltaSafetyProperties::DeltaSafetyProperties(DeltaControlSystem& controlSys, dou
     slSystemReady.setInputActions({check(emergencyStop,false,doEmergency),ignore(approval)});//, ignore(startAgain)});
     slAutoMoving.setInputActions({check(emergencyStop,false,doEmergency),check(approval, false, doMouseTeaching)});//, ignore(startAgain)});
     slMouseTeaching.setInputActions({check(emergencyStop,false,doEmergency),ignore(approval)});//, ignore(startAgain)});
-    slJoystickTeaching.setInputActions({check(emergencyStop,false,doEmergency),ignore(approval)});//, ignore(startAgain)});
     slCalibrating.setInputActions({ignore(emergencyStop), check(approval, false, doSystemReady)});
 
     //############Define output states and events for all levels############
@@ -194,7 +189,6 @@ DeltaSafetyProperties::DeltaSafetyProperties(DeltaControlSystem& controlSys, dou
     slSystemReady.setOutputActions({set(led,true), set(errorLed, false)});//, set(power,false)});
     slAutoMoving.setOutputActions({set(led,true), set(errorLed, false)});//, set(power,false)});
     slMouseTeaching.setOutputActions({set(led,true), set(errorLed, false)});//, set(power,false)});
-    slJoystickTeaching.setOutputActions({set(led,true), set(errorLed, false)});//, set(power,false)});
     slCalibrating.setOutputActions({set(led,true), set(errorLed,true)});
 
     //Defineandaddlevelfunctions

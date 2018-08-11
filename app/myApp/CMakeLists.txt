@@ -13,6 +13,6 @@ link_directories("~/workspace/VTDelta/BeagleBoneBlue/robotics_cape_installer/lib
 #add_executable(myApp smc/SimpleMotorController.cpp smc/MyControlSystem.cpp smc/MySafetyProperties.cpp )
 add_executable(myApp delta.cpp safety/DeltaSafetyProperties.cpp control/DeltaControlSystem.cpp control/PathPlanner.cpp control/DirectKinematic.cpp control/Inertia.cpp control/Jacobi.cpp control/Jacobian.cpp control/Kinematic.cpp control/MotorModel.cpp sequence/CalibrateSequence.cpp sequence/MoveBlockSequence.cpp sequence/SortSequence.cpp sequence/ShuffleSequence.cpp sequence/MouseSequence.cpp sequence/MainSequence.cpp Calibration.cpp)
 #add_executable(myApp mouseTest/MouseTest.cpp)
-#add_executable(myApp seqTest.cpp)
+#add_executable(myApp test/rtTest.cpp)
 
 target_link_libraries(myApp eeros ${CMAKE_DL_LIBS} ucl roboticscape)
