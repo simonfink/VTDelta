@@ -115,6 +115,9 @@ EVA - C++
 -Analyse Bestand Hardware: was wird benötigt? welche hardware sollen wir verwenden?
 -Analyse Software: Safetysystem, Sequenzen, was muss neue Software können?
 
+soll und ist wert prüfen
+bahnplaner prüfen, evtl mit ist position starten
+
 
 DONE:
 -----

@@ -1,0 +1,55 @@
+======== Hardware ========
+
+
+===== Datasheets =====
+| ^Axis Motors ^ TCP Motor ^
+^Motor|{{:delta:build_own_controller:motor-en_1524_sr_dff.pdf|1524-012SR}}|{{:delta:build_own_controller:motor-0816_sr_fmm.pdf|0816-012SR}}|
+^Encoder|{{:delta:build_own_controller:encoder-ieh2-4096_dff.pdf|ieh2-4096}}|{{:delta:build_own_controller:encoder-hem3-256w_mme.pdf|hem3-256w}}|
+^Gear|{{:delta:build_own_controller:gear-15-8_fmm.pdf|15-8_76/1}}|{{:delta:build_own_controller:gear-08-3_fmm.pdf|08-3_120/1}}|
+
+^Beagle Bone Blue^
+|{{:delta:build_own_controller:beaglebone_blue_sch.pdf|bbblue_schema}}|
+|{{:delta:build_own_controller:sd-101d_header_pin_table.pdf|bbblue_pinout}}| 
+|{{:delta:build_own_controller:schema-adapterprint.pdf|adapterprint_schema}}|
+
+
+===== Power Supply =====
+The Beagle Bone Blue can be operated with the 12V DC Power supply, 7.4V DC from a battery or with the 5V from the USB. You can’t run the motors when only powered over USB, so you have to connect an 7.4V battery or the 12V Power supply. You also need 12V on the adapterprint fort he electromagnet (see gpios).
+{{ :delta:build_own_controller:bbblue-pwr-port.png?200 | BBBlue PWR Port}}
+
+===== Encoder =====
+To get the +5V to the adapterprint you can simply get it from the PWR port from the Beagle Bone Blue. You’ll need this 5V for both types of encoders used on the Delta. The encoder inputs oft he Beagle Bone Blue are only 3.3V capable. To get the signals from 5V downto 3.3V a voltage divider is used for each encoder channel.
+{{ :delta:build_own_controller:adapter-print-encoder.png?200 | Voltage divider for the encoders}}
+\\ \\
+===== GPIOs =====
+You can get the 3.3V also from the PWR port of the Beagle Bone Blue. This is used for the button pullups. The leds are pulled down and driven with the 3.3V from a gpio. \\ 
+The output of the gpios is only 3.3V. To get a stronger magnetic field from the elctromagnet, a transistor is used to get 12V over the electromagnet.{{ :delta:build_own_controller:adapter-print-gpios.png?200 |Gpio connection of the adapterprint}}
+
+
+===== Part list =====
+^Pos^Name^Pcs^Description^Link^
+|0|Beagle Bone Blue|1|Beagle Bone Blue Rev A.0|https://beagleboard.org/blue|
+|1|Cable Set|1|Cable set for Beagle Bone Blue|https://www.conrad.ch/de/beagleboard-kabel-bb-blue-kabelset-1606596.html|
+|2|Axis Motors|3|Faulhaber 1524-012SR|https://www.faulhaber.com/de/produkte/serie/1524sr/|
+|3|Encoder for Axis Motor|3|Faulhaber IEH2-4096|https://www.faulhaber.com/de/produkte/serie/ieh2-4096/|
+|4|Gear for Axis Motor|3|Faulhaber 15/8 76:1|https://www.faulhaber.com/de/produkte/serie/158/|
+|5|TCP Motor|1|Faulhaber 0816-012SR|https://www.faulhaber.com/de/produkte/serie/0816sr/|
+|6|Encoder for TCP Motor|1|Faulhaber HEM3-256W|https://www.faulhaber.com/de/produkte/serie/hem3-256/|
+|7|Gear for TCP Motor|1|Faulhaber 08/3 120:1|https://www.faulhaber.com/de/produkte/serie/083/|
+|8|Electromagnet|1|12V|---|
+|9|Lighted pushbutton red|1|||
+|10|Lighted pushbutton green|1|||
+|11|Lighted pushbutton blue|1|||
+|12|Power switch|1||| 
+
+Adapter print
+^Pos^Name^Pcs^
+|0|Stripboard|1|
+|1|Resistor 680 Ohm|4|
+|2|Resistor 330 Ohm|4|
+|3|Resistor 1 kOhm|7|
+|4|Transistor BC337|1|
+|5|Diode |1|
+|6|Male connector 6 pins|4|
+|7|Male connector 4 pins|4|
+
